@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:dudhaganga_app/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
+import 'constants.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -32,12 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: Text(
               "Dudhaganga Dairy",
               textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: "Poppins",
-                fontWeight: FontWeight.bold,
-                fontSize: 50,
-              ),
+              style: splashScreenTitle,
             ))
           ],
         ),
