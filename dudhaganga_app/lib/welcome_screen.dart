@@ -1,6 +1,9 @@
 import 'package:dudhaganga_app/constants.dart';
+import 'package:dudhaganga_app/customeWidgets/cElevatedButton.dart';
 import 'package:dudhaganga_app/main.dart';
 import 'package:flutter/material.dart';
+
+import 'customeWidgets/cTextField.dart';
 
 class WelcomeScreen extends StatefulWidget {
   WelcomeScreen({Key? key}) : super(key: key);
@@ -58,16 +61,28 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
 
   Widget WelcomePage() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16.0, 0, 16.0, 0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
+    return SingleChildScrollView(
+      physics: ClampingScrollPhysics(),
+      child: Container(
+        margin: EdgeInsets.fromLTRB(24.0, 8.0, 8.0, 24.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
               margin: EdgeInsets.all(16.0),
-              child: Image.asset('assets/images/DGLogo.png')),
-        ],
+              child: Image.asset(
+                'assets/images/DGLogo.png',
+                width: 164.0,
+              ),
+            ),
+
+            //used custom widgets
+            CTextField(label: 'Enter Email ID:'),
+            const SizedBox(height: 20.0),
+            CElevatedButton(label: 'Login'),
+          ],
+        ),
       ),
     );
   }
