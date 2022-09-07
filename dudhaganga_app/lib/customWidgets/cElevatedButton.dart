@@ -3,7 +3,8 @@ import 'package:flutter/src/widgets/framework.dart';
 
 class CElevatedButton extends StatelessWidget {
   String label;
-  CElevatedButton({super.key, required this.label});
+  Function onPress;
+  CElevatedButton({super.key, required this.label, required this.onPress});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class CElevatedButton extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(4))),
         ),
       ),
-      onPressed: () {},
+      onPressed: () => {onPress(), print('hi')},
       child: Text(label),
     );
   }

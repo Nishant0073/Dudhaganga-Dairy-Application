@@ -1,18 +1,20 @@
 import 'package:dudhaganga_app/constants.dart';
-import 'package:dudhaganga_app/customeWidgets/cElevatedButton.dart';
+import 'package:dudhaganga_app/customWidgets/cElevatedButton.dart';
+import 'package:dudhaganga_app/home_page.dart';
 import 'package:dudhaganga_app/main.dart';
 import 'package:flutter/material.dart';
 
-import 'customeWidgets/cTextField.dart';
+import 'customWidgets/cTextField.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  WelcomeScreen({Key? key}) : super(key: key);
+  const WelcomeScreen({Key? key}) : super(key: key);
 
   @override
   State<WelcomeScreen> createState() => _WelcomeScreenState();
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  //Created AppBar
   PreferredSizeWidget createAppBar() {
     return AppBar(
       title: Text(appName),
@@ -28,6 +30,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     );
   }
 
+//handles the theme of the app
   void handleThemeChange() {
     setState(() {
       //changing app theme using stream controller,
@@ -60,6 +63,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     );
   }
 
+//Actual welcome Page.
   Widget welcomePage() {
     return SingleChildScrollView(
       physics: ClampingScrollPhysics(),
@@ -80,7 +84,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             //used custom widgets
             CTextField(label: 'Enter Email ID:'),
             const SizedBox(height: 20.0),
-            CElevatedButton(label: 'Login'),
+            CElevatedButton(
+              label: 'Login',
+              onPress: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const HomePage()));
+              },
+            ),
           ],
         ),
       ),
