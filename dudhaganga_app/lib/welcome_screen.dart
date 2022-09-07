@@ -45,14 +45,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return LayoutBuilder(
       builder: ((context, constraints) {
         if (constraints.maxWidth < narrowScreenWidthThreshold) {
-          return Scaffold(appBar: createAppBar(), body: WelcomePage());
+          return Scaffold(appBar: createAppBar(), body: welcomePage());
         } else {
           return Scaffold(
             appBar: createAppBar(),
             body: SafeArea(
               bottom: false,
               top: false,
-              child: WelcomePage(),
+              child: welcomePage(),
             ),
           );
         }
@@ -60,7 +60,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     );
   }
 
-  Widget WelcomePage() {
+  Widget welcomePage() {
     return SingleChildScrollView(
       physics: ClampingScrollPhysics(),
       child: Container(
