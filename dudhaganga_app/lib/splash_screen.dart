@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:dudhaganga_app/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -16,14 +14,16 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    new Future.delayed(const Duration(seconds: 3), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => WelcomeScreen()),
+      );
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    Timer(
-        Duration(seconds: 3),
-        () => Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (BuildContext context) => WelcomeScreen())));
     return Scaffold(
       body: Container(
         color: Color.fromARGB(255, 19, 202, 59),
@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
           children: const [
             Center(
                 child: Text(
-              "Dudhaganga Dairy",
+              appName,
               textAlign: TextAlign.center,
               style: splashScreenTitle,
             ))
