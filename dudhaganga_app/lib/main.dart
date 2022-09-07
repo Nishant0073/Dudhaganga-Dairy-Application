@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
               title: 'Dudhaganga Dairy',
               themeMode: snapshot.data! ? ThemeMode.light : ThemeMode.dark,
               theme: themeData,
-              home: SplashScreen());
+              home: const SplashScreen());
         });
   }
 }

@@ -10,7 +10,7 @@ class CElevatedButton extends StatelessWidget {
     return ElevatedButton(
       style: ButtonStyle(
         shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
-          RoundedRectangleBorder(
+          const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(4))),
         ),
       ),

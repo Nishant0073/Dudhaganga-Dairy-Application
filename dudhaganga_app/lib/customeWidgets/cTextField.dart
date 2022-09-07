@@ -10,10 +10,10 @@ class CTextField extends StatelessWidget {
     return TextField(
       decoration: InputDecoration(
         label: Text(label),
-        focusedBorder: OutlineInputBorder(
+        focusedBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(8.0)),
         ),
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(8.0)),
         ),
       ),
