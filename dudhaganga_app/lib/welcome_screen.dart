@@ -17,7 +17,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   //Created AppBar
   PreferredSizeWidget createAppBar() {
     return AppBar(
-      title: Text(appName),
+      title: const Text(appName),
       actions: [
         IconButton(
           icon: useLightMode
@@ -66,9 +66,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 //Actual welcome Page.
   Widget welcomePage() {
     return SingleChildScrollView(
-      physics: ClampingScrollPhysics(),
+      physics: const ClampingScrollPhysics(),
       child: Container(
-        margin: EdgeInsets.fromLTRB(24.0, 8.0, 8.0, 24.0),
+        margin: const EdgeInsets.fromLTRB(24.0, 8.0, 8.0, 24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,

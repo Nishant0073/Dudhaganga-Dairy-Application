@@ -15,7 +15,7 @@ class CElevatedButton extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(4))),
         ),
       ),
-      onPressed: () => {onPress(), print('hi')},
+      onPressed: () => {onPress()},
       child: Text(label),
     );
   }
