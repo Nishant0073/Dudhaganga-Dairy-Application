@@ -1,10 +1,11 @@
 import 'package:dudhaganga_app/constants.dart';
 import 'package:dudhaganga_app/customWidgets/cElevatedButton.dart';
-import 'package:dudhaganga_app/home_page.dart';
-import 'package:dudhaganga_app/main.dart';
-import 'package:flutter/material.dart';
+import 'package:dudhaganga_app/customWidgets/cTextField.dart';
+import 'package:dudhaganga_app/loginPages/registration_screen.dart';
 
-import 'customWidgets/cTextField.dart';
+import 'package:dudhaganga_app/main.dart';
+
+import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -89,7 +90,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 label: 'Submit',
                 onPress: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const HomePage()));
+                      builder: (context) => RegistrationPage()));
                 },
               ),
             ],

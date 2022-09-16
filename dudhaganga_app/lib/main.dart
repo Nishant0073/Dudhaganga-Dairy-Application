@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:dudhaganga_app/constants.dart';
 import 'package:dudhaganga_app/splash_screen.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,4 @@
-import 'package:dudhaganga_app/welcome_screen.dart';
+import 'package:dudhaganga_app/loginPages/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'constants.dart';
