@@ -82,10 +82,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
 
             //used custom widgets
-            CTextField(label: 'Enter Email ID:'),
+            CTextField(label: 'Enter Phone Number:'),
             const SizedBox(height: 20.0),
             CElevatedButton(
-              label: 'Login',
+              label: 'Submit',
               onPress: () {
                 Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => const HomePage()));
