@@ -1,4 +1,3 @@
-import 'package:dudhaganga_app/constants.dart';
 import 'package:dudhaganga_app/profile_page.dart';
 import 'package:dudhaganga_app/user_home_page.dart';
 import 'package:flutter/material.dart';
@@ -29,10 +28,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(appName),
-        automaticallyImplyLeading: false,
-      ),
       body: Center(child: currentPage),
       bottomNavigationBar: BottomNavigationBar(
         items: [

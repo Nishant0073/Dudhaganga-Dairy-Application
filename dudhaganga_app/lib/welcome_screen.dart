@@ -67,31 +67,33 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget welcomePage() {
     return SingleChildScrollView(
       physics: const ClampingScrollPhysics(),
-      child: Container(
-        margin: const EdgeInsets.fromLTRB(24.0, 8.0, 8.0, 24.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              margin: const EdgeInsets.all(16.0),
-              child: Image.asset(
-                'assets/images/DGLogo.png',
-                width: 164.0,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                margin: const EdgeInsets.all(16.0),
+                child: Image.asset(
+                  'assets/images/DGLogo.png',
+                  width: 164.0,
+                ),
               ),
-            ),
 
-            //used custom widgets
-            CTextField(label: 'Enter Phone Number:'),
-            const SizedBox(height: 20.0),
-            CElevatedButton(
-              label: 'Submit',
-              onPress: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const HomePage()));
-              },
-            ),
-          ],
+              //used custom widgets
+              CTextField(label: 'Enter Phone Number:'),
+              const SizedBox(height: 20.0),
+              CElevatedButton(
+                label: 'Submit',
+                onPress: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const HomePage()));
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
