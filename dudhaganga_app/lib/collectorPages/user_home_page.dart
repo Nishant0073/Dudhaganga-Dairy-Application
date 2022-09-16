@@ -1,4 +1,5 @@
 import 'package:dudhaganga_app/constants.dart';
+import 'package:dudhaganga_app/customWidgets/cCard.dart';
 import 'package:flutter/material.dart';
 
 class UserHomePage extends StatelessWidget {
@@ -45,13 +46,8 @@ class UserHomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Expanded(
-                      flex: 1,
-                      child: PhysicalModel(
-                        borderRadius: BorderRadius.circular(8.0),
-                        color: themeData.backgroundColor,
-                        elevation: 8.0,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        flex: 1,
+                        child: cCard(
                           child: Column(
                             children: const [
                               Text('Collected Milk:'),
@@ -61,29 +57,21 @@ class UserHomePage extends StatelessWidget {
                               ),
                             ],
                           ),
-                        ),
-                      ),
-                    ),
+                        )),
                     const SizedBox(
                       width: 16.0,
                     ),
                     Expanded(
                       flex: 1,
-                      child: PhysicalModel(
-                        borderRadius: BorderRadius.circular(8.0),
-                        color: themeData.backgroundColor,
-                        elevation: 8.0,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              Text('Remaining Farmers:'),
-                              Text(
-                                '21',
-                                style: TextStyle(fontSize: 32.0),
-                              ),
-                            ],
-                          ),
+                      child: cCard(
+                        child: Column(
+                          children: [
+                            Text('Remaining Farmers:'),
+                            Text(
+                              '21',
+                              style: TextStyle(fontSize: 32.0),
+                            ),
+                          ],
                         ),
                       ),
                     )
@@ -97,21 +85,15 @@ class UserHomePage extends StatelessWidget {
                   children: [
                     Expanded(
                       flex: 1,
-                      child: PhysicalModel(
-                        borderRadius: BorderRadius.circular(8.0),
-                        color: themeData.backgroundColor,
-                        elevation: 8.0,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: const [
-                              Text('Sold Milk:'),
-                              Text(
-                                '8 L',
-                                style: TextStyle(fontSize: 32.0),
-                              ),
-                            ],
-                          ),
+                      child: cCard(
+                        child: Column(
+                          children: const [
+                            Text('Sold Milk:'),
+                            Text(
+                              '8 L',
+                              style: TextStyle(fontSize: 32.0),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -120,21 +102,15 @@ class UserHomePage extends StatelessWidget {
                     ),
                     Expanded(
                       flex: 1,
-                      child: PhysicalModel(
-                        borderRadius: BorderRadius.circular(8.0),
-                        color: themeData.backgroundColor,
-                        elevation: 8.0,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              Center(child: Text('No. of Customers:')),
-                              Text(
-                                '14',
-                                style: TextStyle(fontSize: 32.0),
-                              ),
-                            ],
-                          ),
+                      child: cCard(
+                        child: Column(
+                          children: [
+                            Center(child: Text('No. of Customers:')),
+                            Text(
+                              '14',
+                              style: TextStyle(fontSize: 32.0),
+                            ),
+                          ],
                         ),
                       ),
                     )

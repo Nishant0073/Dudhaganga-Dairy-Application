@@ -1,3 +1,4 @@
+import 'package:dudhaganga_app/collectorPages/add_customer.dart';
 import 'package:dudhaganga_app/collectorPages/profile_page.dart';
 import 'package:dudhaganga_app/collectorPages/user_home_page.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _selectedPage = currentIndex;
       if (currentIndex == 0) {
-        currentPage = const Text("ADD CUSTOMERS");
+        currentPage = AddCustomers();
       } else if (currentIndex == 1) {
         currentPage = UserHomePage();
       } else {
