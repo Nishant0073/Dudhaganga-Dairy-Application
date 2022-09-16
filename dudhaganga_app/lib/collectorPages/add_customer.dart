@@ -11,7 +11,9 @@ class AddCustomers extends StatelessWidget {
         title: Text('Add Customer'),
         automaticallyImplyLeading: false,
       ),
-      body: SingleChildScrollView(),
+      body: SingleChildScrollView(
+        child: Column(children: []),
+      ),
     );
   }
 }
