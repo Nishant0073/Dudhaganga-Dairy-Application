@@ -1,5 +1,5 @@
-import 'package:dudhaganga_app/profile_page.dart';
-import 'package:dudhaganga_app/user_home_page.dart';
+import 'package:dudhaganga_app/collectorPages/profile_page.dart';
+import 'package:dudhaganga_app/collectorPages/user_home_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
