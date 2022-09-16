@@ -1,4 +1,3 @@
-import 'package:dudhaganga_app/constants.dart';
 import 'package:dudhaganga_app/customWidgets/cCard.dart';
 import 'package:flutter/material.dart';
 
@@ -21,22 +20,16 @@ class UserHomePage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                PhysicalModel(
-                  color: themeData.backgroundColor,
-                  elevation: 8.0,
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ListTile(
-                      leading: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: Image.asset(
-                          'assets/images/sunset.jpg',
-                        ),
+                cCard(
+                  child: ListTile(
+                    leading: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Image.asset(
+                        'assets/images/sunset.jpg',
                       ),
-                      title: const Text('9 Sup 2022'),
-                      subtitle: const Text("Morning"),
                     ),
+                    title: const Text('9 Sup 2022'),
+                    subtitle: const Text("Morning"),
                   ),
                 ),
                 const SizedBox(
