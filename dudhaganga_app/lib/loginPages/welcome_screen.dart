@@ -2,9 +2,7 @@ import 'package:dudhaganga_app/constants.dart';
 import 'package:dudhaganga_app/customWidgets/cElevatedButton.dart';
 import 'package:dudhaganga_app/customWidgets/cTextField.dart';
 import 'package:dudhaganga_app/loginPages/registration_screen.dart';
-
 import 'package:dudhaganga_app/main.dart';
-
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatefulWidget {

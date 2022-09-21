@@ -9,7 +9,6 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.menu),
         automaticallyImplyLeading: false,
         title: const Text('Profile'),
         actions: [
@@ -37,7 +36,7 @@ class ProfilePage extends StatelessWidget {
                     height: 8.0,
                   ),
                   Text(
-                    "Ram More",
+                    "Ram Mane",
                     style: themeData.textTheme.labelLarge!.copyWith(
                       fontSize: 24.0,
                     ),
@@ -62,7 +61,7 @@ class ProfilePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        "+91 8329060000",
+                        "+91 1234567890",
                         style: themeData.textTheme.displayMedium,
                       ),
                       SizedBox(

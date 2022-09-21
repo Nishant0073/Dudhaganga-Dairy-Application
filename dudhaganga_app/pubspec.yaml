@@ -26,6 +26,8 @@ flutter:
     - assets/images/sunrise.jpg
     - assets/images/sunset.jpg
     - assets/images/profile_pic.jpg
+    - assets/images/farmer_with_milk.png
+    - assets/images/milk_buyer.png
   fonts:
     - family: Poppins
       fonts:

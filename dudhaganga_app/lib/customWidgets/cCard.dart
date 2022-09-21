@@ -10,7 +10,7 @@ class cCard extends StatelessWidget {
     return PhysicalModel(
       borderRadius: BorderRadius.circular(8.0),
       color: themeData.backgroundColor,
-      elevation: 8.0,
+      elevation: 12.0,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: child,
