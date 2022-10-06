@@ -82,7 +82,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
 
               //used custom widgets
-              CTextField(label: 'Enter Phone Number:'),
+              CTextField(
+                label: 'Phone Number',
+                hintText: 'Eg. 9192939495',
+              ),
               const SizedBox(height: 20.0),
               CElevatedButton(
                 label: 'Submit',

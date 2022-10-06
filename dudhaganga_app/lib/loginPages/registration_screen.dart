@@ -80,11 +80,20 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 ),
               ),
               //used custom widgets
-              CTextField(label: 'Enter Name:'),
+              CTextField(
+                label: 'Name',
+                hintText: 'Enter your name here...',
+              ),
               const SizedBox(height: 20.0),
-              CTextField(label: 'Enter Address:'),
+              CTextField(
+                label: 'Address',
+                hintText: 'Enter your address here...',
+              ),
               const SizedBox(height: 20.0),
-              CTextField(label: 'Enter Password:'),
+              CTextField(
+                label: 'Password',
+                hintText: 'Enter your password here...',
+              ),
               const SizedBox(height: 20.0),
               CElevatedButton(
                 label: 'Register',

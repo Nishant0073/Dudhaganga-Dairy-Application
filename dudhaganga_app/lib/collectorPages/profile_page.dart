@@ -64,14 +64,14 @@ class ProfilePage extends StatelessWidget {
                         "+91 1234567890",
                         style: themeData.textTheme.displayMedium,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 12.0,
                       ),
                       Text(
                         "ram1234@gmail.com",
                         style: themeData.textTheme.displayMedium,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 12.0,
                       ),
                     ],

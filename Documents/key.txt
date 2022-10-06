@@ -1,0 +1,21 @@
+nishant0073@Linux:~/StudioProjects/Dudhaganga-Dairy-Application/dudhaganga_app$ keytool -list -v \
+> -alias androiddebugkey -keystore ~/.android/debug.keystore
+Enter keystore password:  
+Alias name: androiddebugkey
+Creation date: Sep 2, 2022
+Entry type: PrivateKeyEntry
+Certificate chain length: 1
+Certificate[1]:
+Owner: C=US, O=Android, CN=Android Debug
+Issuer: C=US, O=Android, CN=Android Debug
+Serial number: 1
+Valid from: Fri Sep 02 01:36:05 IST 2022 until: Sun Aug 25 01:36:05 IST 2052
+Certificate fingerprints:
+         SHA1: 25:F3:B7:D2:F0:82:A4:BB:51:6A:06:80:E4:A5:0A:6F:42:C5:7C:6E
+         SHA256: 87:E0:AB:E2:FC:66:D6:B7:44:91:0B:62:80:90:30:FE:54:F0:33:E9:51:62:6B:E5:0B:DA:C5:8F:C0:47:C6:3D
+Signature algorithm name: SHA1withRSA (weak)
+Subject Public Key Algorithm: 2048-bit RSA key
+Version: 1
+
+Warning:
+The certificate uses the SHA1withRSA signature algorithm which is considered a security risk. This algorithm will be disabled in a future update.

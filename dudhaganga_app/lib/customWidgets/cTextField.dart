@@ -1,22 +1,41 @@
+import 'package:dudhaganga_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class CTextField extends StatelessWidget {
   String label;
-  CTextField({super.key, required this.label});
+  String? hintText;
+  String? validatorText;
+  CTextField(
+      {super.key, required this.label, this.hintText, this.validatorText});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 55.0,
-      child: TextField(
+      child: TextFormField(
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return validatorText;
+          }
+          return null;
+        },
         decoration: InputDecoration(
           label: Text(label),
-          focusedBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+          hintText: hintText,
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: useLightMode ? light_gray : black_color,
+              width: 2,
+            ),
+            borderRadius: BorderRadius.circular(8),
           ),
-          enabledBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: useLightMode ? light_gray : black_color,
+              width: 2,
+            ),
+            borderRadius: BorderRadius.circular(8),
           ),
         ),
       ),
