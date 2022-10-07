@@ -1,5 +1,6 @@
 import 'package:dudhaganga_app/customWidgets/cCard.dart';
 import 'package:flutter/material.dart';
+import 'package:dudhaganga_app/select_farmer.dart';
 
 class UserHomePage extends StatelessWidget {
   const UserHomePage({super.key});
@@ -108,6 +109,28 @@ class UserHomePage extends StatelessWidget {
                       ),
                     )
                   ],
+                ),
+                SizedBox(
+                  height: 24.0,
+                ),
+                cCard(
+                  child: GestureDetector(
+                      child: ListTile(
+                        leading: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Icon(
+                              Icons.edit_note,
+                              size: 45.0,
+                            )),
+                        title: const Text('Take Reading',
+                            style: TextStyle(
+                              fontSize: 20.0,
+                            )),
+                      ),
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => SelectFarmer()));
+                      }),
                 ),
               ],
             ),
