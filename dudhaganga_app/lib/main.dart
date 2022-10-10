@@ -2,12 +2,15 @@ import 'dart:async';
 
 import 'package:dudhaganga_app/constants.dart';
 import 'package:dudhaganga_app/splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 //Created to handle theme of app from stream controller.
 StreamController<bool> isLightTheme = StreamController();
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
