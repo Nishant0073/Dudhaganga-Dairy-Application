@@ -99,7 +99,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 label: 'Register',
                 onPress: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const HomePage()));
+                      builder: (context) => HomePage(
+                            userId: '',
+                          )));
                 },
               ),
             ],

@@ -86,8 +86,10 @@ class _PasswordScreenState extends State<PasswordScreen> {
             CElevatedButton(
               label: 'Login',
               onPress: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const HomePage()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => HomePage(
+                          userId: '',
+                        )));
               },
             ),
           ],

@@ -6,14 +6,20 @@ class CTextField extends StatelessWidget {
   String label;
   String? hintText;
   String? validatorText;
+  Function? onChange = null;
   CTextField(
-      {super.key, required this.label, this.hintText, this.validatorText});
+      {super.key,
+      required this.label,
+      this.hintText,
+      this.validatorText,
+      this.onChange});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 55.0,
       child: TextFormField(
+        onChanged: (value) => onChange == null ? null : onChange!(value),
         validator: (value) {
           if (value == null || value.isEmpty) {
             return validatorText;
