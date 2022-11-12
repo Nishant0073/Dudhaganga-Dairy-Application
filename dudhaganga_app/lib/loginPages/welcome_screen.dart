@@ -198,7 +198,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   onSubmitted: (value) {
                     if (value.length != 6) {
                       Fluttertoast.showToast(msg: "Enter Complete OTP");
-                      Future.delayed(Duration(seconds: 3));
+                      Future.delayed(const Duration(seconds: 2));
                     }
                     _focusNode.requestFocus();
                   },

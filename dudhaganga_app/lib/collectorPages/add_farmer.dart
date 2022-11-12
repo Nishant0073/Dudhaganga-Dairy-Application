@@ -12,6 +12,8 @@ class AddFarmer extends StatefulWidget {
 
 class _AddFarmerState extends State<AddFarmer> {
   final _formKey = GlobalKey<FormState>();
+  String? name;
+  String? phoneNumber;
   bool cow = false;
   bool buffalo = false;
   bool morning = false;
@@ -38,6 +40,13 @@ class _AddFarmerState extends State<AddFarmer> {
                 onPressed: () {
                   Navigator.of(context).pop();
                   FocusScope.of(context).unfocus();
+                  if (this._formKey.currentState!.validate()) {
+                    _formKey.currentState!.save(); // Save our form now.
+
+                    print('Printing the login data.');
+                    print('Email: ${name}');
+                    print('Password: ${phoneNumber}');
+                  }
                   _formKey.currentState?.reset();
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
@@ -72,11 +81,24 @@ class _AddFarmerState extends State<AddFarmer> {
                     label: "Name",
                     validatorText: "Please Enter name:",
                     hintText: 'Enter name here...',
+                    onChange: (value) {
+                      name = value;
+                    },
+                    onSave: (value) {
+                      name = value;
+                    },
                   ),
                   const SizedBox(height: 20.0),
                   CTextField(
                     label: 'Phone Number',
                     hintText: 'Eg. 9192939495',
+                    onChange: (value) {
+                      phoneNumber = value;
+                    },
+                    validatorText: "Enter Phone Number",
+                    onSave: (value) {
+                      phoneNumber = value;
+                    },
                   ),
                   const SizedBox(height: 20.0),
                   Column(
@@ -190,7 +212,9 @@ class _AddFarmerState extends State<AddFarmer> {
                   CElevatedButton(
                     label: 'Add Farmer',
                     onPress: () {
-                      _showMyDialog();
+                      if (_formKey.currentState!.validate()) {
+                        _showMyDialog();
+                      }
                     },
                   ),
                 ],
