@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dudhaganga_app/collectorPages/database_pages/db_add_farmer.dart';
 import 'package:dudhaganga_app/constants.dart';
 import 'package:dudhaganga_app/customWidgets/cElevatedButton.dart';
@@ -23,9 +25,68 @@ class _AddFarmerState extends State<AddFarmer> {
   bool milkTypeWarn = false;
   bool milkTimeWarn = false;
   bool loading = false;
+  bool issnackSuccess = false;
+  bool issnackFail = false;
+
+  Future<void> putDataToFirebase() async {
+    if (this._formKey.currentState!.validate()) {
+      setState(() {
+        loading = true;
+      });
+      AddFarmerToFirebase addFarmerToFirebase = AddFarmerToFirebase(
+          name, phoneNumber, cow, buffalo, morning, evening);
+      await addFarmerToFirebase.addNewFarmer().then((value) {
+        setState(() {
+          loading = false;
+          _formKey.currentState!.reset();
+          cow = false;
+          morning = false;
+          evening = false;
+          buffalo = false;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Farmer Added Successfully'),
+          duration: Duration(seconds: 3),
+        ));
+
+        return Future.value();
+      }).catchError((error) {
+        setState(() {
+          loading = false;
+        });
+        print('MY ERROR: $error');
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Unable to add farmer'),
+          duration: Duration(seconds: 3),
+        ));
+      });
+      return Future.value();
+    }
+  }
+
+  Future<void> checkInternetConnection() async {
+    try {
+      final result = await InternetAddress.lookup('example.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        await putDataToFirebase();
+      }
+    } on SocketException catch (_) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Check your internet Connection!'),
+        duration: Duration(seconds: 3),
+      ));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (issnackSuccess) {
+      issnackSuccess = false;
+    }
+    if (issnackFail) {
+      issnackFail = false;
+    }
+
     Future<void> _showMyDialog() async {
       return showDialog<void>(
         context: context,
@@ -46,43 +107,7 @@ class _AddFarmerState extends State<AddFarmer> {
                   onPressed: () async {
                     Navigator.of(context).pop();
                     FocusScope.of(context).unfocus();
-                    if (this._formKey.currentState!.validate()) {
-                      setState(() {
-                        loading = true;
-                      });
-                      AddFarmerToFirebase addFarmerToFirebase =
-                          AddFarmerToFirebase(name, phoneNumber, cow, buffalo,
-                              morning, evening);
-                      // try {
-                      await addFarmerToFirebase.addNewFarmer().then((value) {
-                        const snackBar = SnackBar(
-                          content: Text("Farmer Added Successfully!"),
-                          duration: Duration(seconds: 3),
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        setState(() {
-                          loading = false;
-                          _formKey.currentState!.reset();
-                          cow = false;
-                          morning = false;
-                          evening = false;
-                          buffalo = false;
-                        });
-
-                        return null;
-                      }).catchError((error) {
-                        print('MY ERROR: $error');
-                        const snackBar = SnackBar(
-                          content: Text("Unable to add Customer!"),
-                          duration: Duration(seconds: 3),
-                        );
-
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        setState(() {
-                          loading = false;
-                        });
-                      });
-                    }
+                    await checkInternetConnection();
                   }),
             ],
           );
