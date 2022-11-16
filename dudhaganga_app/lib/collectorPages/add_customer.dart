@@ -12,7 +12,7 @@ class AddCustomers extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add customer'),
+        title: const Text('Add customer'),
         automaticallyImplyLeading: false,
       ),
       body: Center(

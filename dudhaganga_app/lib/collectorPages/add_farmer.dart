@@ -1,3 +1,4 @@
+import 'package:dudhaganga_app/collectorPages/database_pages/db_add_farmer.dart';
 import 'package:dudhaganga_app/constants.dart';
 import 'package:dudhaganga_app/customWidgets/cElevatedButton.dart';
 import 'package:dudhaganga_app/customWidgets/cTextField.dart';
@@ -12,12 +13,17 @@ class AddFarmer extends StatefulWidget {
 
 class _AddFarmerState extends State<AddFarmer> {
   final _formKey = GlobalKey<FormState>();
-  String? name;
-  String? phoneNumber;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  late String name;
+  late String phoneNumber;
   bool cow = false;
   bool buffalo = false;
   bool morning = false;
   bool evening = false;
+  bool milkTypeWarn = false;
+  bool milkTimeWarn = false;
+  bool loading = false;
+
   @override
   Widget build(BuildContext context) {
     Future<void> _showMyDialog() async {
@@ -27,7 +33,7 @@ class _AddFarmerState extends State<AddFarmer> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text('Add Farmer'),
-            content: Text("Click OK button to Add Farmer"),
+            content: const Text("Click OK button to Add Farmer"),
             actions: <Widget>[
               TextButton(
                 child: const Text('Cancel'),
@@ -36,26 +42,48 @@ class _AddFarmerState extends State<AddFarmer> {
                 },
               ),
               TextButton(
-                child: const Text('OK'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  FocusScope.of(context).unfocus();
-                  if (this._formKey.currentState!.validate()) {
-                    _formKey.currentState!.save(); // Save our form now.
+                  child: const Text('OK'),
+                  onPressed: () async {
+                    Navigator.of(context).pop();
+                    FocusScope.of(context).unfocus();
+                    if (this._formKey.currentState!.validate()) {
+                      setState(() {
+                        loading = true;
+                      });
+                      AddFarmerToFirebase addFarmerToFirebase =
+                          AddFarmerToFirebase(name, phoneNumber, cow, buffalo,
+                              morning, evening);
+                      // try {
+                      await addFarmerToFirebase.addNewFarmer().then((value) {
+                        const snackBar = SnackBar(
+                          content: Text("Farmer Added Successfully!"),
+                          duration: Duration(seconds: 3),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        setState(() {
+                          loading = false;
+                          _formKey.currentState!.reset();
+                          cow = false;
+                          morning = false;
+                          evening = false;
+                          buffalo = false;
+                        });
 
-                    print('Printing the login data.');
-                    print('Email: ${name}');
-                    print('Password: ${phoneNumber}');
-                  }
-                  _formKey.currentState?.reset();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Customer Added successfully "),
-                      duration: Duration(seconds: 3),
-                    ),
-                  );
-                },
-              ),
+                        return null;
+                      }).catchError((error) {
+                        print('MY ERROR: $error');
+                        const snackBar = SnackBar(
+                          content: Text("Unable to add Customer!"),
+                          duration: Duration(seconds: 3),
+                        );
+
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        setState(() {
+                          loading = false;
+                        });
+                      });
+                    }
+                  }),
             ],
           );
         },
@@ -64,164 +92,221 @@ class _AddFarmerState extends State<AddFarmer> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      key: _scaffoldKey,
       appBar: AppBar(
-        title: Text('Add farmer'),
+        title: const Text('Add farmer'),
         automaticallyImplyLeading: false,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+      body: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
                 children: [
-                  CTextField(
-                    label: "Name",
-                    validatorText: "Please Enter name:",
-                    hintText: 'Enter name here...',
-                    onChange: (value) {
-                      name = value;
-                    },
-                    onSave: (value) {
-                      name = value;
-                    },
-                  ),
-                  const SizedBox(height: 20.0),
-                  CTextField(
-                    label: 'Phone Number',
-                    hintText: 'Eg. 9192939495',
-                    onChange: (value) {
-                      phoneNumber = value;
-                    },
-                    validatorText: "Enter Phone Number",
-                    onSave: (value) {
-                      phoneNumber = value;
-                    },
-                  ),
-                  const SizedBox(height: 20.0),
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      CTextField(
+                        label: "Name",
+                        validatorText: "Please Enter name!",
+                        hintText: 'Enter name here...',
+                        onChange: (value) {
+                          name = value;
+                        },
+                        onSave: (value) {
+                          name = value;
+                        },
+                      ),
+                      const SizedBox(height: 20.0),
+                      CTextField(
+                        label: 'Phone Number',
+                        hintText: 'Eg. 9192939495',
+                        onChange: (value) {
+                          phoneNumber = value;
+                        },
+                        validator: (String? value) {
+                          String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+                          RegExp regExp = new RegExp(pattern);
+                          if (value == null) {
+                            return 'Please enter mobile number';
+                          } else if (!regExp.hasMatch(value) ||
+                              value.length != 10) {
+                            return 'Please enter valid mobile number';
+                          }
+                          return null;
+                        },
+                        onSave: (value) {
+                          phoneNumber = value;
+                        },
+                      ),
+                      const SizedBox(height: 20.0),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'Select type of milk:',
-                            style: themeData.textTheme.bodyLarge,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              Text(
+                                'Select type of milk:',
+                                style: themeData.textTheme.bodyLarge,
+                              ),
                               Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Checkbox(
-                                    value: cow,
-                                    onChanged: (bool? newValue) {
-                                      setState(
-                                        () {
-                                          cow = newValue!;
+                                  Row(
+                                    children: [
+                                      Checkbox(
+                                        value: cow,
+                                        onChanged: (bool? newValue) {
+                                          setState(
+                                            () {
+                                              cow = newValue!;
+                                              milkTypeWarn = false;
+                                            },
+                                          );
                                         },
-                                      );
-                                    },
-                                    shape: CircleBorder(),
+                                        shape: CircleBorder(),
+                                      ),
+                                      Text(
+                                        "Cow",
+                                        style: themeData.textTheme.bodySmall,
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    "Cow",
-                                    style: themeData.textTheme.bodySmall,
+                                  Row(
+                                    children: [
+                                      Checkbox(
+                                        value: buffalo,
+                                        onChanged: (bool? newValue) {
+                                          setState(
+                                            () {
+                                              buffalo = newValue!;
+                                              milkTypeWarn = false;
+                                            },
+                                          );
+                                        },
+                                        shape: CircleBorder(),
+                                      ),
+                                      Text(
+                                        "Buffalo",
+                                        style: themeData.textTheme.bodySmall,
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
-                              Row(
-                                children: [
-                                  Checkbox(
-                                    value: buffalo,
-                                    onChanged: (bool? newValue) {
-                                      setState(
-                                        () {
-                                          buffalo = newValue!;
-                                        },
-                                      );
-                                    },
-                                    shape: CircleBorder(),
+                            ],
+                          ),
+                          milkTypeWarn
+                              ? const Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                                  child: const Text(
+                                    "*Milk type required!",
+                                    style: TextStyle(color: Colors.red),
                                   ),
-                                  Text(
-                                    "Buffalo",
-                                    style: themeData.textTheme.bodySmall,
+                                )
+                              : const Text(
+                                  '',
+                                  style: TextStyle(fontSize: 0),
+                                ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Select time of milk:',
+                                style: themeData.textTheme.bodyLarge,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Checkbox(
+                                        value: morning,
+                                        onChanged: (bool? newValue) {
+                                          setState(
+                                            () {
+                                              morning = newValue!;
+                                              milkTimeWarn = false;
+                                            },
+                                          );
+                                        },
+                                        shape: const CircleBorder(),
+                                      ),
+                                      Text(
+                                        "Morning",
+                                        style: themeData.textTheme.bodySmall,
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Checkbox(
+                                        value: evening,
+                                        onChanged: (bool? newValue) {
+                                          setState(
+                                            () {
+                                              evening = newValue!;
+                                              milkTimeWarn = false;
+                                            },
+                                          );
+                                        },
+                                        shape: const CircleBorder(),
+                                      ),
+                                      Text(
+                                        "Evening",
+                                        style: themeData.textTheme.bodySmall,
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
+                              milkTimeWarn
+                                  ? const Text(
+                                      "*Time of milk is required!",
+                                      style: TextStyle(color: Colors.red),
+                                    )
+                                  : const Text(
+                                      '',
+                                      style: TextStyle(fontSize: 0),
+                                    ),
                             ],
                           ),
                         ],
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Select time of milk:',
-                            style: themeData.textTheme.bodyLarge,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Checkbox(
-                                    value: morning,
-                                    onChanged: (bool? newValue) {
-                                      setState(
-                                        () {
-                                          morning = newValue!;
-                                        },
-                                      );
-                                    },
-                                    shape: const CircleBorder(),
-                                  ),
-                                  Text(
-                                    "Morning",
-                                    style: themeData.textTheme.bodySmall,
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Checkbox(
-                                    value: evening,
-                                    onChanged: (bool? newValue) {
-                                      setState(
-                                        () {
-                                          evening = newValue!;
-                                        },
-                                      );
-                                    },
-                                    shape: const CircleBorder(),
-                                  ),
-                                  Text(
-                                    "Evening",
-                                    style: themeData.textTheme.bodySmall,
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
+                      CElevatedButton(
+                        label: 'Add Farmer',
+                        onPress: () {
+                          if (_formKey.currentState!.validate()) {
+                            if (!cow && !buffalo) {
+                              setState(() {
+                                milkTypeWarn = true;
+                              });
+                            } else if (!morning && !evening) {
+                              setState(() {
+                                milkTimeWarn = true;
+                              });
+                            } else {
+                              _showMyDialog();
+                            }
+                          }
+                        },
                       ),
                     ],
                   ),
-                  CElevatedButton(
-                    label: 'Add Farmer',
-                    onPress: () {
-                      if (_formKey.currentState!.validate()) {
-                        _showMyDialog();
-                      }
-                    },
-                  ),
                 ],
               ),
-            ],
+            ),
           ),
-        ),
+          loading
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Container(),
+        ],
       ),
     );
   }

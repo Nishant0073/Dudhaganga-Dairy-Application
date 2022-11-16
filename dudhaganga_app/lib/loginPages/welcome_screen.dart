@@ -5,6 +5,7 @@ import 'package:dudhaganga_app/customWidgets/cElevatedButton.dart';
 import 'package:dudhaganga_app/home_page.dart';
 import 'package:dudhaganga_app/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
@@ -45,46 +46,47 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       setState(() {
         loading = true;
       });
-      PhoneVerificationCompleted verificationCompleted =
-          (PhoneAuthCredential phoneAuthCredential) async {
+      verificationCompleted(PhoneAuthCredential phoneAuthCredential) async {
         User? user;
         bool error = false;
         try {
           user = (await firebaseAuth.signInWithCredential(phoneAuthCredential))
               .user!;
         } catch (e) {
-          print("Failed to sign in: " + e.toString());
+          if (kDebugMode) {
+            print("Failed to sign in: " + e.toString());
+          }
           error = true;
         }
         if (!error && user != null) {
           String id = user.uid;
           //here you can store user data in backend
-          Navigator.pushReplacement(context,
+          // ignore: use_build_context_synchronously
+          Navigator.push(context,
               MaterialPageRoute(builder: (context) => HomePage(userId: id)));
         }
-      };
+      }
 
-      PhoneVerificationFailed verificationFailed =
-          (FirebaseAuthException authException) {
+      verificationFailed(FirebaseAuthException authException) {
         Fluttertoast.showToast(msg: authException.message!);
-      };
-      PhoneCodeSent codeSent =
-          (String? verificationId, [int? forceResendingToken]) async {
+      }
+
+      codeSent(String? verificationId, [int? forceResendingToken]) async {
         Fluttertoast.showToast(
             msg: 'Please check your phone for the verification code.');
         this.forceResendingToken = forceResendingToken;
         _verificationId = verificationId;
-      };
-      PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout =
-          (String verificationId) {
+      }
+
+      codeAutoRetrievalTimeout(String verificationId) {
         _verificationId = verificationId;
-      };
+      }
+
       try {
         await firebaseAuth.verifyPhoneNumber(
             phoneNumber: phoneNumber!,
             timeout: const Duration(seconds: 5),
-            forceResendingToken:
-                forceResendingToken != null ? forceResendingToken : null,
+            forceResendingToken: forceResendingToken ?? null,
             verificationCompleted: verificationCompleted,
             verificationFailed: verificationFailed,
             codeSent: codeSent,
@@ -145,20 +147,21 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               onInputValidated: (bool value) {
                 print(value);
               },
-              selectorConfig: SelectorConfig(
+              selectorConfig: const SelectorConfig(
                 selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
               ),
               spaceBetweenSelectorAndTextField: 0,
               ignoreBlank: false,
               // autoValidateMode: AutovalidateMode.disabled,
-              // selectorTextStyle: TextStyle(color: Colors.black),
+              selectorTextStyle: const TextStyle(color: Colors.black),
               initialValue: PhoneNumber(isoCode: 'IN'),
-              formatInput: false,
-              keyboardType:
-                  TextInputType.numberWithOptions(signed: true, decimal: true),
+              formatInput: true,
+
+              keyboardType: const TextInputType.numberWithOptions(
+                  signed: true, decimal: true),
               inputBorder: OutlineInputBorder(),
             ),
-            SizedBox(
+            const SizedBox(
               height: 55,
             ),
             CElevatedButton(
@@ -180,7 +183,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Center(
+              const Center(
                 child: Text(
                   "Enter OTP",
                   style: TextStyle(
@@ -190,7 +193,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               AbsorbPointer(
@@ -223,7 +226,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     // fieldHeight: 50,
                     // fieldWidth: 40,
                   ),
-                  animationDuration: Duration(milliseconds: 300),
+                  animationDuration: const Duration(milliseconds: 300),
                   controller: otpEditingController,
                   onCompleted: (v) {
                     print("Completed");
@@ -345,15 +348,23 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               SizedBox(
                 height: 40.0,
               ),
-              Stack(
-                children: [
-                  showOtpScreen ? otpScreen() : signInScreen(),
-                  loading
-                      ? Center(
-                          child: CircularProgressIndicator(),
-                        )
-                      : Container(),
-                ],
+              WillPopScope(
+                onWillPop: () {
+                  setState(() {
+                    showOtpScreen = false;
+                  });
+                  return Future.value(true);
+                },
+                child: Stack(
+                  children: [
+                    showOtpScreen ? otpScreen() : signInScreen(),
+                    loading
+                        ? Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : Container(),
+                  ],
+                ),
               ),
             ],
           ),
