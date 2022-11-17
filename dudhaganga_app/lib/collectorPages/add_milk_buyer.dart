@@ -2,6 +2,7 @@ import 'package:dudhaganga_app/constants.dart';
 import 'package:dudhaganga_app/customWidgets/cElevatedButton.dart';
 import 'package:dudhaganga_app/customWidgets/cTextField.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AddMilkBuyer extends StatefulWidget {
   const AddMilkBuyer({super.key});
@@ -24,24 +25,24 @@ class _AddMilkBuyer extends State<AddMilkBuyer> {
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('Add Milk Buyer'),
-            content: Text("Click OK button to Add Milk Buyer"),
+            title: Text('add_milk_buyer_add_buyer'.tr),
+            content: Text('add_milk_buyer_click_button'.tr),
             actions: <Widget>[
               TextButton(
-                child: const Text('Cancel'),
+                child: Text('add_milk_buyer_cancel'.tr),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
               TextButton(
-                child: const Text('OK'),
+                child: Text('add_milk_buyer_ok'.tr),
                 onPressed: () {
                   Navigator.of(context).pop();
                   FocusScope.of(context).unfocus();
                   _formKey.currentState?.reset();
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Customer Added successfully "),
+                    SnackBar(
+                      content: Text('add_milk_buyer_customer_added'.tr),
                       duration: Duration(seconds: 3),
                     ),
                   );
@@ -56,7 +57,7 @@ class _AddMilkBuyer extends State<AddMilkBuyer> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text('Add Milk Buyer'),
+        title: Text('add_milk_buyer_add_buyer'.tr),
         automaticallyImplyLeading: false,
       ),
       body: Padding(
@@ -69,13 +70,13 @@ class _AddMilkBuyer extends State<AddMilkBuyer> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   CTextField(
-                    label: "Name",
-                    validatorText: "Please Enter name:",
-                    hintText: 'Enter name here...',
+                    label: "add_milk_buyer_name".tr,
+                    validatorText: "add_milk_buyer_enter_name".tr,
+                    hintText: 'add_milk_buyer_name_here'.tr,
                   ),
                   const SizedBox(height: 20.0),
                   CTextField(
-                    label: 'Phone Number',
+                    label: 'add_milk_buyer_phone_no'.tr,
                     hintText: 'Eg. 9192939495',
                   ),
                   const SizedBox(height: 20.0),
@@ -83,7 +84,7 @@ class _AddMilkBuyer extends State<AddMilkBuyer> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Select time of milk:',
+                        'add_milk_buyer_select_time'.tr,
                         style: themeData.textTheme.bodyLarge,
                       ),
                       Row(
@@ -103,7 +104,7 @@ class _AddMilkBuyer extends State<AddMilkBuyer> {
                                 shape: const CircleBorder(),
                               ),
                               Text(
-                                "Morning",
+                                "add_milk_buyer_morning".tr,
                                 style: themeData.textTheme.bodySmall,
                               ),
                             ],
@@ -122,7 +123,7 @@ class _AddMilkBuyer extends State<AddMilkBuyer> {
                                 shape: const CircleBorder(),
                               ),
                               Text(
-                                "Evening",
+                                "add_milk_buyer_evening".tr,
                                 style: themeData.textTheme.bodySmall,
                               ),
                             ],
@@ -132,7 +133,7 @@ class _AddMilkBuyer extends State<AddMilkBuyer> {
                     ],
                   ),
                   CElevatedButton(
-                    label: 'Add Farmer',
+                    label: 'add_customer'.tr,
                     onPress: () {
                       _showMyDialog();
                     },

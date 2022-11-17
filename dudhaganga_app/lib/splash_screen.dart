@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
         color: const Color.fromARGB(255, 19, 202, 59),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Center(
                 child: Text(
               appName,

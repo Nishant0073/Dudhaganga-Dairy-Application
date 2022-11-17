@@ -279,7 +279,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   //Created AppBar
   PreferredSizeWidget createAppBar() {
     return AppBar(
-      title: const Text(appName),
+      title: const Text("Dudhaganga Dairy"),
       actions: [
         IconButton(
           icon: useLightMode

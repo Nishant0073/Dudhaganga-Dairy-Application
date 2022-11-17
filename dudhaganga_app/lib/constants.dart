@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 const splashScreenTitle = TextStyle(
   color: Colors.white,
@@ -20,4 +21,4 @@ ThemeData themeData = ThemeData(
 );
 const double narrowScreenWidthThreshold = 450;
 
-const appName = "Dudhaganga Dairy";
+String appName = "constants_app_name".tr;

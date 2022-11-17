@@ -1,6 +1,7 @@
 import 'package:dudhaganga_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -10,7 +11,7 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text('Profile'),
+        title: Text('profile_page_profile'.tr),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -36,7 +37,7 @@ class ProfilePage extends StatelessWidget {
                     height: 8.0,
                   ),
                   Text(
-                    "Ram Mane",
+                    'profile_page_farmer_name'.tr,
                     style: themeData.textTheme.labelLarge!.copyWith(
                       fontSize: 24.0,
                     ),

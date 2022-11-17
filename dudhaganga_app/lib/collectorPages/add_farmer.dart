@@ -5,6 +5,7 @@ import 'package:dudhaganga_app/constants.dart';
 import 'package:dudhaganga_app/customWidgets/cElevatedButton.dart';
 import 'package:dudhaganga_app/customWidgets/cTextField.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AddFarmer extends StatefulWidget {
   const AddFarmer({super.key});
@@ -44,8 +45,8 @@ class _AddFarmerState extends State<AddFarmer> {
           evening = false;
           buffalo = false;
         });
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text('Farmer Added Successfully'),
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("add_farmer_customer_added".tr),
           duration: Duration(seconds: 3),
         ));
 
@@ -55,8 +56,8 @@ class _AddFarmerState extends State<AddFarmer> {
           loading = false;
         });
         print('MY ERROR: $error');
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text('Unable to add farmer'),
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("add_farmer_unable_to_farmer".tr),
           duration: Duration(seconds: 3),
         ));
       });
@@ -93,17 +94,17 @@ class _AddFarmerState extends State<AddFarmer> {
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('Add Farmer'),
-            content: const Text("Click OK button to Add Farmer"),
+            title: Text('add_farmer'.tr),
+            content: Text("add_farmer_click_ok".tr),
             actions: <Widget>[
               TextButton(
-                child: const Text('Cancel'),
+                child: Text('add_milk_buyer_cancel'.tr),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
               TextButton(
-                  child: const Text('OK'),
+                  child: Text('add_milk_buyer_ok'.tr),
                   onPressed: () async {
                     Navigator.of(context).pop();
                     FocusScope.of(context).unfocus();
@@ -119,7 +120,7 @@ class _AddFarmerState extends State<AddFarmer> {
       resizeToAvoidBottomInset: false,
       key: _scaffoldKey,
       appBar: AppBar(
-        title: const Text('Add farmer'),
+        title: Text('add_farmer'.tr),
         automaticallyImplyLeading: false,
       ),
       body: Stack(
@@ -134,9 +135,9 @@ class _AddFarmerState extends State<AddFarmer> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       CTextField(
-                        label: "Name",
-                        validatorText: "Please Enter name!",
-                        hintText: 'Enter name here...',
+                        label: "add_milk_buyer_name".tr,
+                        validatorText: "add_milk_buyer_enter_name".tr,
+                        hintText: 'add_milk_buyer_name_here'.tr,
                         onChange: (value) {
                           name = value;
                         },
@@ -146,7 +147,7 @@ class _AddFarmerState extends State<AddFarmer> {
                       ),
                       const SizedBox(height: 20.0),
                       CTextField(
-                        label: 'Phone Number',
+                        label: 'add_milk_buyer_phone_no'.tr,
                         hintText: 'Eg. 9192939495',
                         onChange: (value) {
                           phoneNumber = value;
@@ -158,7 +159,7 @@ class _AddFarmerState extends State<AddFarmer> {
                             return 'Please enter mobile number';
                           } else if (!regExp.hasMatch(value) ||
                               value.length != 10) {
-                            return 'Please enter valid mobile number';
+                            return "add_farmer_phone_no".tr;
                           }
                           return null;
                         },
@@ -174,7 +175,7 @@ class _AddFarmerState extends State<AddFarmer> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Select type of milk:',
+                                'add_farmer_select_type'.tr,
                                 style: themeData.textTheme.bodyLarge,
                               ),
                               Row(
@@ -195,7 +196,7 @@ class _AddFarmerState extends State<AddFarmer> {
                                         shape: CircleBorder(),
                                       ),
                                       Text(
-                                        "Cow",
+                                        "add_farmer_cow".tr,
                                         style: themeData.textTheme.bodySmall,
                                       ),
                                     ],
@@ -215,7 +216,7 @@ class _AddFarmerState extends State<AddFarmer> {
                                         shape: CircleBorder(),
                                       ),
                                       Text(
-                                        "Buffalo",
+                                        "add_farmer_buffalo".tr,
                                         style: themeData.textTheme.bodySmall,
                                       ),
                                     ],
@@ -241,7 +242,7 @@ class _AddFarmerState extends State<AddFarmer> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Select time of milk:',
+                                'add_milk_buyer_select_time'.tr,
                                 style: themeData.textTheme.bodyLarge,
                               ),
                               Row(
@@ -262,7 +263,7 @@ class _AddFarmerState extends State<AddFarmer> {
                                         shape: const CircleBorder(),
                                       ),
                                       Text(
-                                        "Morning",
+                                        "add_milk_buyer_morning".tr,
                                         style: themeData.textTheme.bodySmall,
                                       ),
                                     ],
@@ -282,7 +283,7 @@ class _AddFarmerState extends State<AddFarmer> {
                                         shape: const CircleBorder(),
                                       ),
                                       Text(
-                                        "Evening",
+                                        "add_milk_buyer_evening".tr,
                                         style: themeData.textTheme.bodySmall,
                                       ),
                                     ],
@@ -303,7 +304,7 @@ class _AddFarmerState extends State<AddFarmer> {
                         ],
                       ),
                       CElevatedButton(
-                        label: 'Add Farmer',
+                        label: 'add_farmer'.tr,
                         onPress: () {
                           if (_formKey.currentState!.validate()) {
                             if (!cow && !buffalo) {

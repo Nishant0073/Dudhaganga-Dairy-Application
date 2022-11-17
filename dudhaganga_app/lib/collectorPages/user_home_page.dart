@@ -1,18 +1,24 @@
+import 'package:dudhaganga_app/collectorPages/side_bar.dart';
 import 'package:dudhaganga_app/customWidgets/cCard.dart';
 import 'package:dudhaganga_app/select_farmer.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class UserHomePage extends StatelessWidget {
+class UserHomePage extends StatefulWidget {
   const UserHomePage({super.key});
 
+  @override
+  State<UserHomePage> createState() => _UserHomePageState();
+}
+
+class _UserHomePageState extends State<UserHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.menu),
-        automaticallyImplyLeading: false,
-        title: const Text('Home '),
+        title: Text('side_bar_home'.tr),
       ),
+      drawer: SideNevigationBar(),
       body: Center(
         child: SingleChildScrollView(
           physics: ClampingScrollPhysics(),
@@ -30,7 +36,7 @@ class UserHomePage extends StatelessWidget {
                       ),
                     ),
                     title: const Text('9 Sup 2022'),
-                    subtitle: const Text("Morning"),
+                    subtitle: Text('user_home_page_morning'.tr),
                   ),
                 ),
                 const SizedBox(
@@ -43,8 +49,8 @@ class UserHomePage extends StatelessWidget {
                         flex: 1,
                         child: cCard(
                           child: Column(
-                            children: const [
-                              Text('Collected Milk:'),
+                            children: [
+                              Text('user_home_page_collected_milk'.tr),
                               Text(
                                 '34 L',
                                 style: TextStyle(fontSize: 32.0),
@@ -60,7 +66,7 @@ class UserHomePage extends StatelessWidget {
                       child: cCard(
                         child: Column(
                           children: [
-                            Text('Remaining Farmers:'),
+                            Text('user_home_page_remaining_farmer'.tr),
                             Text(
                               '21',
                               style: TextStyle(fontSize: 32.0),
@@ -81,8 +87,8 @@ class UserHomePage extends StatelessWidget {
                       flex: 1,
                       child: cCard(
                         child: Column(
-                          children: const [
-                            Text('Sold Milk:'),
+                          children: [
+                            Text('user_home_page_sold_milk'.tr),
                             Text(
                               '8 L',
                               style: TextStyle(fontSize: 32.0),
@@ -99,7 +105,7 @@ class UserHomePage extends StatelessWidget {
                       child: cCard(
                         child: Column(
                           children: [
-                            Center(child: Text('No. of Customers:')),
+                            Center(child: Text('user_home_page_customer'.tr)),
                             Text(
                               '14',
                               style: TextStyle(fontSize: 32.0),
@@ -122,7 +128,7 @@ class UserHomePage extends StatelessWidget {
                               Icons.edit_note,
                               size: 45.0,
                             )),
-                        title: const Text('Take Reading',
+                        title: Text('user_home_page_reading'.tr,
                             style: TextStyle(
                               fontSize: 20.0,
                             )),

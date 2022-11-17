@@ -2,6 +2,7 @@ import 'package:dudhaganga_app/collectorPages/add_customer.dart';
 import 'package:dudhaganga_app/collectorPages/profile_page.dart';
 import 'package:dudhaganga_app/collectorPages/user_home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
   String userId;
@@ -35,15 +36,15 @@ class _HomePageState extends State<HomePage> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.group_add_rounded),
-            label: 'Add Customer',
+            label: 'add_customer'.tr,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: 'side_bar_home'.tr,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
-            label: 'Profile',
+            label: 'home_page_profile'.tr,
           ),
         ],
         currentIndex: _selectedPage,

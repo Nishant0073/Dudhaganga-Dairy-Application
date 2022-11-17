@@ -4,6 +4,7 @@ import 'package:dudhaganga_app/constants.dart';
 import 'package:dudhaganga_app/customWidgets/cCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 
 class AddCustomers extends StatelessWidget {
   const AddCustomers({super.key});
@@ -12,7 +13,7 @@ class AddCustomers extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add customer'),
+        title: Text('add_customer'.tr),
         automaticallyImplyLeading: false,
       ),
       body: Center(
@@ -40,7 +41,7 @@ class AddCustomers extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: Center(
                             child: Text(
-                              'Farmer',
+                              'add_customer_farmer'.tr,
                               style: themeData.textTheme.headline3,
                             ),
                           ),
@@ -70,7 +71,7 @@ class AddCustomers extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: Center(
                             child: Text(
-                              'Milk Buyer',
+                              'add_customer_milk_buyer'.tr,
                               style: themeData.textTheme.headline3,
                             ),
                           ),
