@@ -8,6 +8,16 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const Text('Profile'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(Icons.edit_note),
+          )
+        ],
+      ),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -26,7 +36,7 @@ class ProfilePage extends StatelessWidget {
                     height: 8.0,
                   ),
                   Text(
-                    "Ram More",
+                    "Ram Mane",
                     style: themeData.textTheme.labelLarge!.copyWith(
                       fontSize: 24.0,
                     ),
@@ -51,17 +61,17 @@ class ProfilePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        "+91 8329060000",
+                        "+91 1234567890",
                         style: themeData.textTheme.displayMedium,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 12.0,
                       ),
                       Text(
                         "ram1234@gmail.com",
                         style: themeData.textTheme.displayMedium,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 12.0,
                       ),
                     ],

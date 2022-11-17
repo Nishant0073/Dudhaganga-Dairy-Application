@@ -1,10 +1,11 @@
-import 'package:dudhaganga_app/constants.dart';
-import 'package:dudhaganga_app/profile_page.dart';
-import 'package:dudhaganga_app/user_home_page.dart';
+import 'package:dudhaganga_app/collectorPages/add_customer.dart';
+import 'package:dudhaganga_app/collectorPages/profile_page.dart';
+import 'package:dudhaganga_app/collectorPages/user_home_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  String userId;
+  HomePage({super.key, required this.userId});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -17,7 +18,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _selectedPage = currentIndex;
       if (currentIndex == 0) {
-        currentPage = const Text("ADD CUSTOMERS");
+        currentPage = AddCustomers();
       } else if (currentIndex == 1) {
         currentPage = UserHomePage();
       } else {
@@ -29,10 +30,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(appName),
-        automaticallyImplyLeading: false,
-      ),
       body: Center(child: currentPage),
       bottomNavigationBar: BottomNavigationBar(
         items: [

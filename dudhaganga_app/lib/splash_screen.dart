@@ -1,4 +1,4 @@
-import 'package:dudhaganga_app/welcome_screen.dart';
+import 'package:dudhaganga_app/loginPages/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'constants.dart';
@@ -14,7 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    new Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => WelcomeScreen()),

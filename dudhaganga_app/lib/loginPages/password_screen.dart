@@ -1,23 +1,22 @@
 import 'package:dudhaganga_app/constants.dart';
 import 'package:dudhaganga_app/customWidgets/cElevatedButton.dart';
+import 'package:dudhaganga_app/customWidgets/cTextField.dart';
 import 'package:dudhaganga_app/home_page.dart';
 import 'package:dudhaganga_app/main.dart';
 import 'package:flutter/material.dart';
 
-import 'customWidgets/cTextField.dart';
-
-class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({Key? key}) : super(key: key);
+class PasswordScreen extends StatefulWidget {
+  PasswordScreen({Key? key}) : super(key: key);
 
   @override
-  State<WelcomeScreen> createState() => _WelcomeScreenState();
+  State<PasswordScreen> createState() => _PasswordScreenState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
+class _PasswordScreenState extends State<PasswordScreen> {
   //Created AppBar
   PreferredSizeWidget createAppBar() {
     return AppBar(
-      title: const Text(appName),
+      title: const Text('Login'),
       actions: [
         IconButton(
           icon: useLightMode
@@ -48,14 +47,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return LayoutBuilder(
       builder: ((context, constraints) {
         if (constraints.maxWidth < narrowScreenWidthThreshold) {
-          return Scaffold(appBar: createAppBar(), body: welcomePage());
+          return Scaffold(appBar: createAppBar(), body: passwordPage());
         } else {
           return Scaffold(
             appBar: createAppBar(),
             body: SafeArea(
               bottom: false,
               top: false,
-              child: welcomePage(),
+              child: passwordPage(),
             ),
           );
         }
@@ -64,7 +63,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
 
 //Actual welcome Page.
-  Widget welcomePage() {
+  Widget passwordPage() {
     return SingleChildScrollView(
       physics: const ClampingScrollPhysics(),
       child: Container(
@@ -82,13 +81,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
 
             //used custom widgets
-            CTextField(label: 'Enter Phone Number:'),
+            CTextField(label: 'Enter Password:'),
             const SizedBox(height: 20.0),
             CElevatedButton(
-              label: 'Submit',
+              label: 'Login',
               onPress: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const HomePage()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => HomePage(
+                          userId: '',
+                        )));
               },
             ),
           ],
