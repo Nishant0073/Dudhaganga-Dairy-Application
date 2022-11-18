@@ -60,6 +60,17 @@ class LanguagePage extends Translations {
           'milk_reading_add_reading': 'Add Reading',
           //9
           'constants_app_name': 'Dudhaganga Dairy',
+
+          //10
+          'milk_reading_name': 'Name',
+          'milk_reading_time': 'Time',
+          'milk_reading_morning': 'Moring',
+          'milk_reading_evening': 'Evening',
+          'milk_reading_quantity': 'Quantity',
+          'milk_reading_quantity_liter': 'Enter Milk Quantity in Liter',
+          'milk_reading_fat': 'Fat',
+          'milk_reading_submit': 'Submit',
+          'milk_reading_enter_fat': 'Enter Milk Fat',
         },
         'hi_IN': {
           'side_bar_home': 'मुख्यपृष्ठ',
@@ -118,6 +129,16 @@ class LanguagePage extends Translations {
           'milk_reading_add_reading': 'पढ़ना जोड़ें',
           //9
           'constants_app_name': 'दूधगंगा डेयरी',
+          //10
+          'milk_reading_name': 'नाम',
+          'milk_reading_time': 'समय',
+          'milk_reading_morning': 'सुबह',
+          'milk_reading_evening': 'शाम',
+          'milk_reading_quantity': 'मात्रा',
+          'milk_reading_quantity_liter': 'दूध की मात्रा लीटर में दर्ज करें',
+          'milk_reading_fat': 'फॅट',
+          'milk_reading_submit': 'सबमीट',
+          'milk_reading_enter_fat': 'दूध फॅट दर्ज करें',
         },
         'mr_IN': {
           'side_bar_home': 'मुख्यपृष्ठ',
@@ -176,6 +197,16 @@ class LanguagePage extends Translations {
           'milk_reading_add_reading': 'वाचन जोडा',
           //9
           'constants_app_name': 'दूधगंगा डेअरी',
+          //10
+          'milk_reading_name': 'नाव',
+          'milk_reading_time': 'वेळ',
+          'milk_reading_morning': 'सकाळ',
+          'milk_reading_evening': 'संध्याकाळ',
+          'milk_reading_quantity': 'प्रमाण',
+          'milk_reading_quantity_liter': 'दुधाचे प्रमाण लिटरमध्ये टाका',
+          'milk_reading_fat': 'फॅट',
+          'milk_reading_submit': 'सबमीट',
+          'milk_reading_enter_fat': 'दूध फॅट प्रविष्ट करा',
         }
       };
 }
