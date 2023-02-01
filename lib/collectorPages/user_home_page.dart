@@ -1,5 +1,5 @@
 import 'package:dudhaganga_app/collectorPages/side_bar.dart';
-import 'package:dudhaganga_app/customWidgets/cCard.dart';
+import 'package:dudhaganga_app/customWidgets/c_card.dart';
 import 'package:dudhaganga_app/select_farmer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,16 +18,16 @@ class _UserHomePageState extends State<UserHomePage> {
       appBar: AppBar(
         title: Text('side_bar_home'.tr),
       ),
-      drawer: SideNevigationBar(),
+      drawer: const SideNevigationBar(),
       body: Center(
         child: SingleChildScrollView(
-          physics: ClampingScrollPhysics(),
+          physics: const ClampingScrollPhysics(),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                cCard(
+                HomeCard(
                   child: ListTile(
                     leading: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
@@ -47,11 +47,11 @@ class _UserHomePageState extends State<UserHomePage> {
                   children: [
                     Expanded(
                         flex: 1,
-                        child: cCard(
+                        child: HomeCard(
                           child: Column(
                             children: [
                               Text('user_home_page_collected_milk'.tr),
-                              Text(
+                              const Text(
                                 '34 L',
                                 style: TextStyle(fontSize: 32.0),
                               ),
@@ -63,11 +63,11 @@ class _UserHomePageState extends State<UserHomePage> {
                     ),
                     Expanded(
                       flex: 1,
-                      child: cCard(
+                      child: HomeCard(
                         child: Column(
                           children: [
                             Text('user_home_page_remaining_farmer'.tr),
-                            Text(
+                            const Text(
                               '21',
                               style: TextStyle(fontSize: 32.0),
                             ),
@@ -77,7 +77,7 @@ class _UserHomePageState extends State<UserHomePage> {
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 24.0,
                 ),
                 Row(
@@ -85,11 +85,11 @@ class _UserHomePageState extends State<UserHomePage> {
                   children: [
                     Expanded(
                       flex: 1,
-                      child: cCard(
+                      child: HomeCard(
                         child: Column(
                           children: [
                             Text('user_home_page_sold_milk'.tr),
-                            Text(
+                            const Text(
                               '8 L',
                               style: TextStyle(fontSize: 32.0),
                             ),
@@ -97,16 +97,16 @@ class _UserHomePageState extends State<UserHomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 16.0,
                     ),
                     Expanded(
                       flex: 1,
-                      child: cCard(
+                      child: HomeCard(
                         child: Column(
                           children: [
                             Center(child: Text('user_home_page_customer'.tr)),
-                            Text(
+                            const Text(
                               '14',
                               style: TextStyle(fontSize: 32.0),
                             ),
@@ -116,26 +116,26 @@ class _UserHomePageState extends State<UserHomePage> {
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 24.0,
                 ),
-                cCard(
+                HomeCard(
                   child: GestureDetector(
                       child: ListTile(
                         leading: ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
-                            child: Icon(
+                            child: const Icon(
                               Icons.edit_note,
                               size: 45.0,
                             )),
                         title: Text('user_home_page_reading'.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 20.0,
                             )),
                       ),
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => SelectFarmer()));
+                            builder: (context) => const SelectFarmer()));
                       }),
                 ),
               ],

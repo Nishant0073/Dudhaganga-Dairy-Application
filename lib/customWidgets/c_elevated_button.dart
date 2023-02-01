@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class CElevatedButton extends StatelessWidget {
-  String label;
-  Function onPress;
-  CElevatedButton({super.key, required this.label, required this.onPress});
+  final String label;
+  final Function onPress;
+  const CElevatedButton(
+      {super.key, required this.label, required this.onPress});
 
   @override
   Widget build(BuildContext context) {

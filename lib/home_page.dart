@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
-  String userId;
-  HomePage({super.key, required this.userId});
+  final String userId;
+  const HomePage({super.key, required this.userId});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -14,16 +14,16 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var _selectedPage = 1;
-  Widget currentPage = UserHomePage();
+  Widget currentPage = const UserHomePage();
   void _onSelect(int currentIndex) {
     setState(() {
       _selectedPage = currentIndex;
       if (currentIndex == 0) {
-        currentPage = AddCustomers();
+        currentPage = const AddCustomers();
       } else if (currentIndex == 1) {
-        currentPage = UserHomePage();
+        currentPage = const UserHomePage();
       } else {
-        currentPage = ProfilePage();
+        currentPage = const ProfilePage();
       }
     });
   }
@@ -35,15 +35,15 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.group_add_rounded),
+            icon: const Icon(Icons.group_add_rounded),
             label: 'add_customer'.tr,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: const Icon(Icons.home),
             label: 'side_bar_home'.tr,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
+            icon: const Icon(Icons.account_circle),
             label: 'home_page_profile'.tr,
           ),
         ],

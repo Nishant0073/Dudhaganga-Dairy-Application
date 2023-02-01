@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:dudhaganga_app/constants.dart';
-import 'package:dudhaganga_app/customWidgets/cElevatedButton.dart';
+import 'package:dudhaganga_app/customWidgets/c_elevated_button.dart';
 import 'package:dudhaganga_app/home_page.dart';
 import 'package:dudhaganga_app/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -54,7 +54,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               .user!;
         } catch (e) {
           if (kDebugMode) {
-            print("Failed to sign in: " + e.toString());
+            print("Failed to sign in: $e");
           }
           error = true;
         }
@@ -86,7 +86,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         await firebaseAuth.verifyPhoneNumber(
             phoneNumber: phoneNumber!,
             timeout: const Duration(seconds: 5),
-            forceResendingToken: forceResendingToken ?? null,
+            forceResendingToken: forceResendingToken,
             verificationCompleted: verificationCompleted,
             verificationFailed: verificationFailed,
             codeSent: codeSent,
@@ -116,12 +116,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       );
       user = (await firebaseAuth.signInWithCredential(credential)).user!;
     } catch (e) {
-      Fluttertoast.showToast(msg: "Failed to sign in: " + e.toString());
+      Fluttertoast.showToast(msg: "Failed to sign in: $e");
       error = true;
     }
-    if (!error && user != null && user.uid != null) {
+    if (!error && user != null) {
       String id = user.uid;
       //here you can store user data in backend
+      // ignore: use_build_context_synchronously
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (context) => HomePage(userId: id)));
     }
@@ -132,7 +133,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   Padding signInScreen() {
     return Padding(
-      padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
       child: Form(
         key: _formKey,
         child: Column(
@@ -145,7 +146,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 phoneNumber = number.phoneNumber;
               },
               onInputValidated: (bool value) {
-                print(value);
+                if (kDebugMode) {
+                  print(value);
+                }
               },
               selectorConfig: const SelectorConfig(
                 selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
@@ -159,7 +162,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
               keyboardType: const TextInputType.numberWithOptions(
                   signed: true, decimal: true),
-              inputBorder: OutlineInputBorder(),
+              inputBorder: const OutlineInputBorder(),
             ),
             const SizedBox(
               height: 55,
@@ -173,10 +176,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
 
   SingleChildScrollView otpScreen() {
-    FocusNode _focusNode = FocusNode();
+    FocusNode focusNode = FocusNode();
     return SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.fromLTRB(30, 0, 30, 20),
+        padding: const EdgeInsets.fromLTRB(30, 0, 30, 20),
         child: Form(
           key: _formKey,
           child: Column(
@@ -203,12 +206,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       Fluttertoast.showToast(msg: "Enter Complete OTP");
                       Future.delayed(const Duration(seconds: 2));
                     }
-                    _focusNode.requestFocus();
+                    focusNode.requestFocus();
                   },
                   onTap: () {
-                    _focusNode.requestFocus();
+                    focusNode.requestFocus();
                   },
-                  focusNode: _focusNode,
+                  focusNode: focusNode,
                   enableActiveFill: true,
                   autoDisposeControllers: false,
                   autoDismissKeyboard: false,
@@ -229,12 +232,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   animationDuration: const Duration(milliseconds: 300),
                   controller: otpEditingController,
                   onCompleted: (v) {
-                    print("Completed");
+                    if (kDebugMode) {
+                      print("Completed");
+                    }
                   },
-                  onChanged: (value) {
-                    print(value);
-                  },
+                  onChanged: (value) {},
                   beforeTextPaste: (text) {
+                    // ignore: avoid_print
                     print("Allowing to paste $text");
                     return true;
                   },
@@ -243,18 +247,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               Center(
                 child: GestureDetector(
                   onTap: () => verifyPhoneNumber(),
-                  child: Container(
-                    child: Text(
-                      'Resend OTP?',
-                      style: TextStyle(
-                        fontSize: 15,
-                        letterSpacing: 0.688,
-                      ),
+                  child: const Text(
+                    'Resend OTP?',
+                    style: TextStyle(
+                      fontSize: 15,
+                      letterSpacing: 0.688,
                     ),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Center(
@@ -299,13 +301,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       useLightMode = !useLightMode;
       isLightTheme.add(useLightMode);
       themeData = ThemeData(
-          colorSchemeSeed: app_base_color,
+          colorSchemeSeed: appBaseColor,
           useMaterial3: true,
           brightness: useLightMode ? Brightness.light : Brightness.dark);
     });
   }
-
-  String? phone_number = null;
 
   @override
   Widget build(BuildContext context) {
@@ -333,41 +333,39 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       physics: const ClampingScrollPhysics(),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                margin: const EdgeInsets.all(16.0),
-                child: Image.asset(
-                  'assets/images/DGLogo.png',
-                  width: 164.0,
-                ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              margin: const EdgeInsets.all(16.0),
+              child: Image.asset(
+                'assets/images/DGLogo.png',
+                width: 164.0,
               ),
-              SizedBox(
-                height: 40.0,
+            ),
+            const SizedBox(
+              height: 40.0,
+            ),
+            WillPopScope(
+              onWillPop: () {
+                setState(() {
+                  showOtpScreen = false;
+                });
+                return Future.value(true);
+              },
+              child: Stack(
+                children: [
+                  showOtpScreen ? otpScreen() : signInScreen(),
+                  loading
+                      ? const Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : Container(),
+                ],
               ),
-              WillPopScope(
-                onWillPop: () {
-                  setState(() {
-                    showOtpScreen = false;
-                  });
-                  return Future.value(true);
-                },
-                child: Stack(
-                  children: [
-                    showOtpScreen ? otpScreen() : signInScreen(),
-                    loading
-                        ? Center(
-                            child: CircularProgressIndicator(),
-                          )
-                        : Container(),
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

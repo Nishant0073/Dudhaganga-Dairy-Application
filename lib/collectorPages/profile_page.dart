@@ -1,6 +1,5 @@
 import 'package:dudhaganga_app/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -12,9 +11,9 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text('profile_page_profile'.tr),
-        actions: [
+        actions: const [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0),
             child: Icon(Icons.edit_note),
           )
         ],
@@ -27,13 +26,13 @@ class ProfilePage extends StatelessWidget {
               flex: 1,
               child: Column(
                 children: [
-                  CircleAvatar(
+                  const CircleAvatar(
                     //  backgroundColor: Colors.greenAccent[400],
                     radius: 70,
                     backgroundImage:
                         AssetImage('assets/images/profile_pic.jpg'),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 8.0,
                   ),
                   Text(

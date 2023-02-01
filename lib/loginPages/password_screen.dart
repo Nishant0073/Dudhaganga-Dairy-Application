@@ -1,12 +1,12 @@
 import 'package:dudhaganga_app/constants.dart';
-import 'package:dudhaganga_app/customWidgets/cElevatedButton.dart';
-import 'package:dudhaganga_app/customWidgets/cTextField.dart';
+import 'package:dudhaganga_app/customWidgets/c_elevated_button.dart';
+import 'package:dudhaganga_app/customWidgets/c_text_field.dart';
 import 'package:dudhaganga_app/home_page.dart';
 import 'package:dudhaganga_app/main.dart';
 import 'package:flutter/material.dart';
 
 class PasswordScreen extends StatefulWidget {
-  PasswordScreen({Key? key}) : super(key: key);
+  const PasswordScreen({Key? key}) : super(key: key);
 
   @override
   State<PasswordScreen> createState() => _PasswordScreenState();
@@ -36,7 +36,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
       useLightMode = !useLightMode;
       isLightTheme.add(useLightMode);
       themeData = ThemeData(
-          colorSchemeSeed: app_base_color,
+          colorSchemeSeed: appBaseColor,
           useMaterial3: true,
           brightness: useLightMode ? Brightness.light : Brightness.dark);
     });
@@ -81,13 +81,13 @@ class _PasswordScreenState extends State<PasswordScreen> {
             ),
 
             //used custom widgets
-            CTextField(label: 'Enter Password:'),
+            const CTextField(label: 'Enter Password:'),
             const SizedBox(height: 20.0),
             CElevatedButton(
               label: 'Login',
               onPress: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => HomePage(
+                    builder: (context) => const HomePage(
                           userId: '',
                         )));
               },

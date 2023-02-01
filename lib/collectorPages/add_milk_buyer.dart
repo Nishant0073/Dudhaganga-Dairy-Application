@@ -1,6 +1,6 @@
 import 'package:dudhaganga_app/constants.dart';
-import 'package:dudhaganga_app/customWidgets/cElevatedButton.dart';
-import 'package:dudhaganga_app/customWidgets/cTextField.dart';
+import 'package:dudhaganga_app/customWidgets/c_elevated_button.dart';
+import 'package:dudhaganga_app/customWidgets/c_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,7 +19,7 @@ class _AddMilkBuyer extends State<AddMilkBuyer> {
   bool evening = false;
   @override
   Widget build(BuildContext context) {
-    Future<void> _showMyDialog() async {
+    Future<void> showMyDialog() async {
       return showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
@@ -43,7 +43,7 @@ class _AddMilkBuyer extends State<AddMilkBuyer> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text('add_milk_buyer_customer_added'.tr),
-                      duration: Duration(seconds: 3),
+                      duration: const Duration(seconds: 3),
                     ),
                   );
                 },
@@ -135,7 +135,7 @@ class _AddMilkBuyer extends State<AddMilkBuyer> {
                   CElevatedButton(
                     label: 'add_customer'.tr,
                     onPress: () {
-                      _showMyDialog();
+                      showMyDialog();
                     },
                   ),
                 ],

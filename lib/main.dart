@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       builder: (context, snapshot) {
         return GetMaterialApp(
             translations: LanguagePage(),
-            locale: Locale('en', 'US'),
+            locale: const Locale('en', 'US'),
             debugShowCheckedModeBanner: false,
             title: 'Dudhaganga Dairy',
             themeMode: snapshot.data! ? ThemeMode.light : ThemeMode.dark,

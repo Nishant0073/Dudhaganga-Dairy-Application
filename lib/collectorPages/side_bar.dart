@@ -1,20 +1,21 @@
 import 'package:dudhaganga_app/constants.dart';
 import 'package:dudhaganga_app/main.dart';
 import 'package:flutter/material.dart';
-import 'package:dudhaganga_app/home_page.dart';
-import 'package:dudhaganga_app/customWidgets/cCard.dart';
+import 'package:dudhaganga_app/customWidgets/c_card.dart';
 import 'package:get/get.dart';
 
 class SideNevigationBar extends StatefulWidget {
+  const SideNevigationBar({super.key});
+
   @override
   State<SideNevigationBar> createState() => _SideNevigationBarState();
 }
 
 class _SideNevigationBarState extends State<SideNevigationBar> {
   final List language = [
-    {'name': 'ENGLISH', 'locale': Locale('en', 'US')},
-    {'name': 'हिन्दी', 'locale': Locale('hi', 'IN')},
-    {'name': 'मराठी', 'locale': Locale('mr', 'IN')}
+    {'name': 'ENGLISH', 'locale': const Locale('en', 'US')},
+    {'name': 'हिन्दी', 'locale': const Locale('hi', 'IN')},
+    {'name': 'मराठी', 'locale': const Locale('mr', 'IN')}
   ];
 
   final List mode = [
@@ -33,13 +34,13 @@ class _SideNevigationBarState extends State<SideNevigationBar> {
         builder: (builder) {
           return AlertDialog(
             title: Text(textData),
-            content: Container(
+            content: SizedBox(
               width: double.maxFinite,
               child: ListView.separated(
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     return Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: GestureDetector(
                             onTap: () {
                               updatelanguage(language[index]['locale']);
@@ -47,7 +48,7 @@ class _SideNevigationBarState extends State<SideNevigationBar> {
                             child: Text(listName[index]['name'])));
                   },
                   separatorBuilder: (context, index) {
-                    return Divider(
+                    return const Divider(
                       color: Colors.white,
                     );
                   },
@@ -64,7 +65,7 @@ class _SideNevigationBarState extends State<SideNevigationBar> {
       //changing app theme using stream controller,
       isLightTheme.add(useLightMode);
       themeData = ThemeData(
-          colorSchemeSeed: app_base_color,
+          colorSchemeSeed: appBaseColor,
           useMaterial3: true,
           brightness: useLightMode ? Brightness.light : Brightness.dark);
     });
@@ -76,13 +77,13 @@ class _SideNevigationBarState extends State<SideNevigationBar> {
         builder: (builder) {
           return AlertDialog(
             title: Text(textData),
-            content: Container(
+            content: SizedBox(
               width: double.maxFinite,
               child: ListView.separated(
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     return Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: GestureDetector(
                             onTap: () {
                               handleThemeChange(index);
@@ -91,7 +92,7 @@ class _SideNevigationBarState extends State<SideNevigationBar> {
                             child: Text(listName[index]['name'])));
                   },
                   separatorBuilder: (context, index) {
-                    return Divider(
+                    return const Divider(
                       color: Colors.white,
                     );
                   },
@@ -103,7 +104,7 @@ class _SideNevigationBarState extends State<SideNevigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    return cCard(
+    return HomeCard(
       child: Drawer(
         child: SingleChildScrollView(
           child: Column(
@@ -128,14 +129,14 @@ class _SideNevigationBarState extends State<SideNevigationBar> {
         runSpacing: 16,
         children: [
           ListTile(
-            leading: Icon(Icons.home_outlined),
+            leading: const Icon(Icons.home_outlined),
             title: Text('side_bar_home'.tr),
             onTap: () {
               Navigator.of(context).pop();
             },
           ),
           ListTile(
-            leading: Icon(Icons.language),
+            leading: const Icon(Icons.language),
             title: Text('side_bar_language'.tr),
             onTap: () {
               builddialogForLang(
@@ -143,19 +144,19 @@ class _SideNevigationBarState extends State<SideNevigationBar> {
             },
           ),
           ListTile(
-            leading: Icon(Icons.edit),
+            leading: const Icon(Icons.edit),
             title: Text("side_bar_profile".tr),
             onTap: () {},
           ),
           ListTile(
-            leading: Icon(Icons.change_circle_outlined),
+            leading: const Icon(Icons.change_circle_outlined),
             title: Text("side_bar_theme".tr),
             onTap: () {
               builddialogForTheme(context, 'side_bar_choose_theme'.tr, mode);
             },
           ),
           ListTile(
-            leading: Icon(Icons.logout),
+            leading: const Icon(Icons.logout),
             title: Text('side_bar_logout'.tr),
             onTap: () {},
           )

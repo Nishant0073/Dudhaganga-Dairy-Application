@@ -1,15 +1,14 @@
 import 'package:dudhaganga_app/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class CTextField extends StatefulWidget {
-  String label;
-  String? hintText;
-  String? validatorText;
-  Function? onChange = null;
-  Function? onSave = null;
-  String? Function(String?)? validator;
-  CTextField({
+  final String label;
+  final String? hintText;
+  final String? validatorText;
+  final Function? onChange;
+  final Function? onSave;
+  final String? Function(String?)? validator;
+  const CTextField({
     super.key,
     required this.label,
     this.hintText,
@@ -31,35 +30,34 @@ class _CTextFieldState extends State<CTextField> {
         autovalidateMode: AutovalidateMode.onUserInteraction,
         onChanged: (value) =>
             widget.onChange == null ? null : widget.onChange!(value),
-        validator: widget.validator == null
-            ? (value) {
-                if (value == null || value.isEmpty) {
-                  return widget.validatorText;
-                }
-                return null;
+        validator: widget.validator ??
+            (value) {
+              if (value == null || value.isEmpty) {
+                return widget.validatorText;
               }
-            : widget.validator,
+              return null;
+            },
         decoration: InputDecoration(
           // contentPadding: EdgeInsets.fromLTRB(10, 5, 5, 10),
           label: Text(widget.label),
           hintText: widget.hintText,
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: useLightMode ? light_gray : black_color,
+              color: useLightMode ? lightGray : blackColor,
               width: 2,
             ),
             borderRadius: BorderRadius.circular(8),
           ),
           border: OutlineInputBorder(
             borderSide: BorderSide(
-              color: useLightMode ? light_gray : black_color,
+              color: useLightMode ? lightGray : blackColor,
               width: 2,
             ),
             borderRadius: BorderRadius.circular(8),
           ),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: useLightMode ? light_gray : black_color,
+              color: useLightMode ? lightGray : blackColor,
               width: 2,
             ),
             borderRadius: BorderRadius.circular(8),

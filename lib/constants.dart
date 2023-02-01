@@ -8,14 +8,14 @@ const splashScreenTitle = TextStyle(
   fontSize: 50,
 );
 
-Color light_gray = const Color(0xFF95A1AC);
-Color black_color = const Color(0xFF000000);
+Color lightGray = const Color(0xFF95A1AC);
+Color blackColor = const Color(0xFF000000);
 
-Color app_base_color = const Color.fromARGB(255, 5, 201, 80);
+Color appBaseColor = const Color.fromARGB(255, 5, 201, 80);
 
 bool useLightMode = true;
 ThemeData themeData = ThemeData(
-  colorSchemeSeed: app_base_color,
+  colorSchemeSeed: appBaseColor,
   useMaterial3: true,
   brightness: useLightMode ? Brightness.light : Brightness.dark,
 );

@@ -1,16 +1,16 @@
 import 'package:dudhaganga_app/constants.dart';
 import 'package:flutter/material.dart';
 
-class cCard extends StatefulWidget {
-  Widget child;
-  Color color = themeData.backgroundColor;
-  cCard({super.key, required this.child});
+class HomeCard extends StatefulWidget {
+  final Widget child;
+  final Color color = themeData.backgroundColor;
+  HomeCard({super.key, required this.child});
 
   @override
-  State<cCard> createState() => _cCardState();
+  State<HomeCard> createState() => CardState();
 }
 
-class _cCardState extends State<cCard> {
+class CardState extends State<HomeCard> {
   @override
   Widget build(BuildContext context) {
     return PhysicalModel(

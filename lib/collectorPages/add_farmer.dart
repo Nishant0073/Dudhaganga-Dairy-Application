@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:dudhaganga_app/collectorPages/database_pages/db_add_farmer.dart';
 import 'package:dudhaganga_app/constants.dart';
-import 'package:dudhaganga_app/customWidgets/cElevatedButton.dart';
-import 'package:dudhaganga_app/customWidgets/cTextField.dart';
+import 'package:dudhaganga_app/customWidgets/c_elevated_button.dart';
+import 'package:dudhaganga_app/customWidgets/c_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -30,7 +30,7 @@ class _AddFarmerState extends State<AddFarmer> {
   bool issnackFail = false;
 
   Future<void> putDataToFirebase() async {
-    if (this._formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate()) {
       setState(() {
         loading = true;
       });
@@ -47,7 +47,7 @@ class _AddFarmerState extends State<AddFarmer> {
         });
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text("add_farmer_customer_added".tr),
-          duration: Duration(seconds: 3),
+          duration: const Duration(seconds: 3),
         ));
 
         return Future.value();
@@ -55,10 +55,11 @@ class _AddFarmerState extends State<AddFarmer> {
         setState(() {
           loading = false;
         });
+        // ignore: avoid_print
         print('MY ERROR: $error');
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text("add_farmer_unable_to_farmer".tr),
-          duration: Duration(seconds: 3),
+          duration: const Duration(seconds: 3),
         ));
       });
       return Future.value();
@@ -88,7 +89,7 @@ class _AddFarmerState extends State<AddFarmer> {
       issnackFail = false;
     }
 
-    Future<void> _showMyDialog() async {
+    Future<void> showMyDialog() async {
       return showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
@@ -154,7 +155,7 @@ class _AddFarmerState extends State<AddFarmer> {
                         },
                         validator: (String? value) {
                           String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
-                          RegExp regExp = new RegExp(pattern);
+                          RegExp regExp = RegExp(pattern);
                           if (value == null) {
                             return 'Please enter mobile number';
                           } else if (!regExp.hasMatch(value) ||
@@ -193,7 +194,7 @@ class _AddFarmerState extends State<AddFarmer> {
                                             },
                                           );
                                         },
-                                        shape: CircleBorder(),
+                                        shape: const CircleBorder(),
                                       ),
                                       Text(
                                         "add_farmer_cow".tr,
@@ -213,7 +214,7 @@ class _AddFarmerState extends State<AddFarmer> {
                                             },
                                           );
                                         },
-                                        shape: CircleBorder(),
+                                        shape: const CircleBorder(),
                                       ),
                                       Text(
                                         "add_farmer_buffalo".tr,
@@ -227,9 +228,8 @@ class _AddFarmerState extends State<AddFarmer> {
                           ),
                           milkTypeWarn
                               ? const Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                  child: const Text(
+                                  padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                                  child: Text(
                                     "*Milk type required!",
                                     style: TextStyle(color: Colors.red),
                                   ),
@@ -316,7 +316,7 @@ class _AddFarmerState extends State<AddFarmer> {
                                 milkTimeWarn = true;
                               });
                             } else {
-                              _showMyDialog();
+                              showMyDialog();
                             }
                           }
                         },
@@ -328,7 +328,7 @@ class _AddFarmerState extends State<AddFarmer> {
             ),
           ),
           loading
-              ? Center(
+              ? const Center(
                   child: CircularProgressIndicator(),
                 )
               : Container(),

@@ -1,9 +1,8 @@
 import 'package:dudhaganga_app/collectorPages/add_farmer.dart';
 import 'package:dudhaganga_app/collectorPages/add_milk_buyer.dart';
 import 'package:dudhaganga_app/constants.dart';
-import 'package:dudhaganga_app/customWidgets/cCard.dart';
+import 'package:dudhaganga_app/customWidgets/c_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 class AddCustomers extends StatelessWidget {
@@ -29,7 +28,7 @@ class AddCustomers extends StatelessWidget {
                       builder: (context) => const AddFarmer(),
                     ),
                   ),
-                  child: cCard(
+                  child: HomeCard(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -59,7 +58,7 @@ class AddCustomers extends StatelessWidget {
                       builder: (context) => const AddMilkBuyer(),
                     ),
                   ),
-                  child: cCard(
+                  child: HomeCard(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [

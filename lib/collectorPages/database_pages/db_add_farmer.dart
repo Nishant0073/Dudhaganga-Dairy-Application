@@ -1,7 +1,6 @@
+// ignore_for_file: avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dudhaganga_app/constants.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/material.dart';
 
 class AddFarmerToFirebase {
   late String _name;

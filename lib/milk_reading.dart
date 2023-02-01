@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:dudhaganga_app/customWidgets/cElevatedButton.dart';
-import 'package:dudhaganga_app/constants.dart';
-import 'package:dudhaganga_app/customWidgets/cTextField.dart';
+import 'package:dudhaganga_app/customWidgets/c_elevated_button.dart';
+import 'package:dudhaganga_app/customWidgets/c_text_field.dart';
 
 class MilkReading extends StatelessWidget {
   final int index;
-  MilkReading(this.index);
+  const MilkReading(this.index, {super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +31,7 @@ class MilkReading extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                   ),
                   Row(
@@ -49,7 +48,7 @@ class MilkReading extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Row(
@@ -67,7 +66,7 @@ class MilkReading extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                   ),
                   Row(
@@ -84,7 +83,7 @@ class MilkReading extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               CTextField(
@@ -92,14 +91,14 @@ class MilkReading extends StatelessWidget {
                 validatorText: "milk_reading_quantity_liter".tr,
                 hintText: "milk_reading_quantity_liter".tr,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               CTextField(
                   label: "milk_reading_fat".tr,
                   validatorText: "milk_reading_enter_fat".tr,
                   hintText: "milk_reading_enter_fat".tr),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               CElevatedButton(
