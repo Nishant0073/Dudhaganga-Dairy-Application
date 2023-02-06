@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -42,7 +43,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
 
   void verifyPhoneNumber() async {
-    if (_formKey.currentState!.validate()) {
+    if (_formKey.currentState?.validate() ?? false) {
       setState(() {
         loading = true;
       });
@@ -60,6 +61,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         }
         if (!error && user != null) {
           String id = user.uid;
+          final mainPrefs = await SharedPreferences.getInstance();
+          await mainPrefs.setString('user_id', id);
           //here you can store user data in backend
           // ignore: use_build_context_synchronously
           Navigator.push(context,
@@ -111,10 +114,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     });
     try {
       credential = PhoneAuthProvider.credential(
-        verificationId: _verificationId!,
+        verificationId: _verificationId ?? "",
         smsCode: otpEditingController.text,
       );
-      user = (await firebaseAuth.signInWithCredential(credential)).user!;
+      user = (await firebaseAuth.signInWithCredential(credential)).user;
     } catch (e) {
       Fluttertoast.showToast(msg: "Failed to sign in: $e");
       error = true;
@@ -122,6 +125,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     if (!error && user != null) {
       String id = user.uid;
       //here you can store user data in backend
+      // ignore: use_build_context_synchronously
+
+      final mainPrefs = await SharedPreferences.getInstance();
+      await mainPrefs.setString('user_id', id);
       // ignore: use_build_context_synchronously
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (context) => HomePage(userId: id)));

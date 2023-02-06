@@ -1,7 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:dudhaganga_app/loginPages/welcome_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'constants.dart';
+import 'home_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -14,11 +18,23 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const WelcomeScreen()),
-      );
+    Future.delayed(const Duration(seconds: 3), () async {
+      final mainPrefs = await SharedPreferences.getInstance();
+      final String? id = mainPrefs.getString('user_id');
+      double width = MediaQuery.of(context).size.width;
+      double height = MediaQuery.of(context).size.height;
+      ssheight = height;
+      sswidth = width;
+      print("user id: $id");
+      if (id == null || id == "") {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+        );
+      } else {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => HomePage(userId: id)));
+      }
     });
   }
 

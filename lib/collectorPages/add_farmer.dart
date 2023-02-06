@@ -56,7 +56,7 @@ class _AddFarmerState extends State<AddFarmer> {
           loading = false;
         });
         // ignore: avoid_print
-        print('MY ERROR: $error');
+        print('Add milk buyer ERROR: $error');
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text("add_farmer_unable_to_farmer".tr),
           duration: const Duration(seconds: 3),

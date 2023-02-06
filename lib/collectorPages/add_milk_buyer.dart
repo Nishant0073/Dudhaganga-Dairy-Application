@@ -1,8 +1,11 @@
 import 'package:dudhaganga_app/constants.dart';
 import 'package:dudhaganga_app/customWidgets/c_elevated_button.dart';
 import 'package:dudhaganga_app/customWidgets/c_text_field.dart';
+import 'package:dudhaganga_app/customWidgets/ddd_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'database_pages/db_add_milk_buyer.dart';
 
 class AddMilkBuyer extends StatefulWidget {
   const AddMilkBuyer({super.key});
@@ -12,9 +15,10 @@ class AddMilkBuyer extends StatefulWidget {
 }
 
 class _AddMilkBuyer extends State<AddMilkBuyer> {
+  bool loading = false;
   final _formKey = GlobalKey<FormState>();
-  bool cow = false;
-  bool buffalo = false;
+  String? name;
+  String? phoneNumber;
   bool morning = false;
   bool evening = false;
   @override
@@ -37,15 +41,30 @@ class _AddMilkBuyer extends State<AddMilkBuyer> {
               TextButton(
                 child: Text('add_milk_buyer_ok'.tr),
                 onPressed: () {
+                  setState(() {
+                    loading = true;
+                  });
                   Navigator.of(context).pop();
                   FocusScope.of(context).unfocus();
                   _formKey.currentState?.reset();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('add_milk_buyer_customer_added'.tr),
-                      duration: const Duration(seconds: 3),
-                    ),
+
+                  addNewMilkBuyer(name, phoneNumber, evening, morning).then(
+                    (value) => {
+                      if (value == true)
+                        {
+                          snackbarService.showSnackbar(
+                              message: "Unable to customer")
+                        }
+                      else
+                        {
+                          snackbarService.showSnackbar(
+                              message: 'add_milk_buyer_customer_added'.tr)
+                        }
+                    },
                   );
+                  setState(() {
+                    loading = false;
+                  });
                 },
               ),
             ],
@@ -60,89 +79,119 @@ class _AddMilkBuyer extends State<AddMilkBuyer> {
         title: Text('add_milk_buyer_add_buyer'.tr),
         automaticallyImplyLeading: false,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+      body: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
                 children: [
-                  CTextField(
-                    label: "add_milk_buyer_name".tr,
-                    validatorText: "add_milk_buyer_enter_name".tr,
-                    hintText: 'add_milk_buyer_name_here'.tr,
-                  ),
-                  const SizedBox(height: 20.0),
-                  CTextField(
-                    label: 'add_milk_buyer_phone_no'.tr,
-                    hintText: 'Eg. 9192939495',
-                  ),
-                  const SizedBox(height: 20.0),
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        'add_milk_buyer_select_time'.tr,
-                        style: themeData.textTheme.bodyLarge,
+                      CTextField(
+                        label: "add_milk_buyer_name".tr,
+                        validatorText: "add_milk_buyer_enter_name".tr,
+                        hintText: 'add_milk_buyer_name_here'.tr,
+                        onChange: (value) {
+                          name = value;
+                        },
+                        onSave: (value) {
+                          name = value;
+                        },
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                      const SizedBox(height: 20.0),
+                      CTextField(
+                        label: 'add_milk_buyer_phone_no'.tr,
+                        hintText: 'Eg. 9192939495',
+                        onChange: (value) {
+                          phoneNumber = value;
+                        },
+                        validator: (String? value) {
+                          String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+                          RegExp regExp = RegExp(pattern);
+                          if (value == null) {
+                            return 'Please enter mobile number';
+                          } else if (!regExp.hasMatch(value) ||
+                              value.length != 10) {
+                            return "add_farmer_phone_no".tr;
+                          }
+                          return null;
+                        },
+                        onSave: (value) {
+                          phoneNumber = value;
+                        },
+                      ),
+                      const SizedBox(height: 20.0),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            children: [
-                              Checkbox(
-                                value: morning,
-                                onChanged: (bool? newValue) {
-                                  setState(
-                                    () {
-                                      morning = newValue!;
-                                    },
-                                  );
-                                },
-                                shape: const CircleBorder(),
-                              ),
-                              Text(
-                                "add_milk_buyer_morning".tr,
-                                style: themeData.textTheme.bodySmall,
-                              ),
-                            ],
+                          Text(
+                            'add_milk_buyer_select_time'.tr,
+                            style: themeData.textTheme.bodyLarge,
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Checkbox(
-                                value: evening,
-                                onChanged: (bool? newValue) {
-                                  setState(
-                                    () {
-                                      evening = newValue!;
+                              Row(
+                                children: [
+                                  Checkbox(
+                                    value: morning,
+                                    onChanged: (bool? newValue) {
+                                      setState(
+                                        () {
+                                          morning = newValue!;
+                                        },
+                                      );
                                     },
-                                  );
-                                },
-                                shape: const CircleBorder(),
+                                    shape: const CircleBorder(),
+                                  ),
+                                  Text(
+                                    "add_milk_buyer_morning".tr,
+                                    style: themeData.textTheme.bodySmall,
+                                  ),
+                                ],
                               ),
-                              Text(
-                                "add_milk_buyer_evening".tr,
-                                style: themeData.textTheme.bodySmall,
+                              Row(
+                                children: [
+                                  Checkbox(
+                                    value: evening,
+                                    onChanged: (bool? newValue) {
+                                      setState(
+                                        () {
+                                          evening = newValue!;
+                                        },
+                                      );
+                                    },
+                                    shape: const CircleBorder(),
+                                  ),
+                                  Text(
+                                    "add_milk_buyer_evening".tr,
+                                    style: themeData.textTheme.bodySmall,
+                                  ),
+                                ],
                               ),
                             ],
                           ),
                         ],
                       ),
+                      CElevatedButton(
+                        label: 'add_customer'.tr,
+                        onPress: () {
+                          showMyDialog();
+                        },
+                      ),
                     ],
-                  ),
-                  CElevatedButton(
-                    label: 'add_customer'.tr,
-                    onPress: () {
-                      showMyDialog();
-                    },
                   ),
                 ],
               ),
-            ],
+            ),
           ),
-        ),
+          DDLoader(
+            loading: loading,
+          ),
+        ],
       ),
     );
   }

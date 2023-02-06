@@ -24,6 +24,8 @@ dependencies:
   firebase_database: ^9.1.7
   firebase_core_platform_interface: 4.5.1
   firebase_messaging: ^13.0.4
+  shared_preferences: ^2.0.17
+  stacked_services: ^0.9.9
 
 
 

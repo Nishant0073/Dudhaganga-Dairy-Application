@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:stacked_services/stacked_services.dart';
+
+import 'app/app.locator.dart';
+
+final snackbarService = locator<SnackbarService>();
 
 const splashScreenTitle = TextStyle(
   color: Colors.white,
@@ -22,3 +27,5 @@ ThemeData themeData = ThemeData(
 const double narrowScreenWidthThreshold = 450;
 
 String appName = "constants_app_name".tr;
+double sswidth = 0;
+double ssheight = 0;
