@@ -41,7 +41,7 @@ class AddCustomers extends StatelessWidget {
                           child: Center(
                             child: Text(
                               'add_customer_farmer'.tr,
-                              style: themeData.textTheme.headline3,
+                              style: themeData.textTheme.displaySmall,
                             ),
                           ),
                         ),
@@ -71,7 +71,7 @@ class AddCustomers extends StatelessWidget {
                           child: Center(
                             child: Text(
                               'add_customer_milk_buyer'.tr,
-                              style: themeData.textTheme.headline3,
+                              style: themeData.textTheme.displaySmall,
                             ),
                           ),
                         ),

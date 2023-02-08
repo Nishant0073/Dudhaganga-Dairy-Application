@@ -7,17 +7,17 @@ class DDLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: appBaseColor.withOpacity(0.1),
-      height: ssheight,
-      width: sswidth,
-      child: loading ?? false
-          ? const Center(
+    return loading ?? false
+        ? Container(
+            color: appBaseColor.withOpacity(0.1),
+            height: ssheight,
+            width: sswidth,
+            child: const Center(
               child: CircularProgressIndicator(
                 color: Colors.green,
               ),
-            )
-          : Container(),
-    );
+            ),
+          )
+        : Container();
   }
 }

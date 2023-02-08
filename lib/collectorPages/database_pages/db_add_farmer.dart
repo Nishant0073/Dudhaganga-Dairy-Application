@@ -25,7 +25,6 @@ class AddFarmerToFirebase {
     String path = "/Dairy/Dudhaganga/Farmers/";
     CollectionReference collectionReference =
         FirebaseFirestore.instance.collection(path);
-    print("DONE! 1");
     try {
       await collectionReference.doc(_phoneNumber).set({
         "name": _name,
@@ -35,7 +34,7 @@ class AddFarmerToFirebase {
         "morning": _morning,
         "evening": _evening,
       });
-      print("DONE! 2");
+      print("DONE! ");
     } catch (e) {
       print("Error while adding farmer:$e");
       return false;

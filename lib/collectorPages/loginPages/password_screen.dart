@@ -1,21 +1,22 @@
 import 'package:dudhaganga_app/constants.dart';
 import 'package:dudhaganga_app/customWidgets/c_elevated_button.dart';
 import 'package:dudhaganga_app/customWidgets/c_text_field.dart';
-import 'package:dudhaganga_app/home_page.dart';
 import 'package:dudhaganga_app/main.dart';
 import 'package:flutter/material.dart';
+import '../home_page.dart';
 
-class RegistrationPage extends StatefulWidget {
-  const RegistrationPage({Key? key}) : super(key: key);
+class PasswordScreen extends StatefulWidget {
+  const PasswordScreen({Key? key}) : super(key: key);
 
   @override
-  State<RegistrationPage> createState() => _RegistrationPageState();
+  State<PasswordScreen> createState() => _PasswordScreenState();
 }
 
-class _RegistrationPageState extends State<RegistrationPage> {
+class _PasswordScreenState extends State<PasswordScreen> {
+  //Created AppBar
   PreferredSizeWidget createAppBar() {
     return AppBar(
-      title: const Text('Register'),
+      title: const Text('Login'),
       actions: [
         IconButton(
           icon: useLightMode
@@ -46,14 +47,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
     return LayoutBuilder(
       builder: ((context, constraints) {
         if (constraints.maxWidth < narrowScreenWidthThreshold) {
-          return Scaffold(appBar: createAppBar(), body: registrationPage());
+          return Scaffold(appBar: createAppBar(), body: passwordPage());
         } else {
           return Scaffold(
             appBar: createAppBar(),
             body: SafeArea(
               bottom: false,
               top: false,
-              child: registrationPage(),
+              child: passwordPage(),
             ),
           );
         }
@@ -62,11 +63,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
   }
 
 //Actual welcome Page.
-  Widget registrationPage() {
+  Widget passwordPage() {
     return SingleChildScrollView(
       physics: const ClampingScrollPhysics(),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
+      child: Container(
+        margin: const EdgeInsets.fromLTRB(24.0, 8.0, 8.0, 24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -78,24 +79,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 width: 164.0,
               ),
             ),
+
             //used custom widgets
-            const CTextField(
-              label: 'Name',
-              hintText: 'Enter your name here...',
-            ),
-            const SizedBox(height: 20.0),
-            const CTextField(
-              label: 'Address',
-              hintText: 'Enter your address here...',
-            ),
-            const SizedBox(height: 20.0),
-            const CTextField(
-              label: 'Password',
-              hintText: 'Enter your password here...',
-            ),
+            const CTextField(label: 'Enter Password:'),
             const SizedBox(height: 20.0),
             CElevatedButton(
-              label: 'Register',
+              label: 'Login',
               onPress: () {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => const HomePage(

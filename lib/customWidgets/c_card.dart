@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class HomeCard extends StatefulWidget {
   final Widget child;
-  final Color color = themeData.backgroundColor;
+  final Color color = themeData.colorScheme.background;
   HomeCard({super.key, required this.child});
 
   @override
@@ -15,7 +15,7 @@ class CardState extends State<HomeCard> {
   Widget build(BuildContext context) {
     return PhysicalModel(
       borderRadius: BorderRadius.circular(8.0),
-      color: Theme.of(context).backgroundColor,
+      color: Theme.of(context).colorScheme.background,
       elevation: 12.0,
       child: Padding(
         padding: const EdgeInsets.all(8.0),

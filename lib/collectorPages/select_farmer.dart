@@ -1,9 +1,9 @@
 import 'package:dudhaganga_app/constants.dart';
 import 'package:dudhaganga_app/main.dart';
-import 'package:dudhaganga_app/milk_reading.dart';
 import 'package:flutter/material.dart';
 import 'package:dudhaganga_app/customWidgets/c_card.dart';
 import 'package:get/get.dart';
+import '/collectorPages/milk_reading.dart';
 
 class SelectFarmer extends StatefulWidget {
   const SelectFarmer({Key? key}) : super(key: key);

@@ -21,6 +21,13 @@ class _AddMilkBuyer extends State<AddMilkBuyer> {
   String? phoneNumber;
   bool morning = false;
   bool evening = false;
+
+  @override
+  void initState() {
+    loading = false;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Future<void> showMyDialog() async {
@@ -40,28 +47,25 @@ class _AddMilkBuyer extends State<AddMilkBuyer> {
               ),
               TextButton(
                 child: Text('add_milk_buyer_ok'.tr),
-                onPressed: () {
+                onPressed: () async {
                   setState(() {
                     loading = true;
                   });
+                  print("$phoneNumber $name $morning $evening");
                   Navigator.of(context).pop();
                   FocusScope.of(context).unfocus();
                   _formKey.currentState?.reset();
 
-                  addNewMilkBuyer(name, phoneNumber, evening, morning).then(
-                    (value) => {
-                      if (value == true)
-                        {
-                          snackbarService.showSnackbar(
-                              message: "Unable to customer")
-                        }
-                      else
-                        {
-                          snackbarService.showSnackbar(
-                              message: 'add_milk_buyer_customer_added'.tr)
-                        }
-                    },
-                  );
+                  bool value = await addNewMilkBuyer(
+                      name, phoneNumber, evening, morning);
+                  print(value);
+                  if (value == false) {
+                    snackbarService.showSnackbar(message: "Unable to customer");
+                  } else {
+                    snackbarService.showSnackbar(
+                        message: 'add_milk_buyer_customer_added'.tr);
+                  }
+
                   setState(() {
                     loading = false;
                   });

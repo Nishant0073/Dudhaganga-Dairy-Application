@@ -1,11 +1,11 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:dudhaganga_app/loginPages/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'collectorPages/home_page.dart';
+import 'collectorPages/loginPages/welcome_screen.dart';
 import 'constants.dart';
-import 'home_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
           MaterialPageRoute(builder: (context) => const WelcomeScreen()),
         );
       } else {
-        Navigator.push(context,
+        Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => HomePage(userId: id)));
       }
     });

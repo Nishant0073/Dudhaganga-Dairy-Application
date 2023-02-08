@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:dudhaganga_app/constants.dart';
 import 'package:dudhaganga_app/customWidgets/c_elevated_button.dart';
-import 'package:dudhaganga_app/home_page.dart';
 import 'package:dudhaganga_app/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -11,6 +10,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../home_page.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -71,6 +72,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       }
 
       verificationFailed(FirebaseAuthException authException) {
+        print(authException.message);
         Fluttertoast.showToast(msg: authException.message!);
       }
 

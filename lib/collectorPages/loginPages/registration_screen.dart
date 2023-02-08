@@ -1,22 +1,22 @@
 import 'package:dudhaganga_app/constants.dart';
-import 'package:dudhaganga_app/customWidgets/c_elevated_button.dart';
-import 'package:dudhaganga_app/customWidgets/c_text_field.dart';
-import 'package:dudhaganga_app/home_page.dart';
 import 'package:dudhaganga_app/main.dart';
 import 'package:flutter/material.dart';
 
-class PasswordScreen extends StatefulWidget {
-  const PasswordScreen({Key? key}) : super(key: key);
+import '../../customWidgets/c_elevated_button.dart';
+import '../../customWidgets/c_text_field.dart';
+import '../home_page.dart';
+
+class RegistrationPage extends StatefulWidget {
+  const RegistrationPage({Key? key}) : super(key: key);
 
   @override
-  State<PasswordScreen> createState() => _PasswordScreenState();
+  State<RegistrationPage> createState() => _RegistrationPageState();
 }
 
-class _PasswordScreenState extends State<PasswordScreen> {
-  //Created AppBar
+class _RegistrationPageState extends State<RegistrationPage> {
   PreferredSizeWidget createAppBar() {
     return AppBar(
-      title: const Text('Login'),
+      title: const Text('Register'),
       actions: [
         IconButton(
           icon: useLightMode
@@ -47,14 +47,14 @@ class _PasswordScreenState extends State<PasswordScreen> {
     return LayoutBuilder(
       builder: ((context, constraints) {
         if (constraints.maxWidth < narrowScreenWidthThreshold) {
-          return Scaffold(appBar: createAppBar(), body: passwordPage());
+          return Scaffold(appBar: createAppBar(), body: registrationPage());
         } else {
           return Scaffold(
             appBar: createAppBar(),
             body: SafeArea(
               bottom: false,
               top: false,
-              child: passwordPage(),
+              child: registrationPage(),
             ),
           );
         }
@@ -63,11 +63,11 @@ class _PasswordScreenState extends State<PasswordScreen> {
   }
 
 //Actual welcome Page.
-  Widget passwordPage() {
+  Widget registrationPage() {
     return SingleChildScrollView(
       physics: const ClampingScrollPhysics(),
-      child: Container(
-        margin: const EdgeInsets.fromLTRB(24.0, 8.0, 8.0, 24.0),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -79,12 +79,24 @@ class _PasswordScreenState extends State<PasswordScreen> {
                 width: 164.0,
               ),
             ),
-
             //used custom widgets
-            const CTextField(label: 'Enter Password:'),
+            const CTextField(
+              label: 'Name',
+              hintText: 'Enter your name here...',
+            ),
+            const SizedBox(height: 20.0),
+            const CTextField(
+              label: 'Address',
+              hintText: 'Enter your address here...',
+            ),
+            const SizedBox(height: 20.0),
+            const CTextField(
+              label: 'Password',
+              hintText: 'Enter your password here...',
+            ),
             const SizedBox(height: 20.0),
             CElevatedButton(
-              label: 'Login',
+              label: 'Register',
               onPress: () {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => const HomePage(

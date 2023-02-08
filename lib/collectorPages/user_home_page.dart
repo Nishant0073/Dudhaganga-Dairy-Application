@@ -1,6 +1,7 @@
+import 'package:dudhaganga_app/collectorPages/select_farmer.dart';
 import 'package:dudhaganga_app/collectorPages/side_bar.dart';
 import 'package:dudhaganga_app/customWidgets/c_card.dart';
-import 'package:dudhaganga_app/select_farmer.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

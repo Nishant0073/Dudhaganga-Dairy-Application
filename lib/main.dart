@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dudhaganga_app/languagepage.dart';
+import 'app/app.locator.dart';
 
 //Created to handle theme of app from stream controller.
 StreamController<bool> isLightTheme = StreamController();
@@ -12,6 +13,8 @@ StreamController<bool> isLightTheme = StreamController();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+  setupLocator();
   runApp(const MyApp());
 }
 
