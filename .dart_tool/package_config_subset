@@ -178,6 +178,10 @@ meta
 2.12
 file:///home/nishant/.pub-cache/hosted/pub.dev/meta-1.8.0/
 file:///home/nishant/.pub-cache/hosted/pub.dev/meta-1.8.0/lib/
+nested
+2.12
+file:///home/nishant/.pub-cache/hosted/pub.dev/nested-1.0.0/
+file:///home/nishant/.pub-cache/hosted/pub.dev/nested-1.0.0/lib/
 path
 2.12
 file:///home/nishant/.pub-cache/hosted/pub.dev/path-1.8.2/
@@ -210,6 +214,10 @@ process
 2.14
 file:///home/nishant/.pub-cache/hosted/pub.dev/process-4.2.4/
 file:///home/nishant/.pub-cache/hosted/pub.dev/process-4.2.4/lib/
+provider
+2.12
+file:///home/nishant/.pub-cache/hosted/pub.dev/provider-6.0.5/
+file:///home/nishant/.pub-cache/hosted/pub.dev/provider-6.0.5/lib/
 shared_preferences
 2.14
 file:///home/nishant/.pub-cache/hosted/pub.dev/shared_preferences-2.0.17/
@@ -246,6 +254,10 @@ stack_trace
 2.18
 file:///home/nishant/.pub-cache/hosted/pub.dev/stack_trace-1.11.0/
 file:///home/nishant/.pub-cache/hosted/pub.dev/stack_trace-1.11.0/lib/
+stacked
+2.12
+file:///home/nishant/.pub-cache/hosted/pub.dev/stacked-3.1.0+3/
+file:///home/nishant/.pub-cache/hosted/pub.dev/stacked-3.1.0+3/lib/
 stacked_core
 2.16
 file:///home/nishant/.pub-cache/hosted/pub.dev/stacked_core-1.2.4/
@@ -274,6 +286,10 @@ typed_data
 2.12
 file:///home/nishant/.pub-cache/hosted/pub.dev/typed_data-1.3.1/
 file:///home/nishant/.pub-cache/hosted/pub.dev/typed_data-1.3.1/lib/
+universal_io
+2.12
+file:///home/nishant/.pub-cache/hosted/pub.dev/universal_io-2.0.4/
+file:///home/nishant/.pub-cache/hosted/pub.dev/universal_io-2.0.4/lib/
 vector_math
 2.14
 file:///home/nishant/.pub-cache/hosted/pub.dev/vector_math-2.1.4/

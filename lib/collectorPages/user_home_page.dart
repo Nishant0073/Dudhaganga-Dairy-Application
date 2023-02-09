@@ -1,4 +1,4 @@
-import 'package:dudhaganga_app/collectorPages/select_farmer.dart';
+import 'package:dudhaganga_app/collectorPages/screens/select_farmer/select_farmer_screen.dart';
 import 'package:dudhaganga_app/collectorPages/side_bar.dart';
 import 'package:dudhaganga_app/customWidgets/c_card.dart';
 

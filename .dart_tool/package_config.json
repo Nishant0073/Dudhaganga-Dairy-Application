@@ -290,6 +290,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "nested",
+      "rootUri": "file:///home/nishant/.pub-cache/hosted/pub.dev/nested-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "path",
       "rootUri": "file:///home/nishant/.pub-cache/hosted/pub.dev/path-1.8.2",
       "packageUri": "lib/",
@@ -336,6 +342,12 @@
       "rootUri": "file:///home/nishant/.pub-cache/hosted/pub.dev/process-4.2.4",
       "packageUri": "lib/",
       "languageVersion": "2.14"
+    },
+    {
+      "name": "provider",
+      "rootUri": "file:///home/nishant/.pub-cache/hosted/pub.dev/provider-6.0.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "shared_preferences",
@@ -398,6 +410,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "stacked",
+      "rootUri": "file:///home/nishant/.pub-cache/hosted/pub.dev/stacked-3.1.0+3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "stacked_core",
       "rootUri": "file:///home/nishant/.pub-cache/hosted/pub.dev/stacked_core-1.2.4",
       "packageUri": "lib/",
@@ -440,6 +458,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "universal_io",
+      "rootUri": "file:///home/nishant/.pub-cache/hosted/pub.dev/universal_io-2.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "vector_math",
       "rootUri": "file:///home/nishant/.pub-cache/hosted/pub.dev/vector_math-2.1.4",
       "packageUri": "lib/",
@@ -464,7 +488,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2023-02-06T16:32:03.610861Z",
+  "generated": "2023-02-09T17:22:59.611740Z",
   "generator": "pub",
   "generatorVersion": "2.19.1"
 }

@@ -10,7 +10,7 @@ Future<bool> addNewMilkBuyer(
     await collectionReference.doc(phoneNumber).set(
       {
         "name": name,
-        "phone_number": phoneNumber,
+        "phoneNumber": phoneNumber,
         "morning": morning,
         "evening": evening,
       },

@@ -28,13 +28,12 @@ class AddFarmerToFirebase {
     try {
       await collectionReference.doc(_phoneNumber).set({
         "name": _name,
-        "phone_number": _phoneNumber,
+        "phoneNumber": _phoneNumber,
         "cow": _cow,
         "buffalo": _buffalo,
         "morning": _morning,
         "evening": _evening,
       });
-      print("DONE! ");
     } catch (e) {
       print("Error while adding farmer:$e");
       return false;
