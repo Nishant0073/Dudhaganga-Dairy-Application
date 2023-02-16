@@ -8,6 +8,7 @@ class CTextField extends StatefulWidget {
   final Function? onChange;
   final Function? onSave;
   final String? Function(String?)? validator;
+  final TextEditingController? textEditingController;
   const CTextField({
     super.key,
     required this.label,
@@ -16,6 +17,7 @@ class CTextField extends StatefulWidget {
     this.onChange,
     this.onSave,
     this.validator,
+    this.textEditingController,
   });
 
   @override
@@ -27,6 +29,7 @@ class _CTextFieldState extends State<CTextField> {
   Widget build(BuildContext context) {
     return Material(
       child: TextFormField(
+        controller: widget.textEditingController,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         onChanged: (value) =>
             widget.onChange == null ? null : widget.onChange!(value),

@@ -66,6 +66,10 @@ file
 2.12
 file:///home/nishant/.pub-cache/hosted/pub.dev/file-6.1.4/
 file:///home/nishant/.pub-cache/hosted/pub.dev/file-6.1.4/lib/
+file_picker
+2.17
+file:///home/nishant/.pub-cache/hosted/pub.dev/file_picker-5.2.5/
+file:///home/nishant/.pub-cache/hosted/pub.dev/file_picker-5.2.5/lib/
 firebase_auth
 2.16
 file:///home/nishant/.pub-cache/hosted/pub.dev/firebase_auth-3.11.2/
@@ -118,6 +122,10 @@ flutter_lints
 2.17
 file:///home/nishant/.pub-cache/hosted/pub.dev/flutter_lints-2.0.1/
 file:///home/nishant/.pub-cache/hosted/pub.dev/flutter_lints-2.0.1/lib/
+flutter_plugin_android_lifecycle
+2.12
+file:///home/nishant/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.7/
+file:///home/nishant/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.7/lib/
 fluttertoast
 2.12
 file:///home/nishant/.pub-cache/hosted/pub.dev/fluttertoast-8.1.1/
@@ -250,6 +258,14 @@ source_span
 2.14
 file:///home/nishant/.pub-cache/hosted/pub.dev/source_span-1.9.1/
 file:///home/nishant/.pub-cache/hosted/pub.dev/source_span-1.9.1/lib/
+sqflite
+2.18
+file:///home/nishant/.pub-cache/hosted/pub.dev/sqflite-2.2.4+1/
+file:///home/nishant/.pub-cache/hosted/pub.dev/sqflite-2.2.4+1/lib/
+sqflite_common
+2.18
+file:///home/nishant/.pub-cache/hosted/pub.dev/sqflite_common-2.4.2+2/
+file:///home/nishant/.pub-cache/hosted/pub.dev/sqflite_common-2.4.2+2/lib/
 stack_trace
 2.18
 file:///home/nishant/.pub-cache/hosted/pub.dev/stack_trace-1.11.0/
@@ -274,6 +290,10 @@ string_scanner
 2.18
 file:///home/nishant/.pub-cache/hosted/pub.dev/string_scanner-1.2.0/
 file:///home/nishant/.pub-cache/hosted/pub.dev/string_scanner-1.2.0/lib/
+synchronized
+2.18
+file:///home/nishant/.pub-cache/hosted/pub.dev/synchronized-3.0.1/
+file:///home/nishant/.pub-cache/hosted/pub.dev/synchronized-3.0.1/lib/
 term_glyph
 2.12
 file:///home/nishant/.pub-cache/hosted/pub.dev/term_glyph-1.2.1/

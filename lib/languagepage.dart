@@ -70,6 +70,9 @@ class LanguagePage extends Translations {
           'milk_reading_fat': 'Fat',
           'milk_reading_submit': 'Submit',
           'milk_reading_enter_fat': 'Enter Milk Fat',
+
+          //take reading page:
+          'select_milk_type': 'Type of milk',
         },
         'hi_IN': {
           'side_bar_home': 'मुख्यपृष्ठ',
@@ -138,6 +141,8 @@ class LanguagePage extends Translations {
           'milk_reading_fat': 'फॅट',
           'milk_reading_submit': 'सबमीट',
           'milk_reading_enter_fat': 'दूध फॅट दर्ज करें',
+          //take reading page:
+          'select_milk_type': 'दूध का प्रकार',
         },
         'mr_IN': {
           'side_bar_home': 'मुख्यपृष्ठ',
@@ -206,6 +211,8 @@ class LanguagePage extends Translations {
           'milk_reading_fat': 'फॅट',
           'milk_reading_submit': 'सबमीट',
           'milk_reading_enter_fat': 'दूध फॅट प्रविष्ट करा',
+          //take reading page:
+          'select_milk_type': 'दुधाचा प्रकार',
         }
       };
 }

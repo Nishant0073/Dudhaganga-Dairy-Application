@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:dudhaganga_app/customWidgets/c_card.dart';
 import 'package:get/get.dart';
 import 'package:stacked/stacked.dart';
-import '/collectorPages/milk_reading.dart';
+import '../take_readings/take_readings_view.dart';
 
 class SelectFarmer extends StatefulWidget {
   const SelectFarmer({Key? key}) : super(key: key);
@@ -44,7 +44,8 @@ class _SelectFarmerState extends State<SelectFarmer> {
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => MilkReading(index),
+                          builder: (context) =>
+                              MilkReading(model.farmers[index]),
                         ),
                       );
                     }),
