@@ -2,6 +2,10 @@ _flutterfire_internals
 2.16
 file:///home/nishant/.pub-cache/hosted/pub.dev/_flutterfire_internals-1.0.2/
 file:///home/nishant/.pub-cache/hosted/pub.dev/_flutterfire_internals-1.0.2/lib/
+archive
+2.12
+file:///home/nishant/.pub-cache/hosted/pub.dev/archive-3.3.6/
+file:///home/nishant/.pub-cache/hosted/pub.dev/archive-3.3.6/lib/
 async
 2.18
 file:///home/nishant/.pub-cache/hosted/pub.dev/async-2.10.0/
@@ -42,6 +46,10 @@ control_style
 2.12
 file:///home/nishant/.pub-cache/hosted/pub.dev/control_style-0.0.3/
 file:///home/nishant/.pub-cache/hosted/pub.dev/control_style-0.0.3/lib/
+convert
+2.18
+file:///home/nishant/.pub-cache/hosted/pub.dev/convert-3.1.1/
+file:///home/nishant/.pub-cache/hosted/pub.dev/convert-3.1.1/lib/
 crypto
 2.14
 file:///home/nishant/.pub-cache/hosted/pub.dev/crypto-3.0.2/
@@ -54,6 +62,10 @@ equatable
 2.12
 file:///home/nishant/.pub-cache/hosted/pub.dev/equatable-2.0.5/
 file:///home/nishant/.pub-cache/hosted/pub.dev/equatable-2.0.5/lib/
+excel
+2.17
+file:///home/nishant/.pub-cache/hosted/pub.dev/excel-2.0.1/
+file:///home/nishant/.pub-cache/hosted/pub.dev/excel-2.0.1/lib/
 fake_async
 2.12
 file:///home/nishant/.pub-cache/hosted/pub.dev/fake_async-1.3.1/
@@ -206,6 +218,10 @@ path_provider_windows
 2.17
 file:///home/nishant/.pub-cache/hosted/pub.dev/path_provider_windows-2.1.3/
 file:///home/nishant/.pub-cache/hosted/pub.dev/path_provider_windows-2.1.3/lib/
+petitparser
+2.18
+file:///home/nishant/.pub-cache/hosted/pub.dev/petitparser-5.1.0/
+file:///home/nishant/.pub-cache/hosted/pub.dev/petitparser-5.1.0/lib/
 pin_code_fields
 2.12
 file:///home/nishant/.pub-cache/hosted/pub.dev/pin_code_fields-7.4.0/
@@ -218,6 +234,10 @@ plugin_platform_interface
 2.12
 file:///home/nishant/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.3/
 file:///home/nishant/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.3/lib/
+pointycastle
+2.12
+file:///home/nishant/.pub-cache/hosted/pub.dev/pointycastle-3.6.2/
+file:///home/nishant/.pub-cache/hosted/pub.dev/pointycastle-3.6.2/lib/
 process
 2.14
 file:///home/nishant/.pub-cache/hosted/pub.dev/process-4.2.4/
@@ -258,6 +278,10 @@ source_span
 2.14
 file:///home/nishant/.pub-cache/hosted/pub.dev/source_span-1.9.1/
 file:///home/nishant/.pub-cache/hosted/pub.dev/source_span-1.9.1/lib/
+spreadsheet_decoder
+2.16
+file:///home/nishant/.pub-cache/hosted/pub.dev/spreadsheet_decoder-2.2.0/
+file:///home/nishant/.pub-cache/hosted/pub.dev/spreadsheet_decoder-2.2.0/lib/
 sqflite
 2.18
 file:///home/nishant/.pub-cache/hosted/pub.dev/sqflite-2.2.4+1/
@@ -322,6 +346,10 @@ xdg_directories
 2.12
 file:///home/nishant/.pub-cache/hosted/pub.dev/xdg_directories-0.2.0+3/
 file:///home/nishant/.pub-cache/hosted/pub.dev/xdg_directories-0.2.0+3/lib/
+xml
+2.18
+file:///home/nishant/.pub-cache/hosted/pub.dev/xml-6.2.2/
+file:///home/nishant/.pub-cache/hosted/pub.dev/xml-6.2.2/lib/
 dudhaganga_app
 2.17
 file:///home/nishant/Projects/Dudhaganga-Dairy-Application/

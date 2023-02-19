@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dudhaganga_app/farmer.dart';
+import 'package:dudhaganga_app/models/farmer.dart';
 import 'package:intl/intl.dart';
 
 Future<bool> addMilkRecord(
