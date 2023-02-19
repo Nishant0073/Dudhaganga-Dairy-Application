@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'package:dudhaganga_app/app/db_sql.dart';
 import 'package:excel/excel.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -33,8 +34,6 @@ class TakeRatesModel extends BaseViewModel {
         List<Rate> rates = [];
         for (var table in excel.tables.keys) {
           print(table); //sheet Name
-          // print(excel.tables[table]?.maxCols);
-          // print(excel.tables[table]?.maxRows);
 
           Sheet sheetObject = excel[table];
           List<double> snf = [];
@@ -66,8 +65,8 @@ class TakeRatesModel extends BaseViewModel {
             }
           }
         }
-        for (var rate in rates) {
-          print("${rate.snf} ${rate.fat} ${rate.value}");
+        for (Rate rate in rates) {
+          DbManager().insertModel(rate);
         }
         if (rates.isNotEmpty) {
           isDataImported = true;

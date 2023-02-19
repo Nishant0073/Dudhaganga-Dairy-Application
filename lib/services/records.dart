@@ -2,8 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dudhaganga_app/models/farmer.dart';
 import 'package:intl/intl.dart';
 
-Future<bool> addMilkRecord(
-    Farmer? farmer, double fat, double weight, String animal) async {
+Future<bool> addMilkRecord(Farmer? farmer, double fat, double weight,
+    String animal, double? snf, double? rate, double? value) async {
+  print("$rate $weight $value");
   String path =
       "/Dairy/ Farmer/milkrecords/${farmer?.phoneNumber}/${DateFormat('dd-MM-yy').format(DateTime.now())}";
   CollectionReference collectionReference =
@@ -18,6 +19,9 @@ Future<bool> addMilkRecord(
         "time": DateTime.now().hour < 15 ? "morning" : "evening",
         "weight": weight,
         "fat": fat,
+        "snf": snf,
+        "rate": rate,
+        "value": value
       },
     );
   } catch (e) {

@@ -15,10 +15,16 @@ class TakeReadingModel extends BaseViewModel {
   List<String> animals = [];
   String? selectedAnimal;
   bool isFileUploaded = false;
+  double? rate = 0;
+  double? snf = 7.1;
+  double? value = 0;
+  double? fat = 0;
+  double? weight = 0;
+  List<Rate>? rates;
   init(farmer, BuildContext context) async {
     this.farmer = farmer;
     setBusy(true);
-    List<Rate>? rates;
+
     try {
       rates = await DbManager().getModelList();
     } catch (e) {
@@ -52,18 +58,54 @@ class TakeReadingModel extends BaseViewModel {
     }
   }
 
-  void saveDetails() async {
+  void saveDetails(BuildContext context) async {
+    print("$weight $fat");
     setBusy(true);
-    bool res = await addMilkRecord(
-        farmer,
-        double.parse(textEditingControllerWeight.text),
-        double.parse(textEditingControllerFat.text),
-        selectedAnimal ?? "");
-    if (res) {
-      snackbarService.showSnackbar(message: "Record added successfully!");
-    } else {
-      snackbarService.showSnackbar(message: "Unable to add record!");
+    try {
+      weight = double.parse(textEditingControllerWeight.text);
+      fat = double.parse(textEditingControllerFat.text);
+      if (weight == null || fat == null || selectedAnimal == null) {
+        snackbarService.showSnackbar(message: "Please fill all fields");
+        setBusy(false);
+        return;
+      }
+      if (getRateAndValue()) {
+        bool res = await addMilkRecord(
+            farmer,
+            double.parse(textEditingControllerWeight.text),
+            double.parse(textEditingControllerFat.text),
+            selectedAnimal ?? "",
+            thesnf,
+            rate,
+            value);
+        if (res) {
+          snackbarService.showSnackbar(message: "Record added successfully!");
+          // ignore: use_build_context_synchronously
+          Navigator.of(context).pop();
+          // ignore: use_build_context_synchronously
+          Navigator.of(context).pop();
+        } else {
+          snackbarService.showSnackbar(message: "Unable to add record!");
+        }
+      } else {
+        snackbarService.showSnackbar(message: "Unable to fecth rate!");
+      }
+    } catch (e) {
+      print("Unbale to add record $e");
+      snackbarService.showSnackbar(message: "unbale to add reading!");
     }
     setBusy(false);
+  }
+
+  bool getRateAndValue() {
+    if (rates == null) return false;
+    for (var i in rates!) {
+      if (i.fat == fat && i.snf == thesnf) {
+        rate = i.value ?? 0.0;
+        value = ((weight ?? 0) * (rate ?? 0));
+      }
+    }
+
+    return (rate != 0 && value != 0);
   }
 }

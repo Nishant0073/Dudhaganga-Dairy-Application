@@ -9,19 +9,19 @@ class DbManager {
   Database? _database;
 
   Future openDb() async {
-    _database = await openDatabase(join(await getDatabasesPath(), "ss.db"),
+    _database = await openDatabase(join(await getDatabasesPath(), "rate.db"),
         version: 1, onCreate: (Database db, int version) async {
       await db.execute(
-        "CREATE TABLE model(id INTEGER PRIMARY KEY autoincrement, fruitName TEXT, quantity TEXT)",
+        "CREATE TABLE rate(id INTEGER PRIMARY KEY autoincrement, snf REAL, fat REAL,value REAL)",
       );
     });
     return _database;
   }
 
-  // Future insertModel(Model model) async {
-  //   await openDb();
-  //   return await _database.insert('model', model.toJson());
-  // }
+  Future insertModel(Rate model) async {
+    await openDb();
+    return await _database?.insert('rate', model.toJson());
+  }
 
   Future<List<Rate>>? getModelList() async {
     await openDb();
@@ -32,15 +32,11 @@ class DbManager {
       (i) {
         return Rate(
           snf: double.parse(maps![i]['snf'].toString()),
-          fat: double.parse(maps[i]['snf'].toString()),
-          value: double.parse(maps[i]['snf'].toString()),
+          fat: double.parse(maps[i]['fat'].toString()),
+          value: double.parse(maps[i]['value'].toString()),
         );
       },
     ).toList();
-    // return maps
-    //     .map((e) => Model(
-    //         id: e["id"], fruitName: e["fruitName"], quantity: e["quantity"]))
-    //     .toList();
   }
 
   // Future<int> updateModel(Model model) async {

@@ -153,6 +153,13 @@ class _MilkReadingState extends State<MilkReading> {
                     validatorText: "milk_reading_quantity_liter".tr,
                     hintText: "milk_reading_quantity_liter".tr,
                     textEditingController: model.textEditingControllerWeight,
+                    validator: (value) {
+                      print(value);
+                      if (value == null || value.isEmpty) {
+                        return "Please add weight";
+                      }
+                      return "";
+                    },
                   ),
                   const SizedBox(
                     height: 15,
@@ -162,6 +169,13 @@ class _MilkReadingState extends State<MilkReading> {
                     validatorText: "milk_reading_enter_fat".tr,
                     hintText: "milk_reading_enter_fat".tr,
                     textEditingController: model.textEditingControllerFat,
+                    validator: (value) {
+                      print(value);
+                      if (value == null || value.isEmpty) {
+                        return "Please add fat";
+                      }
+                      return "";
+                    },
                   ),
                   const SizedBox(
                     height: 15,
@@ -169,7 +183,7 @@ class _MilkReadingState extends State<MilkReading> {
                   CElevatedButton(
                     label: 'milk_reading_submit'.tr,
                     onPress: () {
-                      model.saveDetails();
+                      model.saveDetails(context);
                     },
                   ),
                 ],
