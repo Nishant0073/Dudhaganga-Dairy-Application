@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "760633784645",
+    "project_id": "dudhagangaapp",
+    "storage_bucket": "dudhagangaapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:760633784645:android:01f13f0eca42fcc2d2262c",
+        "android_client_info": {
+          "package_name": "com.example.dudhaganga_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "760633784645-2qibfjd0ah4gi8b8ukfm2eho9t8fvv04.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dudhaganga_app",
+            "certificate_hash": "25f3b7d2f082a4bb516a0680e4a50a6f42c57c6e"
+          }
+        },
+        {
+          "client_id": "760633784645-4uo748tshhu0skv1d9nha9ekd3qauvrg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtBsX87KsoLbmERkUBsGFKhRF-P0W0Y8k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "760633784645-4uo748tshhu0skv1d9nha9ekd3qauvrg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
