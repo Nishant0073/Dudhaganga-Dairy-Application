@@ -31,6 +31,15 @@ String appName = "constants_app_name".tr;
 double sswidth = 0;
 double ssheight = 0;
 String appFontFamilly = "Poppins";
+double thesnf = 7.2;
+
+double H(context) {
+  return MediaQuery.of(context).size.height;
+}
+
+double W(context) {
+  return MediaQuery.of(context).size.width;
+}
 
 PreferredSizeWidget createAppBar() {
   return AppBar(

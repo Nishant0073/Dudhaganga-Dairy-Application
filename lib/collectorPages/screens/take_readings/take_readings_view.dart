@@ -1,6 +1,6 @@
 import 'package:dudhaganga_app/collectorPages/screens/take_readings/take_readings_model.dart';
 import 'package:dudhaganga_app/customWidgets/ddd_loading.dart';
-import 'package:dudhaganga_app/farmer.dart';
+import 'package:dudhaganga_app/models/farmer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dudhaganga_app/customWidgets/c_elevated_button.dart';
@@ -20,7 +20,7 @@ class _MilkReadingState extends State<MilkReading> {
   Widget build(BuildContext context) {
     return ViewModelBuilder<TakeReadingModel>.reactive(
         viewModelBuilder: () => TakeReadingModel(),
-        onViewModelReady: (model) => model.init(widget.farmer),
+        onViewModelReady: (model) => model.init(widget.farmer, context),
         builder: (context, model, child) => _body(context, model));
   }
 
@@ -153,6 +153,13 @@ class _MilkReadingState extends State<MilkReading> {
                     validatorText: "milk_reading_quantity_liter".tr,
                     hintText: "milk_reading_quantity_liter".tr,
                     textEditingController: model.textEditingControllerWeight,
+                    validator: (value) {
+                      print(value);
+                      if (value == null || value.isEmpty) {
+                        return "Please add weight";
+                      }
+                      return "";
+                    },
                   ),
                   const SizedBox(
                     height: 15,
@@ -162,6 +169,13 @@ class _MilkReadingState extends State<MilkReading> {
                     validatorText: "milk_reading_enter_fat".tr,
                     hintText: "milk_reading_enter_fat".tr,
                     textEditingController: model.textEditingControllerFat,
+                    validator: (value) {
+                      print(value);
+                      if (value == null || value.isEmpty) {
+                        return "Please add fat";
+                      }
+                      return "";
+                    },
                   ),
                   const SizedBox(
                     height: 15,
@@ -169,7 +183,7 @@ class _MilkReadingState extends State<MilkReading> {
                   CElevatedButton(
                     label: 'milk_reading_submit'.tr,
                     onPress: () {
-                      model.saveDetails();
+                      model.saveDetails(context);
                     },
                   ),
                 ],
