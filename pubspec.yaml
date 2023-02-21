@@ -26,6 +26,8 @@ dependencies:
   firebase_messaging: ^13.0.4
   shared_preferences: ^2.0.17
   stacked_services: ^0.9.9
+  google_fonts: ^4.0.3
+  intl: ^0.17.0
 
 
 

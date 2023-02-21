@@ -1,6 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
-
-import 'package:dudhaganga_app/loginPages/welcome_screen.dart';
+import  'package:dudhaganga_app/loginPages/welcome_screen.dart';
+import 'package:dudhaganga_app/milk_buyerpages/login_buyer.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -29,11 +29,11 @@ class _SplashScreenState extends State<SplashScreen> {
       if (id == null || id == "") {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+          MaterialPageRoute(builder: (context) => WelcomeScreen()),
         );
       } else {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => HomePage(userId: id)));
+            MaterialPageRoute(builder: (context) => WelcomeScreen()));
       }
     });
   }

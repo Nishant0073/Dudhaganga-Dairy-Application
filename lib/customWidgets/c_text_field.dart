@@ -16,6 +16,7 @@ class CTextField extends StatefulWidget {
     this.onChange,
     this.onSave,
     this.validator,
+
   });
 
   @override
@@ -27,6 +28,7 @@ class _CTextFieldState extends State<CTextField> {
   Widget build(BuildContext context) {
     return Material(
       child: TextFormField(
+
         autovalidateMode: AutovalidateMode.onUserInteraction,
         onChanged: (value) =>
             widget.onChange == null ? null : widget.onChange!(value),
