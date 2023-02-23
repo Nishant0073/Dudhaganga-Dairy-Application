@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'collectorPages/home_page.dart';
 import 'collectorPages/loginPages/welcome_screen.dart';
 import 'constants.dart';
+import 'farmerPages/farmer_login_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -29,11 +30,11 @@ class _SplashScreenState extends State<SplashScreen> {
       if (id == null || id == "") {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+          MaterialPageRoute(builder: (context) => const MyLogin()),
         );
       } else {
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => HomePage(userId: id)));
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => MyLogin()));
       }
     });
   }
