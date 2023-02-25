@@ -1,21 +1,16 @@
-// ignore_for_file: use_build_context_synchronously
-
+import 'package:dudhaganga_app/milk_buyerpages/login_buyer.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../constants.dart';
 
-import 'collectorPages/home_page.dart';
-import 'collectorPages/loginPages/welcome_screen.dart';
-import 'constants.dart';
-import 'farmerPages/farmer_login_page.dart';
-
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+class SplashScreenb extends StatefulWidget {
+  const SplashScreenb({Key? key}) : super(key: key);
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  State<SplashScreenb> createState() => _SplashScreenbState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenbState extends State<SplashScreenb> {
   @override
   void initState() {
     super.initState();
@@ -29,13 +24,12 @@ class _SplashScreenState extends State<SplashScreen> {
       print("user id: $id");
       if (id == null || id == "") {
         Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const MyLogin()),
-        );
+            context, MaterialPageRoute(builder: (context) => const MyLogin()));
       } else {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => MyLogin()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const MyLogin()));
       }
+      ;
     });
   }
 
