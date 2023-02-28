@@ -17,19 +17,25 @@ class _SplashScreenbState extends State<SplashScreenb> {
     Future.delayed(const Duration(seconds: 3), () async {
       final mainPrefs = await SharedPreferences.getInstance();
       final String? id = mainPrefs.getString('user_id');
-      double width = MediaQuery.of(context).size.width;
-      double height = MediaQuery.of(context).size.height;
-      ssheight = height;
-      sswidth = width;
-      print("user id: $id");
-      if (id == null || id == "") {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const MyLogin()));
-      } else {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const MyLogin()));
+      ssheight = 0;
+      sswidth = 0;
+      if (mounted) {
+        double width = MediaQuery.of(context).size.width;
+        double height = MediaQuery.of(context).size.height;
+        ssheight = height;
+        sswidth = width;
       }
-      ;
+
+      print("user id: $id");
+      if (mounted) {
+        if (id == null || id == "") {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => const MyLogin()));
+        } else {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const MyLogin()));
+        }
+      }
     });
   }
 

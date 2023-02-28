@@ -1,5 +1,8 @@
+import 'package:dudhaganga_app/splash_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import 'app/app.locator.dart';
@@ -17,7 +20,7 @@ const splashScreenTitle = TextStyle(
 Color lightGray = const Color(0xFF95A1AC);
 Color blackColor = const Color(0xFF000000);
 
-Color appBaseColor = const Color.fromARGB(255, 5, 201, 80);
+Color appBaseColor = const Color.fromARGB(255, 19, 202, 59);
 
 bool useLightMode = true;
 ThemeData themeData = ThemeData(
@@ -54,6 +57,23 @@ PreferredSizeWidget createAppBar() {
       ),
     ],
   );
+}
+
+Future<void> signOut(BuildContext context) async {
+  await FirebaseAuth.instance.signOut().whenComplete(() async {
+    final mainPrefs = await SharedPreferences.getInstance();
+    mainPrefs.clear();
+    snackbarService.showSnackbar(message: "Successfully Logout!");
+    if (context.mounted) {
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (_) => const SplashScreen()),
+          (route) => false);
+    }
+  }).onError((error, stackTrace) {
+    print("signOut: $error");
+    snackbarService.showSnackbar(message: "Unable tp logout!");
+  });
 }
 
 //handles the theme of the app
