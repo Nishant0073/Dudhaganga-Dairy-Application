@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dudhaganga_app/constants.dart';
 import 'package:dudhaganga_app/customWidgets/c_elevated_button.dart';
+import 'package:dudhaganga_app/customWidgets/ddd_loading.dart';
 import 'package:dudhaganga_app/main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -76,7 +77,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   SingleChildScrollView otpScreen(
       BuildContext context, LoginPageViewModel model) {
-    FocusNode focusNode = FocusNode();
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(30, 0, 30, 20),
@@ -106,12 +106,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       Fluttertoast.showToast(msg: "Enter Complete OTP");
                       Future.delayed(const Duration(seconds: 2));
                     }
-                    focusNode.requestFocus();
                   },
-                  onTap: () {
-                    focusNode.requestFocus();
-                  },
-                  focusNode: focusNode,
                   enableActiveFill: true,
                   autoDisposeControllers: false,
                   autoDismissKeyboard: false,
@@ -126,8 +121,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     shape: PinCodeFieldShape.box,
                     borderRadius: BorderRadius.circular(8),
                     borderWidth: 0,
-                    // fieldHeight: 50,
-                    // fieldWidth: 40,
                   ),
                   animationDuration: const Duration(milliseconds: 300),
                   controller: model.otpEditingController,
@@ -259,11 +252,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   model.showOtpScreen
                       ? otpScreen(context, model)
                       : signInScreen(context, model),
-                  model.isBusy
-                      ? const Center(
-                          child: CircularProgressIndicator(),
-                        )
-                      : Container(),
+                  DDLoader(
+                    loading: model.isBusy,
+                  ),
                 ],
               ),
             ),

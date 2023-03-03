@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dudhaganga_app/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,8 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../farmerPages/farmer_home_page.dart';
+import '../../milk_buyerpages/home_buyer.dart';
 import '../home_page.dart';
 
 class LoginPageViewModel extends BaseViewModel {
@@ -35,8 +38,8 @@ class LoginPageViewModel extends BaseViewModel {
   }
 
   void verifyPhoneNumber(BuildContext context) async {
+    setBusy(true);
     if (formKey.currentState?.validate() ?? false) {
-      setBusy(true);
       notifyListeners();
       verificationCompleted(PhoneAuthCredential phoneAuthCredential) async {
         User? user;
@@ -91,10 +94,10 @@ class LoginPageViewModel extends BaseViewModel {
         Fluttertoast.showToast(msg: "Failed to Verify Phone Number: $e");
         showOtpScreen = false;
       }
-
-      setBusy(false);
-      notifyListeners();
     }
+
+    setBusy(false);
+    notifyListeners();
   }
 
   void signInWithPhoneNumber(BuildContext context) async {
@@ -117,13 +120,26 @@ class LoginPageViewModel extends BaseViewModel {
     if (!error && user != null) {
       String id = user.uid;
       //here you can store user data in backend
-      // ignore: use_build_context_synchronously
 
       final mainPrefs = await SharedPreferences.getInstance();
       await mainPrefs.setString('user_id', id);
-      // ignore: use_build_context_synchronously
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => HomePage(userId: id)));
+      await mainPrefs.setString(userCn, phoneNumber.toString().substring(3));
+      await mainPrefs.setString(userTypeCn, userType.toString());
+
+      // ["Farmer", "Milk Collector", "Milk Buyer"];
+      print("Stored  user id: ${phoneNumber.toString().substring(3)}");
+      if (context.mounted) {
+        if (userType == "Milk Collector") {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => HomePage(userId: id)));
+        } else if (userType == "Milk Buyer") {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => BuyerHomePage()));
+        } else {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => FarmerHomePage()));
+        }
+      }
     }
 
     setBusy(false);

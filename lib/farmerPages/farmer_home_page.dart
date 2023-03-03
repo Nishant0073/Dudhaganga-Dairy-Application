@@ -145,7 +145,7 @@ class _FarmerHomePageState extends State<FarmerHomePage> {
                       const SizedBox(
                         height: 5.0,
                       ),
-                      TableData(),
+                      tableData(),
                       const SizedBox(
                         height: 20,
                       ),
@@ -169,7 +169,7 @@ class _FarmerHomePageState extends State<FarmerHomePage> {
                       const SizedBox(
                         height: 5.0,
                       ),
-                      TableData(),
+                      tableData(),
                     ],
                   ),
                 ),
@@ -203,7 +203,7 @@ class _FarmerHomePageState extends State<FarmerHomePage> {
     );
   }
 
-  Widget TableData() {
+  Widget tableData() {
     return Table(
       children: const [
         TableRow(

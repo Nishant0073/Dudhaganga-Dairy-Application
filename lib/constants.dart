@@ -31,6 +31,8 @@ ThemeData themeData = ThemeData(
 const double narrowScreenWidthThreshold = 450;
 
 String appName = "constants_app_name".tr;
+String userCn = "user_contact_no";
+String userTypeCn = "user_type";
 double sswidth = 0;
 double ssheight = 0;
 String appFontFamilly = "Poppins";
@@ -86,3 +88,6 @@ void handleThemeChange() {
       useMaterial3: true,
       brightness: useLightMode ? Brightness.light : Brightness.dark);
 }
+
+//firebase paths
+String pathFarmerMilkRecords = "/Dairy/records/farmer/";
