@@ -69,15 +69,17 @@ class TakeReadingModel extends BaseViewModel {
         setBusy(false);
         return;
       }
+
       if (getRateAndValue()) {
         bool res = await addMilkRecord(
-            farmer,
-            double.parse(textEditingControllerWeight.text),
-            double.parse(textEditingControllerFat.text),
-            selectedAnimal ?? "",
-            thesnf,
-            rate,
-            value);
+          farmer,
+          double.parse(textEditingControllerFat.text),
+          double.parse(textEditingControllerWeight.text),
+          selectedAnimal ?? "",
+          thesnf,
+          rate,
+          value,
+        );
         if (res) {
           snackbarService.showSnackbar(message: "Record added successfully!");
           // ignore: use_build_context_synchronously

@@ -2,7 +2,7 @@ class MilkRecord {
   final String? date;
   final String? phoneNumber;
   final double? rate;
-  final int? fat;
+  final double? fat;
   final String? name;
   final double? weight;
   final String? animal;
@@ -27,7 +27,7 @@ class MilkRecord {
       : date = json['date'] as String?,
         phoneNumber = json['phoneNumber'] as String?,
         rate = json['rate'] as double?,
-        fat = json['fat'] as int?,
+        fat = json['fat'] as double?,
         name = json['name'] as String?,
         weight = json['weight'] as double?,
         animal = json['animal'] as String?,

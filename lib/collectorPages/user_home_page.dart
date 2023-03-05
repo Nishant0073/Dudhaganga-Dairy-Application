@@ -144,7 +144,8 @@ class _UserHomePageState extends State<UserHomePage> {
                             onFarmerSelection: (Farmer farmer) {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => MilkReading(farmer),
+                                  builder: (context) =>
+                                      MilkReadingScreen(farmer),
                                 ),
                               );
                             },
@@ -179,7 +180,7 @@ class _UserHomePageState extends State<UserHomePage> {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (context) => ViewHistoryScreen(
-                                      phoneNumber: farmer.phoneNumber,
+                                      farmer: farmer,
                                     ),
                                   ),
                                 );

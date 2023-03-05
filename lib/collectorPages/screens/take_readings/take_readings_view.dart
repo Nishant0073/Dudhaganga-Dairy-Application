@@ -7,15 +7,15 @@ import 'package:dudhaganga_app/customWidgets/c_elevated_button.dart';
 import 'package:dudhaganga_app/customWidgets/c_text_field.dart';
 import 'package:stacked/stacked.dart';
 
-class MilkReading extends StatefulWidget {
+class MilkReadingScreen extends StatefulWidget {
   final Farmer? farmer;
-  const MilkReading(this.farmer, {super.key});
+  const MilkReadingScreen(this.farmer, {super.key});
 
   @override
-  State<MilkReading> createState() => _MilkReadingState();
+  State<MilkReadingScreen> createState() => _MilkReadingScreenState();
 }
 
-class _MilkReadingState extends State<MilkReading> {
+class _MilkReadingScreenState extends State<MilkReadingScreen> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<TakeReadingModel>.reactive(
