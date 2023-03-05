@@ -32,6 +32,11 @@ dependencies:
   sqflite: ^2.2.4+1
   excel: ^2.0.1
   spreadsheet_decoder: ^2.2.0
+  flutter_month_picker: ^0.0.1
+  pdf: ^3.9.0
+  path_provider: ^2.0.13
+  syncfusion_flutter_pdfviewer: ^20.4.52
+  external_path: ^1.0.3
  
 
 

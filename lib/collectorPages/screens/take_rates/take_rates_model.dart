@@ -26,11 +26,11 @@ class TakeRatesModel extends BaseViewModel {
       );
 
       /// file might be picked
-
+      print(pickedFile?.files.first);
       if (pickedFile != null) {
         Uint8List? bytes = pickedFile.files.single.bytes;
         Excel excel = Excel.decodeBytes(bytes ?? []);
-
+        print("HERE");
         List<Rate> rates = [];
         for (var table in excel.tables.keys) {
           print(table); //sheet Name

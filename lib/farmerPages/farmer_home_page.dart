@@ -1,8 +1,8 @@
 import 'package:dudhaganga_app/collectorPages/side_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../customWidgets/c_Card.dart';
 import 'package:intl/intl.dart';
+import '../customWidgets/c_card.dart';
 import './farmer_milk_details.dart';
 
 class FarmerHomePage extends StatefulWidget {
@@ -13,27 +13,27 @@ class FarmerHomePage extends StatefulWidget {
 }
 
 class _FarmerHomePageState extends State<FarmerHomePage> {
-  TextEditingController? DateFromcontroller;
-  TextEditingController? DateTocontroller;
-  DateTime SelectedDate = DateTime.now();
+  TextEditingController? dateFormController;
+  TextEditingController? dateToController;
+  DateTime selectedDate = DateTime.now();
   @override
   void initState() {
     super.initState();
-    DateFromcontroller = TextEditingController(
-        text: DateFormat('EEE,MMM,d, ' 'yy').format(SelectedDate));
+    dateFormController = TextEditingController(
+        text: DateFormat('EEE,MMM,d, ' 'yy').format(selectedDate));
   }
 
   _selectDate(BuildContext context) async {
     final DateTime? selected = await showDatePicker(
       context: context,
-      initialDate: SelectedDate,
+      initialDate: selectedDate,
       firstDate: DateTime(2005),
       lastDate: DateTime(2030),
     );
-    if (selected != null && selected != SelectedDate) {
+    if (selected != null && selected != selectedDate) {
       setState(() {
-        SelectedDate = selected;
-        DateFromcontroller!.text =
+        selectedDate = selected;
+        dateFormController!.text =
             DateFormat('EEE,MMM,d, ' 'yy').format(selected);
       });
     }
@@ -68,7 +68,7 @@ class _FarmerHomePageState extends State<FarmerHomePage> {
                       Expanded(
                         flex: 3,
                         child: TextFormField(
-                          controller: DateFromcontroller,
+                          controller: dateFormController,
                           cursorColor: Colors.black,
                           style: TextStyle(
                             color: Colors.black,
@@ -145,7 +145,7 @@ class _FarmerHomePageState extends State<FarmerHomePage> {
                       const SizedBox(
                         height: 5.0,
                       ),
-                      TableData(),
+                      tableData(),
                       const SizedBox(
                         height: 20,
                       ),
@@ -169,7 +169,7 @@ class _FarmerHomePageState extends State<FarmerHomePage> {
                       const SizedBox(
                         height: 5.0,
                       ),
-                      TableData(),
+                      tableData(),
                     ],
                   ),
                 ),
@@ -203,7 +203,7 @@ class _FarmerHomePageState extends State<FarmerHomePage> {
     );
   }
 
-  Widget TableData() {
+  Widget tableData() {
     return Table(
       children: const [
         TableRow(

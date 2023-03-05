@@ -1,4 +1,4 @@
-import 'package:dudhaganga_app/milk_buyerpages/Get_Bill.dart';
+import 'package:dudhaganga_app/milk_buyerpages/get_bill.dart';
 import 'package:dudhaganga_app/collectorPages/side_bar.dart';
 import 'package:dudhaganga_app/customWidgets/c_card.dart';
 import 'package:flutter/material.dart';

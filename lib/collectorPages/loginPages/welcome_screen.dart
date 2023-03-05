@@ -2,149 +2,39 @@ import 'dart:async';
 
 import 'package:dudhaganga_app/constants.dart';
 import 'package:dudhaganga_app/customWidgets/c_elevated_button.dart';
+import 'package:dudhaganga_app/customWidgets/ddd_loading.dart';
 import 'package:dudhaganga_app/main.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:stacked/stacked.dart';
 
-import '../home_page.dart';
+import 'login_page_view_model.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({Key? key}) : super(key: key);
+  final String? userType;
+  const WelcomeScreen({this.userType, Key? key}) : super(key: key);
 
   @override
   State<WelcomeScreen> createState() => _WelcomeScreenState();
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  final _formKey = GlobalKey<FormState>();
-  String? phoneNumber;
-  TextEditingController otpEditingController = TextEditingController();
-  String? _verificationId;
-  int? forceResendingToken;
-  bool showOtpScreen = false;
-  late StreamController<ErrorAnimationType> errorController;
-  bool loading = false;
-
   @override
-  void initState() {
-    errorController = StreamController<ErrorAnimationType>();
-    super.initState();
+  Widget build(BuildContext context) {
+    return ViewModelBuilder<LoginPageViewModel>.reactive(
+        viewModelBuilder: () => LoginPageViewModel(),
+        onViewModelReady: (model) => model.init(widget.userType),
+        builder: (context, model, child) => _body(context, model));
   }
 
-  @override
-  void dispose() {
-    errorController.close();
-    super.dispose();
-  }
-
-  void verifyPhoneNumber() async {
-    if (_formKey.currentState?.validate() ?? false) {
-      setState(() {
-        loading = true;
-      });
-      verificationCompleted(PhoneAuthCredential phoneAuthCredential) async {
-        User? user;
-        bool error = false;
-        try {
-          user = (await firebaseAuth.signInWithCredential(phoneAuthCredential))
-              .user!;
-        } catch (e) {
-          if (kDebugMode) {
-            print("Failed to sign in: $e");
-          }
-          error = true;
-        }
-        if (!error && user != null) {
-          String id = user.uid;
-          final mainPrefs = await SharedPreferences.getInstance();
-          await mainPrefs.setString('user_id', id);
-          //here you can store user data in backend
-          // ignore: use_build_context_synchronously
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => HomePage(userId: id)));
-        }
-      }
-
-      verificationFailed(FirebaseAuthException authException) {
-        print(authException.message);
-        Fluttertoast.showToast(msg: authException.message!);
-      }
-
-      codeSent(String? verificationId, [int? forceResendingToken]) async {
-        Fluttertoast.showToast(
-            msg: 'Please check your phone for the verification code.');
-        this.forceResendingToken = forceResendingToken;
-        _verificationId = verificationId;
-      }
-
-      codeAutoRetrievalTimeout(String verificationId) {
-        _verificationId = verificationId;
-      }
-
-      try {
-        await firebaseAuth.verifyPhoneNumber(
-            phoneNumber: phoneNumber!,
-            timeout: const Duration(seconds: 5),
-            forceResendingToken: forceResendingToken,
-            verificationCompleted: verificationCompleted,
-            verificationFailed: verificationFailed,
-            codeSent: codeSent,
-            codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
-        showOtpScreen = true;
-      } catch (e) {
-        Fluttertoast.showToast(msg: "Failed to Verify Phone Number: $e");
-        showOtpScreen = false;
-      }
-      setState(() {
-        loading = false;
-      });
-    }
-  }
-
-  void signInWithPhoneNumber() async {
-    bool error = false;
-    User? user;
-    AuthCredential credential;
-    setState(() {
-      loading = true;
-    });
-    try {
-      credential = PhoneAuthProvider.credential(
-        verificationId: _verificationId ?? "",
-        smsCode: otpEditingController.text,
-      );
-      user = (await firebaseAuth.signInWithCredential(credential)).user;
-    } catch (e) {
-      Fluttertoast.showToast(msg: "Failed to sign in: $e");
-      error = true;
-    }
-    if (!error && user != null) {
-      String id = user.uid;
-      //here you can store user data in backend
-      // ignore: use_build_context_synchronously
-
-      final mainPrefs = await SharedPreferences.getInstance();
-      await mainPrefs.setString('user_id', id);
-      // ignore: use_build_context_synchronously
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => HomePage(userId: id)));
-    }
-    setState(() {
-      loading = false;
-    });
-  }
-
-  Padding signInScreen() {
+  Padding signInScreen(BuildContext context, LoginPageViewModel model) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
       child: Form(
-        key: _formKey,
+        key: model.formKey,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -152,7 +42,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           children: [
             InternationalPhoneNumberInput(
               onInputChanged: (PhoneNumber number) {
-                phoneNumber = number.phoneNumber;
+                model.phoneNumber = number.phoneNumber;
               },
               onInputValidated: (bool value) {
                 if (kDebugMode) {
@@ -177,20 +67,21 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               height: 55,
             ),
             CElevatedButton(
-                label: "Get OTP", onPress: () => verifyPhoneNumber()),
+                label: "Get OTP",
+                onPress: () => model.verifyPhoneNumber(context)),
           ],
         ),
       ),
     );
   }
 
-  SingleChildScrollView otpScreen() {
-    FocusNode focusNode = FocusNode();
+  SingleChildScrollView otpScreen(
+      BuildContext context, LoginPageViewModel model) {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(30, 0, 30, 20),
         child: Form(
-          key: _formKey,
+          key: model.formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -215,12 +106,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       Fluttertoast.showToast(msg: "Enter Complete OTP");
                       Future.delayed(const Duration(seconds: 2));
                     }
-                    focusNode.requestFocus();
                   },
-                  onTap: () {
-                    focusNode.requestFocus();
-                  },
-                  focusNode: focusNode,
                   enableActiveFill: true,
                   autoDisposeControllers: false,
                   autoDismissKeyboard: false,
@@ -235,11 +121,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     shape: PinCodeFieldShape.box,
                     borderRadius: BorderRadius.circular(8),
                     borderWidth: 0,
-                    // fieldHeight: 50,
-                    // fieldWidth: 40,
                   ),
                   animationDuration: const Duration(milliseconds: 300),
-                  controller: otpEditingController,
+                  controller: model.otpEditingController,
                   onCompleted: (v) {
                     if (kDebugMode) {
                       print("Completed");
@@ -255,7 +139,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
               Center(
                 child: GestureDetector(
-                  onTap: () => verifyPhoneNumber(),
+                  onTap: () => model.verifyPhoneNumber(context),
                   child: const Text(
                     'Resend OTP?',
                     style: TextStyle(
@@ -272,9 +156,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 child: CElevatedButton(
                   label: "OK",
                   onPress: () {
-                    if (otpEditingController.text.length == 6) {
-                      signInWithPhoneNumber();
-                    } else if (otpEditingController.text.length < 6) {
+                    if (model.otpEditingController.text.length == 6) {
+                      model.signInWithPhoneNumber(context);
+                    } else if (model.otpEditingController.text.length < 6) {
                       Fluttertoast.showToast(msg: "Enter complete otp");
                     }
                   },
@@ -316,19 +200,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _body(BuildContext context, LoginPageViewModel model) {
     return LayoutBuilder(
       builder: ((context, constraints) {
         if (constraints.maxWidth < narrowScreenWidthThreshold) {
-          return Scaffold(appBar: createAppBar(), body: welcomePage());
+          return Scaffold(
+              appBar: createAppBar(), body: welcomePage(context, model));
         } else {
           return Scaffold(
             appBar: createAppBar(),
             body: SafeArea(
               bottom: false,
               top: false,
-              child: welcomePage(),
+              child: welcomePage(context, model),
             ),
           );
         }
@@ -337,7 +221,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
 
 //Actual welcome Page.
-  Widget welcomePage() {
+  Widget welcomePage(BuildContext context, LoginPageViewModel model) {
     return SingleChildScrollView(
       physics: const ClampingScrollPhysics(),
       child: Padding(
@@ -359,18 +243,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             WillPopScope(
               onWillPop: () {
                 setState(() {
-                  showOtpScreen = false;
+                  model.showOtpScreen = false;
                 });
                 return Future.value(true);
               },
               child: Stack(
                 children: [
-                  showOtpScreen ? otpScreen() : signInScreen(),
-                  loading
-                      ? const Center(
-                          child: CircularProgressIndicator(),
-                        )
-                      : Container(),
+                  model.showOtpScreen
+                      ? otpScreen(context, model)
+                      : signInScreen(context, model),
+                  DDLoader(
+                    loading: model.isBusy,
+                  ),
                 ],
               ),
             ),

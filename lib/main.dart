@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dudhaganga_app/languagepage.dart';
 import 'app/app.locator.dart';
-import 'package:dudhaganga_app/milk_buyerpages/Splash_screen_buyer.dart';
 
 //Created to handle theme of app from stream controller.
 StreamController<bool> isLightTheme = StreamController();
@@ -36,7 +35,7 @@ class MyApp extends StatelessWidget {
             title: 'Dudhaganga Dairy',
             themeMode: snapshot.data! ? ThemeMode.light : ThemeMode.dark,
             theme: themeData,
-            home: const SplashScreenb());
+            home: const SplashScreen());
       },
     );
   }

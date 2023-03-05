@@ -1,14 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../../constants.dart';
 import '../../../models/farmer.dart';
 
 //all functions releted to SelectFarmer is in this file.
 
 class SelectFarmerModel extends BaseViewModel {
   List<Farmer> farmers = [];
-  init() {
+  String? userPhoneNumber;
+  init() async {
     listAllFarmers();
+    userPhoneNumber = await getUserPhoneNumber();
+    print("User contact number: $userPhoneNumber");
   }
 
   Future<void> listAllFarmers() async {
@@ -31,6 +36,12 @@ class SelectFarmerModel extends BaseViewModel {
     //this is to set false loading screen.
     setBusy(false);
     notifyListeners();
+  }
+
+  Future<String?> getUserPhoneNumber() async {
+    final mainPrefs = await SharedPreferences.getInstance();
+    String? cn = mainPrefs.getString(userCn);
+    return cn;
   }
 }
 

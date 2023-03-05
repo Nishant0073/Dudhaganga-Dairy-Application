@@ -1,10 +1,7 @@
-import 'package:dudhaganga_app/collectorPages/side_bar.dart';
-import 'package:dudhaganga_app/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../customWidgets/c_Card.dart';
 import 'package:intl/intl.dart';
-import '../customWidgets/c_elevated_Button.dart';
+
+import '../customWidgets/c_card.dart';
 
 class FarmerMilkDetailPage extends StatefulWidget {
   const FarmerMilkDetailPage({super.key});
@@ -14,30 +11,30 @@ class FarmerMilkDetailPage extends StatefulWidget {
 }
 
 class _FarmerMilkDetailPageState extends State<FarmerMilkDetailPage> {
-  TextEditingController? DateFromcontroller;
-  TextEditingController? DateTocontroller;
-  DateTime SelectedDate = DateTime.now();
+  TextEditingController? dateFormController;
+  TextEditingController? dateToController;
+  DateTime selectedDate = DateTime.now();
 
   @override
   void initState() {
     super.initState();
-    DateFromcontroller = TextEditingController(
-        text: DateFormat(' d MMM, ' 'yy').format(SelectedDate));
-    DateTocontroller = TextEditingController(
-        text: DateFormat(' d MMM, ' 'yy').format(SelectedDate));
+    dateFormController = TextEditingController(
+        text: DateFormat(' d MMM, ' 'yy').format(selectedDate));
+    dateToController = TextEditingController(
+        text: DateFormat(' d MMM, ' 'yy').format(selectedDate));
   }
 
   _selectDate(BuildContext context) async {
     final DateTime? selected = await showDatePicker(
       context: context,
-      initialDate: SelectedDate,
+      initialDate: selectedDate,
       firstDate: DateTime(2005),
       lastDate: DateTime(2030),
     );
-    if (selected != null && selected != SelectedDate) {
+    if (selected != null && selected != selectedDate) {
       setState(() {
-        SelectedDate = selected;
-        DateFromcontroller!.text = DateFormat(' d MMM, ' 'yy').format(selected);
+        selectedDate = selected;
+        dateFormController!.text = DateFormat(' d MMM, ' 'yy').format(selected);
       });
     }
   }
@@ -45,15 +42,15 @@ class _FarmerMilkDetailPageState extends State<FarmerMilkDetailPage> {
   _selectToDate(BuildContext context) async {
     final DateTime? selected = await showDatePicker(
       context: context,
-      initialDate: SelectedDate,
+      initialDate: selectedDate,
       firstDate: DateTime(2005),
       lastDate: DateTime(2030),
     );
-    if (selected != null && selected != SelectedDate) {
+    if (selected != null && selected != selectedDate) {
       setState(() {
-        SelectedDate = selected;
+        selectedDate = selected;
 
-        DateTocontroller!.text = DateFormat(' d MMM, ' 'yy').format(selected);
+        dateToController!.text = DateFormat(' d MMM, ' 'yy').format(selected);
       });
     }
   }
@@ -86,7 +83,7 @@ class _FarmerMilkDetailPageState extends State<FarmerMilkDetailPage> {
                       Expanded(
                           flex: 3,
                           child: TextFormField(
-                            controller: DateFromcontroller,
+                            controller: dateFormController,
                             cursorColor: Colors.black,
                             style: TextStyle(
                               color: Colors.black,
@@ -127,7 +124,7 @@ class _FarmerMilkDetailPageState extends State<FarmerMilkDetailPage> {
                       Expanded(
                           flex: 3,
                           child: TextFormField(
-                            controller: DateTocontroller,
+                            controller: dateToController,
                             cursorColor: Colors.black,
                             style: TextStyle(
                               color: Colors.black,
@@ -247,12 +244,12 @@ class _FarmerMilkDetailPageState extends State<FarmerMilkDetailPage> {
 
   Widget milkDetailtable() {
     return Table(
-      columnWidths: {
+      columnWidths: const {
         0: FlexColumnWidth(2),
         1: FlexColumnWidth(2),
         2: FlexColumnWidth(1),
-        1: FlexColumnWidth(1),
-        2: FlexColumnWidth(1),
+        // 1: FlexColumnWidth(1),
+        // 2: FlexColumnWidth(1),
       },
       children: const [
         TableRow(

@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:dudhaganga_app/customWidgets/c_card.dart';
 import 'package:get/get.dart';
 import 'package:stacked/stacked.dart';
-import '../take_readings/take_readings_view.dart';
 
 class SelectFarmer extends StatefulWidget {
-  const SelectFarmer({Key? key}) : super(key: key);
+  final Function? onFarmerSelection;
+  const SelectFarmer({Key? key, this.onFarmerSelection}) : super(key: key);
 
   @override
   State<SelectFarmer> createState() => _SelectFarmerState();
@@ -35,21 +35,18 @@ class _SelectFarmerState extends State<SelectFarmer> {
             itemCount: model.farmers.length,
             itemBuilder: (_, index) {
               return HomeCard(
-                  child: ListTile(
-                title: Text(model.farmers[index].name ?? "Farmer Name"),
-                subtitle: Text(model.farmers[index].phoneNumber.toString()),
-                leading: const Icon(Icons.person),
-                trailing: IconButton(
+                child: ListTile(
+                  title: Text(model.farmers[index].name ?? "Farmer Name"),
+                  subtitle: Text(model.farmers[index].phoneNumber.toString()),
+                  leading: const Icon(Icons.person),
+                  trailing: IconButton(
                     icon: const Icon(Icons.arrow_forward),
                     onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              MilkReading(model.farmers[index]),
-                        ),
-                      );
-                    }),
-              ));
+                      widget.onFarmerSelection?.call(model.farmers[index]);
+                    },
+                  ),
+                ),
+              );
             },
           ),
           DDLoader(

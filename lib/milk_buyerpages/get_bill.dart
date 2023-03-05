@@ -2,8 +2,6 @@ import 'package:dudhaganga_app/customWidgets/c_card.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'package:dudhaganga_app/customWidgets/c_elevated_button.dart';
-
 class BuyerMilkDetailPage extends StatefulWidget {
   const BuyerMilkDetailPage({super.key});
 
@@ -12,30 +10,30 @@ class BuyerMilkDetailPage extends StatefulWidget {
 }
 
 class _BuyerMilkDetailPageState extends State<BuyerMilkDetailPage> {
-  TextEditingController? DateFromcontroller;
-  TextEditingController? DateTocontroller;
-  DateTime SelectedDate = DateTime.now();
+  TextEditingController? dateFormController;
+  TextEditingController? dateToController;
+  DateTime selectedDate = DateTime.now();
 
   @override
   void initState() {
     super.initState();
-    DateFromcontroller = TextEditingController(
-        text: DateFormat(' d MMM, ' 'yy').format(SelectedDate));
-    DateTocontroller = TextEditingController(
-        text: DateFormat(' d MMM, ' 'yy').format(SelectedDate));
+    dateFormController = TextEditingController(
+        text: DateFormat(' d MMM, ' 'yy').format(selectedDate));
+    dateToController = TextEditingController(
+        text: DateFormat(' d MMM, ' 'yy').format(selectedDate));
   }
 
   _selectDate(BuildContext context) async {
     final DateTime? selected = await showDatePicker(
       context: context,
-      initialDate: SelectedDate,
+      initialDate: selectedDate,
       firstDate: DateTime(2005),
       lastDate: DateTime(2030),
     );
-    if (selected != null && selected != SelectedDate) {
+    if (selected != null && selected != selectedDate) {
       setState(() {
-        SelectedDate = selected;
-        DateFromcontroller!.text = DateFormat(' d MMM, ' 'yy').format(selected);
+        selectedDate = selected;
+        dateFormController!.text = DateFormat(' d MMM, ' 'yy').format(selected);
       });
     }
   }
@@ -43,15 +41,15 @@ class _BuyerMilkDetailPageState extends State<BuyerMilkDetailPage> {
   _selectToDate(BuildContext context) async {
     final DateTime? selected = await showDatePicker(
       context: context,
-      initialDate: SelectedDate,
+      initialDate: selectedDate,
       firstDate: DateTime(2005),
       lastDate: DateTime(2030),
     );
-    if (selected != null && selected != SelectedDate) {
+    if (selected != null && selected != selectedDate) {
       setState(() {
-        SelectedDate = selected;
+        selectedDate = selected;
 
-        DateTocontroller!.text = DateFormat(' d MMM, ' 'yy').format(selected);
+        dateToController!.text = DateFormat(' d MMM, ' 'yy').format(selected);
       });
     }
   }
@@ -84,7 +82,7 @@ class _BuyerMilkDetailPageState extends State<BuyerMilkDetailPage> {
                       Expanded(
                           flex: 3,
                           child: TextFormField(
-                            controller: DateFromcontroller,
+                            controller: dateFormController,
                             cursorColor: Colors.black,
                             style: TextStyle(
                               color: Colors.black,
@@ -125,7 +123,7 @@ class _BuyerMilkDetailPageState extends State<BuyerMilkDetailPage> {
                       Expanded(
                           flex: 3,
                           child: TextFormField(
-                            controller: DateTocontroller,
+                            controller: dateToController,
                             cursorColor: Colors.black,
                             style: TextStyle(
                               color: Colors.black,
@@ -245,12 +243,12 @@ class _BuyerMilkDetailPageState extends State<BuyerMilkDetailPage> {
 
   Widget milkDetailtable() {
     return Table(
-      columnWidths: {
+      columnWidths: const {
         0: FlexColumnWidth(2),
         1: FlexColumnWidth(2),
         2: FlexColumnWidth(1),
-        1: FlexColumnWidth(1),
-        2: FlexColumnWidth(1),
+        // 1: FlexColumnWidth(1),
+        // 2: FlexColumnWidth(1),
       },
       children: const [
         TableRow(

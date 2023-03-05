@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 class MyLogin extends StatefulWidget {
   const MyLogin({Key? key}) : super(key: key);
   @override
-  _MyLoginState createState() => _MyLoginState();
+  State createState() => _MyLoginState();
 }
 
 class _MyLoginState extends State<MyLogin> {
@@ -56,76 +56,73 @@ class _MyLoginState extends State<MyLogin> {
     //TextEditingController PhoneController = TextEditingController();
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Container(
-        // decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/login.png"))),
-        child: Stack(
-          children: [
-            Container(
-              padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.2),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(left: 35, right: 35),
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'assets/images/DGLogo.png',
-                          width: 164.0,
-                        ),
-                        const SizedBox(
-                          height: 40, //<-- SEE HERE
-                        ),
-                        CTextField(
-                          label: 'Enter Phone number'.tr,
-                          hintText: 'Eg. 9192939495',
-                          onChange: (value) {
-                            phoneNumber = value;
-                          },
-                          validator: (String? value) {
-                            String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
-                            RegExp regExp = RegExp(pattern);
-                            if (value == null) {
-                              return 'Please enter mobile number';
-                            } else if (!regExp.hasMatch(value) ||
-                                value.length != 10) {
-                              return "phone_no".tr;
-                            }
-                            return null;
-                          },
-                          onSave: (value) {
-                            phoneNumber = value;
-                          },
-                        ),
-                        const SizedBox(height: 40.0),
-                        CTextField(
-                          label: "Password".tr,
-                          validatorText: "Password".tr,
-                          hintText: 'Password'.tr,
-                          onChange: (value) {
-                            password = value;
-                          },
-                          onSave: (value) {
-                            password = value;
-                          },
-                        ),
-                        const SizedBox(height: 20.0),
-                        CElevatedButton(
-                          label: 'Register',
-                          onPress: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const BuyerHomePage()));
-                          },
-                        ),
-                      ],
-                    ),
+      body: Stack(
+        children: [
+          Container(
+            padding:
+                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.2),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(left: 35, right: 35),
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        'assets/images/DGLogo.png',
+                        width: 164.0,
+                      ),
+                      const SizedBox(
+                        height: 40, //<-- SEE HERE
+                      ),
+                      CTextField(
+                        label: 'Enter Phone number'.tr,
+                        hintText: 'Eg. 9192939495',
+                        onChange: (value) {
+                          phoneNumber = value;
+                        },
+                        validator: (String? value) {
+                          String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+                          RegExp regExp = RegExp(pattern);
+                          if (value == null) {
+                            return 'Please enter mobile number';
+                          } else if (!regExp.hasMatch(value) ||
+                              value.length != 10) {
+                            return "phone_no".tr;
+                          }
+                          return null;
+                        },
+                        onSave: (value) {
+                          phoneNumber = value;
+                        },
+                      ),
+                      const SizedBox(height: 40.0),
+                      CTextField(
+                        label: "Password".tr,
+                        validatorText: "Password".tr,
+                        hintText: 'Password'.tr,
+                        onChange: (value) {
+                          password = value;
+                        },
+                        onSave: (value) {
+                          password = value;
+                        },
+                      ),
+                      const SizedBox(height: 20.0),
+                      CElevatedButton(
+                        label: 'Register',
+                        onPress: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const BuyerHomePage()));
+                        },
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

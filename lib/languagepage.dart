@@ -73,6 +73,46 @@ class LanguagePage extends Translations {
 
           //take reading page:
           'select_milk_type': 'Type of milk',
+
+          //home page
+          'view_history': 'view history',
+
+          //view history
+          'view_All_recrods': 'View All Recrods',
+          'view_All_bills': 'View All Bills',
+
+          '1': 'January',
+          '2': 'February',
+          '3': 'March',
+          '4': 'April',
+          '5': 'May',
+          '6': 'June',
+          '7': 'July',
+          '8': 'August',
+          '9': 'September',
+          '10': 'October',
+          '11': 'November',
+          '12': 'December',
+
+          //farmer details
+          'farmer_name': 'Farmer Name',
+          'month_year': 'Month Year',
+
+          //bill details
+          'total_bill_price': 'Total Bill Price',
+          'total_milk_collected': 'Total Milk Collected',
+          'date': 'Date',
+          'time': 'Time',
+          'cattle': 'Cattle',
+          'litre': 'Litre',
+          'fat': 'Fat',
+          'rate': 'Rate',
+          'total': 'Total',
+          'cow': 'Cow',
+          'buffalo': 'Buffalo',
+          //new keys
+          'morning': 'Morning',
+          'evening': 'Evening',
         },
         'hi_IN': {
           'side_bar_home': 'मुख्यपृष्ठ',
@@ -143,6 +183,45 @@ class LanguagePage extends Translations {
           'milk_reading_enter_fat': 'दूध फॅट दर्ज करें',
           //take reading page:
           'select_milk_type': 'दूध का प्रकार',
+
+          //home page
+          'view_history': 'इतिहास देखें',
+
+          //view history
+          'view_All_recrods': 'सभी रिकॉर्ड देखें',
+          'view_All_bills': 'सभी बिल देखें',
+          //months
+          '1': 'जनवरी',
+          '2': 'फरवरी',
+          '3': 'मार्च',
+          '4': 'अप्रैल',
+          '5': 'मई',
+          '6': 'जून',
+          '7': 'जुलाई',
+          '8': 'अगस्त',
+          '9': 'सितंबर',
+          '10': 'अक्टूबर',
+          '11': 'नवंबर',
+          '12': 'दिसंबर',
+          //farmer details
+          'farmer_name': 'किसान का नाम',
+          'month_year': 'महीना साल',
+
+          //bill details
+          'total_bill_price': 'कुल बिल कीमत',
+          'total_milk_collected': 'कुल दूध इकट्ठा हुआ',
+          'date': 'तारीख',
+          'time': 'समय',
+          'cattle': 'पशु',
+          'litre': 'लीटर',
+          'fat': 'वसा',
+          'rate': 'दर',
+          'total': 'कुल',
+          'cow': 'गाय',
+          'buffalo': 'भैंस',
+          //new translations
+          'morning': 'सुबह',
+          'evening': 'शाम',
         },
         'mr_IN': {
           'side_bar_home': 'मुख्यपृष्ठ',
@@ -213,6 +292,46 @@ class LanguagePage extends Translations {
           'milk_reading_enter_fat': 'दूध फॅट प्रविष्ट करा',
           //take reading page:
           'select_milk_type': 'दुधाचा प्रकार',
+
+          //home page
+          'view_history': 'इतिहास पहा',
+
+          //view history
+          'view_All_recrods': 'सर्व रेकॉर्ड पहा',
+          'view_All_bills': 'सर्व बिले पहा',
+
+          //moths
+          '1': 'जानेवारी',
+          '2': 'फेब्रुवारी',
+          '3': 'मार्च',
+          '4': 'एप्रिल',
+          '5': 'मे',
+          '6': 'जून',
+          '7': 'जुलै',
+          '8': 'ऑगस्ट',
+          '9': 'सप्टेंबर',
+          '10': 'ऑक्टोबर',
+          '11': 'नोव्हेंबर',
+          '12': 'डिसेंबर',
+          //farmer details
+          'farmer_name': 'शेतकरीचे नाव',
+          'month_year': 'महिना वर्ष',
+
+          //bill details
+          'total_bill_price': 'एकूण बिल दर',
+          'total_milk_collected': 'एकूण दूध वजन',
+          'date': 'तारीख',
+          'time': 'वेळ',
+          'cattle': 'पशु',
+          'litre': 'लिटर',
+          'fat': 'फॅट',
+          'rate': 'दर',
+          'total': 'एकूण',
+          'cow': 'गाय',
+          'buffalo': 'म्हैस',
+          //new translations
+          'morning': 'सकाळ',
+          'evening': 'संध्याकाळ',
         }
       };
 }

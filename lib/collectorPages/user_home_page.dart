@@ -1,6 +1,9 @@
 import 'package:dudhaganga_app/collectorPages/screens/select_farmer/select_farmer_screen.dart';
+import 'package:dudhaganga_app/collectorPages/screens/take_readings/take_readings_view.dart';
+import 'package:dudhaganga_app/collectorPages/screens/view_history/view_history_screen.dart';
 import 'package:dudhaganga_app/collectorPages/side_bar.dart';
 import 'package:dudhaganga_app/customWidgets/c_card.dart';
+import 'package:dudhaganga_app/models/farmer.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -122,21 +125,69 @@ class _UserHomePageState extends State<UserHomePage> {
                 ),
                 HomeCard(
                   child: GestureDetector(
+                    child: ListTile(
+                      leading: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: const Icon(
+                            Icons.edit_note,
+                            size: 45.0,
+                          )),
+                      title: Text('user_home_page_reading'.tr,
+                          style: const TextStyle(
+                            fontSize: 20.0,
+                          )),
+                    ),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => SelectFarmer(
+                            onFarmerSelection: (Farmer farmer) {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      MilkReadingScreen(farmer),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  height: 24.0,
+                ),
+                HomeCard(
+                  child: GestureDetector(
                       child: ListTile(
                         leading: ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
                             child: const Icon(
-                              Icons.edit_note,
+                              Icons.history,
                               size: 45.0,
                             )),
-                        title: Text('user_home_page_reading'.tr,
+                        title: Text('view_history'.tr,
                             style: const TextStyle(
                               fontSize: 20.0,
                             )),
                       ),
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const SelectFarmer()));
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => SelectFarmer(
+                              onFarmerSelection: (Farmer farmer) {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => ViewHistoryScreen(
+                                      farmer: farmer,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        );
                       }),
                 ),
               ],
