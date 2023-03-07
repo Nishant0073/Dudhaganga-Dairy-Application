@@ -22,7 +22,7 @@ Future<bool> sendMilkCollectedSMS(
     "route": "v3",
     "sender_id": "FTWSMS",
     "message":
-        "Hi Farmer, \nWeight: $weight \nFat: $fat \nCattle:$cattle \nRate: Rs. $rate\nTotal: Rs. $amount \nCollected at $time.\nThanks,\nDudhaganga Dairy",
+        "Time:$time\nWeight: $weight \nFat: $fat\nCattle: $cattle\nRate: Rs.$rate\nTotal: Rs.$amount",
     "language": "english",
     "flash": 0,
     "numbers": "$contactNumber"

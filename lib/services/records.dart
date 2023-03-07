@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dudhaganga_app/models/farmer.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:intl/intl.dart';
 
@@ -19,6 +20,16 @@ Future<bool> addMilkRecord(Farmer? farmer, double fat, double weight,
   String path = "/Dairy/records/farmer/$doc/${farmer?.phoneNumber}/";
   CollectionReference collectionReference =
       FirebaseFirestore.instance.collection(path);
+
+  final snapShot = await FirebaseFirestore.instance
+      .collection(path)
+      .doc(DateFormat('dd-MM-yy').format(DateTime.now()))
+      .get();
+  if (snapShot.exists == true) {
+    Fluttertoast.showToast(msg: "Data is already present!");
+    return false;
+  }
+
   try {
     print(DateFormat('dd/MM/yy').format(DateTime.now()));
     await collectionReference
@@ -36,12 +47,35 @@ Future<bool> addMilkRecord(Farmer? farmer, double fat, double weight,
         "rate": rate,
         "value": value
       },
+      SetOptions(merge: false),
     );
+    updateAmount(value ?? 0, farmer?.phoneNumber ?? "0");
   } catch (e) {
     print("Error while adding farmer:$e");
     return false;
   }
   return true;
+}
+
+void updateAmount(double value, String phoneNumber) async {
+  String path = "/Dairy/Dudhaganga/Farmers/$phoneNumber/finance/";
+  print(path);
+  CollectionReference collectionReference =
+      FirebaseFirestore.instance.collection(path);
+  final snapShot =
+      await FirebaseFirestore.instance.collection(path).doc("amount").get();
+  if (snapShot.exists) {
+    print(snapShot.data());
+    double prevValue = snapShot["balance"].toDouble();
+    print("VALUE IS: $value");
+    await collectionReference.doc("amount").set(
+      {
+        "balance": value + prevValue,
+      },
+      SetOptions(merge: false),
+    );
+    print("Amount updated from $prevValue to ${value + prevValue}");
+  }
 }
 
 Future<List<MilkRecord>?> getMilkRecordsOfEachFarmer(String phoneNumber) async {

@@ -12,6 +12,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/widgets.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'package:stacked/stacked.dart';
 
@@ -155,10 +156,15 @@ class ViewHistoryModel extends BaseViewModel {
       ),
     ); // Page
 
+    var status = await Permission.storage.status;
+    if (!status.isGranted) {
+      await Permission.storage.request();
+    }
     final String dir = (await ExternalPath.getExternalStoragePublicDirectory(
         ExternalPath.DIRECTORY_DOWNLOADS));
 
-    final String path = '$dir/bill${farmer?.name}-$cyear-$cmonth.pdf';
+    final String path =
+        '$dir/bill${farmer?.name?.replaceAll(" ", '')}-$cyear-$cmonth.pdf';
     final File file = File(path);
     await file.writeAsBytes(await pdf.save());
     billFile = file;
