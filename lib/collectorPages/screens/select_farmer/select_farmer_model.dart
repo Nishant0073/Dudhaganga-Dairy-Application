@@ -24,9 +24,11 @@ class SelectFarmerModel extends BaseViewModel {
     var list = querySnapshot.docs;
     for (var it in list) {
       Farmer fmr = Farmer(
-        buffalo: it["buffalo"],
+        buffalo: it.get("buffalo") ?? "",
         name: it["name"],
-        phoneNumber: it["phoneNumber"].toString(),
+        phoneNumber: it.data().toString().contains('phoneNumber')
+            ? it.get("phoneNumber")
+            : "0000000000",
         cow: it["cow"],
         evening: it["evening"],
         morning: it["morning"],
