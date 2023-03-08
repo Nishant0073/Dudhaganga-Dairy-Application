@@ -8,6 +8,8 @@ import 'package:dudhaganga_app/models/farmer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'screens/view_payments/view_payments_screen.dart';
+
 class UserHomePage extends StatefulWidget {
   const UserHomePage({super.key});
 
@@ -160,35 +162,72 @@ class _UserHomePageState extends State<UserHomePage> {
                 ),
                 HomeCard(
                   child: GestureDetector(
-                      child: ListTile(
-                        leading: ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: const Icon(
-                              Icons.history,
-                              size: 45.0,
-                            )),
-                        title: Text('view_history'.tr,
-                            style: const TextStyle(
-                              fontSize: 20.0,
-                            )),
-                      ),
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => SelectFarmer(
-                              onFarmerSelection: (Farmer farmer) {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => ViewHistoryScreen(
-                                      farmer: farmer,
-                                    ),
+                    child: ListTile(
+                      leading: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: const Icon(
+                            Icons.history,
+                            size: 45.0,
+                          )),
+                      title: Text('view_history'.tr,
+                          style: const TextStyle(
+                            fontSize: 20.0,
+                          )),
+                    ),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => SelectFarmer(
+                            onFarmerSelection: (Farmer farmer) {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => ViewHistoryScreen(
+                                    farmer: farmer,
                                   ),
-                                );
-                              },
-                            ),
+                                ),
+                              );
+                            },
                           ),
-                        );
-                      }),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  height: 24.0,
+                ),
+                HomeCard(
+                  child: GestureDetector(
+                    child: ListTile(
+                      leading: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: const Icon(
+                            Icons.payment,
+                            size: 45.0,
+                          )),
+                      title: Text('view_payments'.tr,
+                          style: const TextStyle(
+                            fontSize: 20.0,
+                          )),
+                    ),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => SelectFarmer(
+                            onFarmerSelection: (Farmer farmer) {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => ViewPaymentsScreen(
+                                    farmer: farmer,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ],
             ),

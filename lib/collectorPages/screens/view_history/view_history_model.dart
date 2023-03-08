@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_month_picker/flutter_month_picker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -46,6 +47,10 @@ class ViewHistoryModel extends BaseViewModel {
     billFile = File(path);
     print(billFile);
     records = await getMilkRecordsOfEachFarmer(phoneNumber ?? "0");
+    records?.sort(((a, b) => DateFormat("dd-MM-yy")
+        .parse(a.date ?? "12/12/12")
+        .compareTo(DateFormat("dd-MM-yy").parse(b.date ?? "12/12/12"))));
+
     setBusy(false);
     font = await rootBundle.load("assets/fonts/Poppins-Regular.ttf");
     ttf = Font.ttf(font);
