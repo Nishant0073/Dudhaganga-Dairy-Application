@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:dudhaganga_app/constants.dart';
+import 'package:dudhaganga_app/services/razorpay.dart';
 import 'package:dudhaganga_app/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ StreamController<bool> isLightTheme = StreamController();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
+  razerInit();
   setupLocator();
   runApp(const MyApp());
 }

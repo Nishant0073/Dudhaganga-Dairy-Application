@@ -34,10 +34,26 @@ class AddFarmerToFirebase {
         "morning": _morning,
         "evening": _evening,
       });
+      createFinanceAccount(_phoneNumber);
     } catch (e) {
       print("Error while adding farmer:$e");
       return false;
     }
     return true;
+  }
+
+  void createFinanceAccount(String phoneNumber) async {
+    String path = "/Dairy/Dudhaganga/Farmers/$phoneNumber/finance/";
+    CollectionReference collectionReference =
+        FirebaseFirestore.instance.collection(path);
+    try {
+      await collectionReference.doc("amount").set(
+        {
+          "balance": 0,
+        },
+      );
+    } catch (e) {
+      print("createFinanceAccount() $e");
+    }
   }
 }

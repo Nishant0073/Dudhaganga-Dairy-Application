@@ -8,10 +8,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_month_picker/flutter_month_picker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/widgets.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'package:stacked/stacked.dart';
 
@@ -45,6 +47,10 @@ class ViewHistoryModel extends BaseViewModel {
     billFile = File(path);
     print(billFile);
     records = await getMilkRecordsOfEachFarmer(phoneNumber ?? "0");
+    records?.sort(((a, b) => DateFormat("dd-MM-yy")
+        .parse(a.date ?? "12/12/12")
+        .compareTo(DateFormat("dd-MM-yy").parse(b.date ?? "12/12/12"))));
+
     setBusy(false);
     font = await rootBundle.load("assets/fonts/Poppins-Regular.ttf");
     ttf = Font.ttf(font);
@@ -155,10 +161,15 @@ class ViewHistoryModel extends BaseViewModel {
       ),
     ); // Page
 
+    var status = await Permission.storage.status;
+    if (!status.isGranted) {
+      await Permission.storage.request();
+    }
     final String dir = (await ExternalPath.getExternalStoragePublicDirectory(
         ExternalPath.DIRECTORY_DOWNLOADS));
 
-    final String path = '$dir/bill${farmer?.name}-$cyear-$cmonth.pdf';
+    final String path =
+        '$dir/bill${farmer?.name?.replaceAll(" ", '')}-$cyear-$cmonth.pdf';
     final File file = File(path);
     await file.writeAsBytes(await pdf.save());
     billFile = file;

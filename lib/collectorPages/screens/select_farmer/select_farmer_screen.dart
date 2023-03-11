@@ -34,16 +34,19 @@ class _SelectFarmerState extends State<SelectFarmer> {
           ListView.builder(
             itemCount: model.farmers.length,
             itemBuilder: (_, index) {
-              return HomeCard(
-                child: ListTile(
-                  title: Text(model.farmers[index].name ?? "Farmer Name"),
-                  subtitle: Text(model.farmers[index].phoneNumber.toString()),
-                  leading: const Icon(Icons.person),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.arrow_forward),
-                    onPressed: () {
-                      widget.onFarmerSelection?.call(model.farmers[index]);
-                    },
+              return Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: HomeCard(
+                  child: ListTile(
+                    title: Text(model.farmers[index].name ?? "Farmer Name"),
+                    subtitle: Text(model.farmers[index].phoneNumber.toString()),
+                    leading: const Icon(Icons.person),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.arrow_forward),
+                      onPressed: () {
+                        widget.onFarmerSelection?.call(model.farmers[index]);
+                      },
+                    ),
                   ),
                 ),
               );

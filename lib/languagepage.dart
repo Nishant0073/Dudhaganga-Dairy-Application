@@ -113,6 +113,7 @@ class LanguagePage extends Translations {
           //new keys
           'morning': 'Morning',
           'evening': 'Evening',
+          'view_payments': 'View Payments'
         },
         'hi_IN': {
           'side_bar_home': 'मुख्यपृष्ठ',
@@ -222,6 +223,7 @@ class LanguagePage extends Translations {
           //new translations
           'morning': 'सुबह',
           'evening': 'शाम',
+          'view_payments': 'भुगतान देखें'
         },
         'mr_IN': {
           'side_bar_home': 'मुख्यपृष्ठ',
@@ -332,6 +334,7 @@ class LanguagePage extends Translations {
           //new translations
           'morning': 'सकाळ',
           'evening': 'संध्याकाळ',
+          'view_payments': 'भुगताने पहा'
         }
       };
 }

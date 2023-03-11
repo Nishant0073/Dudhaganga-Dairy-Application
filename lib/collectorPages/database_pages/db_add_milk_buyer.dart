@@ -15,11 +15,27 @@ Future<bool> addNewMilkBuyer(
         "evening": evening,
       },
     );
+    createFinanceAccount(phoneNumber ?? "0000000");
     print("ADDED");
     return true;
   } catch (e) {
     print("Error while adding farmer:$e");
     print("NOT ADDED");
     return false;
+  }
+}
+
+void createFinanceAccount(String phoneNumber) async {
+  String path = "/Dairy/Dudhaganga/Milk_Buyer/$phoneNumber/finance/";
+  CollectionReference collectionReference =
+      FirebaseFirestore.instance.collection(path);
+  try {
+    await collectionReference.doc("amount").set(
+      {
+        "balance": 0,
+      },
+    );
+  } catch (e) {
+    print("createFinanceAccount() $e");
   }
 }
