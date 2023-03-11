@@ -3,6 +3,9 @@ import 'package:dudhaganga_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:dudhaganga_app/customWidgets/c_card.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../select_user/select_user_screen.dart';
 
 class SideNevigationBar extends StatefulWidget {
   const SideNevigationBar({super.key});
@@ -158,8 +161,21 @@ class _SideNevigationBarState extends State<SideNevigationBar> {
           ListTile(
             leading: const Icon(Icons.logout),
             title: Text('side_bar_logout'.tr),
-            onTap: () {},
+            onTap: () {
+              _clearSessionData();
+              Navigator.pushReplacement(
+                // Navigate to the login screen
+                context,
+                MaterialPageRoute(builder: (context) => SelectUserScreen()),
+              );
+              ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text("You Have Successfully Logged Out")));
+            },
           )
         ],
       );
+  _clearSessionData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+  }
 }
