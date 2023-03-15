@@ -3,6 +3,7 @@ import 'package:dudhaganga_app/constants.dart';
 import 'package:dudhaganga_app/customWidgets/c_card.dart';
 import 'package:dudhaganga_app/customWidgets/c_elevated_button.dart';
 import 'package:dudhaganga_app/customWidgets/c_text_field.dart';
+import 'package:dudhaganga_app/customWidgets/ddd_loading.dart';
 import 'package:dudhaganga_app/models/farmer.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -29,84 +30,165 @@ class _ViewPaymentsScreenState extends State<ViewPaymentsScreen> {
       appBar: AppBar(
         title: Text("Payments"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: H(context) / 6,
-              width: double.infinity,
-              child: HomeCard(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Pending Amount",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+      body: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: H(context) / 6,
+                  width: double.infinity,
+                  child: HomeCard(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Pending Amount",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        Text(
+                          "${model.pendingAmount.toString().length >= 6 ? model.pendingAmount.toString().substring(0, 6) : model.pendingAmount.toString()} Rs",
+                          style: TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Visibility(
+                          visible: (model.pendingAmount ?? 0.0) > 0.0,
+                          child: SizedBox(
+                            width: double.infinity,
+                            height: 50.0,
+                            child: CElevatedButton(
+                                label: "Pay Amount",
+                                onPress: () {
+                                  model.onPayAmountPressed();
+                                }),
+                          ),
+                        )
+                      ],
                     ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    Text(
-                      "${model.pendingAmount.toString().length >= 6 ? model.pendingAmount.toString().substring(0, 6) : model.pendingAmount.toString()} Rs",
-                      style: TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Visibility(
-                      visible: (model.pendingAmount ?? 0.0) > 0.0,
-                      child: SizedBox(
-                        width: double.infinity,
+                  ),
+                ),
+                SizedBox(
+                  height: 30.0,
+                ),
+                Visibility(
+                  visible: model.isShowRez,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      SizedBox(
                         height: 50.0,
-                        child: CElevatedButton(
-                            label: "Pay Amount",
-                            onPress: () {
-                              model.onPayAmountPressed();
-                            }),
+                        width: W(context) / 2.5,
+                        child: CTextField(
+                          label: "Enter amount",
+                          textEditingController: model.amountController,
+                        ),
                       ),
-                    )
-                  ],
+                      SizedBox(
+                        height: 50.0,
+                        width: W(context) / 2.5,
+                        child: CElevatedButton(
+                          label: "Enter amount",
+                          onPress: () {
+                            model.openCheckout();
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                Visibility(
+                  visible: model.transactions.isNotEmpty,
+                  child: Expanded(
+                    child: Column(
+                      children: [
+                        Table(
+                          columnWidths: const {
+                            0: FlexColumnWidth(2),
+                            1: FlexColumnWidth(1),
+                            2: FlexColumnWidth(1),
+                          },
+                          children: getRows(model),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          DDLoader(
+            loading: model.isBusy,
+          )
+        ],
+      ),
+    );
+  }
+
+  getRows(ViewPaymenetsModel model) {
+    List<TableRow> rows = [
+      TableRow(
+          decoration: BoxDecoration(color: Color.fromARGB(255, 185, 181, 181)),
+          children: const [
+            TableCell(
+              child: Center(
+                child: Text(
+                  "Date",
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
             ),
-            SizedBox(
-              height: 30.0,
-            ),
-            Visibility(
-              visible: model.isShowRez,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  SizedBox(
-                    height: 50.0,
-                    width: W(context) / 2.5,
-                    child: CTextField(
-                      label: "Enter amount",
-                      textEditingController: model.amountController,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 50.0,
-                    width: W(context) / 2.5,
-                    child: CElevatedButton(
-                      label: "Enter amount",
-                      onPress: () {
-                        model.openCheckout();
-                      },
-                    ),
-                  ),
-                ],
+            TableCell(
+              child: Center(
+                child: Text(
+                  "Amount Paid",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
               ),
-            )
+            ),
+            TableCell(
+              child: Center(
+                child: Text(
+                  "Initial Amont",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            TableCell(
+                child: Center(
+                    child: Text("Remaining",
+                        style: TextStyle(fontWeight: FontWeight.bold)))),
+          ]),
+    ];
+    rows.addAll(
+      model.transactions.map(
+        (e) => TableRow(
+          decoration: BoxDecoration(color: Color.fromARGB(255, 245, 244, 244)),
+          children: [
+            TableCell(child: Center(child: Text(e.date.toString()))),
+            TableCell(
+                child: Center(child: Text("${e.amountPaid.toString()} Rs"))),
+            TableCell(
+                child:
+                    Center(child: Text("${e.initialBalance.toString()} Rs"))),
+            TableCell(child: Text("${e.remaningBalance.toString()} Rs")),
           ],
         ),
       ),
     );
+    return rows;
   }
 }

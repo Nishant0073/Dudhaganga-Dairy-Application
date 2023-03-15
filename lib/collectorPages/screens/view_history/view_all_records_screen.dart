@@ -17,11 +17,6 @@ Widget viewAllRecordsScreen(BuildContext context, ViewHistoryModel model) {
           },
           children: getRows(model),
         ),
-        //  model.records
-        //         ?.map(
-        //           (e) => TableRow(),
-        //         )
-        //         .toList(),
       ],
     ),
   );
