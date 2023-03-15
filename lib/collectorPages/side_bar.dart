@@ -1,5 +1,6 @@
 import 'package:dudhaganga_app/constants.dart';
 import 'package:dudhaganga_app/main.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:dudhaganga_app/customWidgets/c_card.dart';
 import 'package:get/get.dart';
@@ -175,7 +176,15 @@ class _SideNevigationBarState extends State<SideNevigationBar> {
         ],
       );
   _clearSessionData() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    auth.signOut();
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
+    bool isLogout = await prefs.clear();
+    if (isLogout && context.mounted) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const SelectUserScreen()),
+      );
+    }
   }
 }
