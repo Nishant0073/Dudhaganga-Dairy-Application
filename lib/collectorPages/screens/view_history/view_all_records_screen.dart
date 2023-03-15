@@ -11,8 +11,8 @@ Widget viewAllRecordsScreen(BuildContext context, ViewHistoryModel model) {
       children: [
         Table(
           columnWidths: const {
-            0: FlexColumnWidth(2),
-            1: FlexColumnWidth(2),
+            0: FlexColumnWidth(1),
+            1: FlexColumnWidth(1),
             2: FlexColumnWidth(1),
           },
           children: getRows(model),
