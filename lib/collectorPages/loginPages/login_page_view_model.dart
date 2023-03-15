@@ -9,6 +9,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../customWidgets/c_elevated_button.dart';
 import '../../farmerPages/farmer_home_page.dart';
 import '../../milk_buyerpages/home_buyer.dart';
 import '../home_page.dart';
@@ -22,6 +23,7 @@ class LoginPageViewModel extends BaseViewModel {
   int? forceResendingToken;
   bool showOtpScreen = false;
   late StreamController<ErrorAnimationType> errorController;
+  bool isOTPsending = false;
 
   String? userType;
 
@@ -39,6 +41,8 @@ class LoginPageViewModel extends BaseViewModel {
 
   void verifyPhoneNumber(BuildContext context) async {
     setBusy(true);
+    isOTPsending = true;
+    notifyListeners();
     if (formKey.currentState?.validate() ?? false) {
       notifyListeners();
       verificationCompleted(PhoneAuthCredential phoneAuthCredential) async {
@@ -72,6 +76,8 @@ class LoginPageViewModel extends BaseViewModel {
       codeSent(String? verificationId, [int? forceResendingToken]) async {
         Fluttertoast.showToast(
             msg: 'Please check your phone for the verification code.');
+        setBusy(false);
+        isOTPsending = false;
         this.forceResendingToken = forceResendingToken;
         _verificationId = verificationId;
       }
@@ -96,7 +102,6 @@ class LoginPageViewModel extends BaseViewModel {
       }
     }
 
-    setBusy(false);
     notifyListeners();
   }
 
@@ -144,5 +149,78 @@ class LoginPageViewModel extends BaseViewModel {
 
     setBusy(false);
     notifyListeners();
+  }
+
+  SingleChildScrollView otpScreen(
+      BuildContext context, LoginPageViewModel model) {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(30, 0, 30, 20),
+        child: Form(
+          key: model.formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Center(
+                child: Text(
+                  "Enter OTP",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 22.0,
+                    letterSpacing: 1.05,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              PinCodeTextField(
+                  keyboardType: TextInputType.number,
+                  hintCharacter: "•",
+                  controller: model.otpEditingController,
+                  hintStyle: TextStyle(
+                    color: Color(0xffAEC0EF),
+                  ), // enableActiveFill: true,
+                  pinTheme: PinTheme(
+                    shape: PinCodeFieldShape.box,
+                    borderRadius: BorderRadius.circular(8),
+                    borderWidth: 0,
+                  ),
+                  appContext: context,
+                  length: 6,
+                  onChanged: (string) {}),
+              Center(
+                child: GestureDetector(
+                  onTap: () => model.verifyPhoneNumber(context),
+                  child: const Text(
+                    'Resend OTP?',
+                    style: TextStyle(
+                      fontSize: 15,
+                      letterSpacing: 0.688,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Center(
+                child: CElevatedButton(
+                  label: "OK",
+                  onPress: () {
+                    if (model.otpEditingController.text.length == 6) {
+                      model.signInWithPhoneNumber(context);
+                    } else if (model.otpEditingController.text.length < 6) {
+                      Fluttertoast.showToast(msg: "Enter complete otp");
+                    }
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

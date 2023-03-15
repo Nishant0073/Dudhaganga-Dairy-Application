@@ -279,17 +279,13 @@ class ViewHistoryModel extends BaseViewModel {
                 ),
               ),
               pw.Text(
-                getfiveDigitString(
-                  e.rate.toString(),
-                ),
+                "${getfiveDigitString(e.rate.toString())} Rs",
                 style: pw.TextStyle(
                   font: ttf,
                 ),
               ),
               pw.Text(
-                getfiveDigitString(
-                  e.value.toString(),
-                ),
+                "${getfiveDigitString(e.value.toString())} Rs",
                 style: pw.TextStyle(
                   font: ttf,
                 ),

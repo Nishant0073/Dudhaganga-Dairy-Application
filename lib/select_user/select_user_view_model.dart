@@ -14,7 +14,8 @@ class SelectUserViewModel extends BaseViewModel {
   }
 
   void onTap(BuildContext context) {
-    if (selectedUser == "") {
+    print("Selected user: $selectedUser");
+    if (selectedUser == "" || selectedUser == null) {
       snackbarService.showSnackbar(message: "Please select user type.");
       return;
     }

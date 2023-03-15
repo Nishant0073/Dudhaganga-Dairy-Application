@@ -11,17 +11,12 @@ Widget viewAllRecordsScreen(BuildContext context, ViewHistoryModel model) {
       children: [
         Table(
           columnWidths: const {
-            0: FlexColumnWidth(2),
-            1: FlexColumnWidth(2),
+            0: FlexColumnWidth(1),
+            1: FlexColumnWidth(1),
             2: FlexColumnWidth(1),
           },
           children: getRows(model),
         ),
-        //  model.records
-        //         ?.map(
-        //           (e) => TableRow(),
-        //         )
-        //         .toList(),
       ],
     ),
   );
@@ -88,11 +83,13 @@ getRows(ViewHistoryModel model) {
                 child:
                     Center(child: Text(getfiveDigitString(e.fat.toString())))),
             TableCell(
-                child:
-                    Center(child: Text(getfiveDigitString(e.rate.toString())))),
+                child: Center(
+                    child:
+                        Text("${getfiveDigitString(e.rate.toString())} Rs"))),
             TableCell(
                 child: Center(
-                    child: Text(getfiveDigitString(e.value.toString())))),
+                    child:
+                        Text("${getfiveDigitString(e.value.toString())} Rs"))),
           ],
         ),
       ) ??

@@ -30,13 +30,14 @@ class MyApp extends StatelessWidget {
       stream: isLightTheme.stream,
       builder: (context, snapshot) {
         return GetMaterialApp(
-            translations: LanguagePage(),
-            locale: const Locale('en', 'US'),
-            debugShowCheckedModeBanner: false,
-            title: 'Dudhaganga Dairy',
-            themeMode: snapshot.data! ? ThemeMode.light : ThemeMode.dark,
-            theme: themeData,
-            home: const SplashScreen());
+          translations: LanguagePage(),
+          locale: const Locale('en', 'US'),
+          debugShowCheckedModeBanner: false,
+          title: 'Dudhaganga Dairy',
+          themeMode: snapshot.data! ? ThemeMode.light : ThemeMode.dark,
+          theme: themeData,
+          home: const SplashScreen(),
+        );
       },
     );
   }

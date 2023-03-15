@@ -201,22 +201,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
 
   Widget _body(BuildContext context, LoginPageViewModel model) {
-    return LayoutBuilder(
-      builder: ((context, constraints) {
-        if (constraints.maxWidth < narrowScreenWidthThreshold) {
-          return Scaffold(
-              appBar: createAppBar(), body: welcomePage(context, model));
-        } else {
-          return Scaffold(
-            appBar: createAppBar(),
-            body: SafeArea(
-              bottom: false,
-              top: false,
-              child: welcomePage(context, model),
+    return Scaffold(
+      appBar: createAppBar(),
+      body: SafeArea(
+        bottom: false,
+        top: false,
+        child: Stack(
+          children: [
+            welcomePage(context, model),
+            DDLoader(
+              loading: model.isOTPsending,
             ),
-          );
-        }
-      }),
+          ],
+        ),
+      ),
     );
   }
 
@@ -247,16 +245,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 });
                 return Future.value(true);
               },
-              child: Stack(
-                children: [
-                  model.showOtpScreen
-                      ? otpScreen(context, model)
-                      : signInScreen(context, model),
-                  DDLoader(
-                    loading: model.isBusy,
-                  ),
-                ],
-              ),
+              child: model.showOtpScreen
+                  ? model.otpScreen(context, model)
+                  : signInScreen(context, model),
             ),
           ],
         ),
