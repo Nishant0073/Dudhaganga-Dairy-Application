@@ -83,11 +83,13 @@ getRows(ViewHistoryModel model) {
                 child:
                     Center(child: Text(getfiveDigitString(e.fat.toString())))),
             TableCell(
-                child:
-                    Center(child: Text(getfiveDigitString(e.rate.toString())))),
+                child: Center(
+                    child:
+                        Text("${getfiveDigitString(e.rate.toString())} Rs"))),
             TableCell(
                 child: Center(
-                    child: Text(getfiveDigitString(e.value.toString())))),
+                    child:
+                        Text("${getfiveDigitString(e.value.toString())} Rs"))),
           ],
         ),
       ) ??

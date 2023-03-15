@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../app/db_sql.dart';
@@ -6,6 +7,7 @@ import '../../../constants.dart';
 import '../../../models/farmer.dart';
 import '../../../models/rate.dart';
 import '../../../services/records.dart';
+import '../../../services/sms.dart';
 import '../take_rates/take_rates_view.dart';
 
 class TakeReadingModel extends BaseViewModel {
@@ -95,20 +97,20 @@ class TakeReadingModel extends BaseViewModel {
           // ignore: use_build_context_synchronously
           Navigator.of(context).pop();
 
-          // bool isSmsSent = await sendMilkCollectedSMS(
-          //     amount: value.toString(),
-          //     fat: fat.toString(),
-          //     weight: weight.toString(),
-          //     time:
-          //         "${DateTime.now().hour < 15 ? "mor." : "even."} ${DateFormat('dd-MM-yy').format(DateTime.now())}",
-          //     rate: rate.toString(),
-          //     cattle: selectedAnimal,
-          //     contactNumber: farmer?.phoneNumber);
-          // if (isSmsSent) {
-          //   print("SMS sent ");
-          // } else {
-          //   print("Unable to send sms");
-          // }
+          bool isSmsSent = await sendMilkCollectedSMS(
+              amount: value.toString(),
+              fat: fat.toString(),
+              weight: weight.toString(),
+              time:
+                  "${DateTime.now().hour < 15 ? "mor." : "even."} ${DateFormat('dd-MM-yy').format(DateTime.now())}",
+              rate: rate.toString(),
+              cattle: selectedAnimal,
+              contactNumber: farmer?.phoneNumber);
+          if (isSmsSent) {
+            print("SMS sent ");
+          } else {
+            print("Unable to send sms");
+          }
         } else {
           snackbarService.showSnackbar(message: "Unable to add record!");
         }
