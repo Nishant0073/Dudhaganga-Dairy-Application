@@ -63,7 +63,7 @@ class LanguagePage extends Translations {
           //10
           'milk_reading_name': 'Name',
           'milk_reading_time': 'Time',
-          'milk_reading_morning': 'Moring',
+          'milk_reading_morning': 'Morning',
           'milk_reading_evening': 'Evening',
           'milk_reading_quantity': 'Quantity',
           'milk_reading_quantity_liter': 'Enter Milk Quantity in Liter',
@@ -113,7 +113,15 @@ class LanguagePage extends Translations {
           //new keys
           'morning': 'Morning',
           'evening': 'Evening',
-          'view_payments': 'View Payments'
+          'view_payments': 'View Payments',
+          'sell_milk': 'Sell Milk',
+          'select_milk_buyer': 'Select Milk Buyer',
+          'change_rate': 'Change Rate',
+          'enter_rate': 'Enter Rate',
+          'go_back': "Go Back",
+          'select_user': 'Select User',
+          'farmer': 'Farmer',
+          'milk_buyer': 'Milk Buyer',
         },
         'hi_IN': {
           'side_bar_home': 'मुख्यपृष्ठ',
@@ -223,7 +231,15 @@ class LanguagePage extends Translations {
           //new translations
           'morning': 'सुबह',
           'evening': 'शाम',
-          'view_payments': 'भुगतान देखें'
+          'view_payments': 'भुगतान देखें',
+          'sell_milk': 'दूध बेचें',
+          'select_milk_buyer': 'दूध खरीदने वाला चुनें',
+          'change_rate': 'दर बदलें',
+          'enter_rate': 'दर दर्ज करें',
+          'go_back': "वापस जाओ",
+          'select_user': 'उपयोगकर्ता चुनें',
+          'farmer': 'किसान',
+          'milk_buyer': 'खरीदार',
         },
         'mr_IN': {
           'side_bar_home': 'मुख्यपृष्ठ',
@@ -334,7 +350,15 @@ class LanguagePage extends Translations {
           //new translations
           'morning': 'सकाळ',
           'evening': 'संध्याकाळ',
-          'view_payments': 'भुगताने पहा'
+          'view_payments': 'भुगताने पहा',
+          'sell_milk': 'दूध विकणे',
+          'select_milk_buyer': 'दूध खरेदीदार निवडा',
+          'change_rate': 'दर बदला',
+          'enter_rate': 'दर प्रविष्ट करा',
+          'go_back': "परत जा",
+          'select_user': 'वापरकर्ता निवडा',
+          'farmer': 'शेतकरी',
+          'milk_buyer': 'खरीदार',
         }
       };
 }

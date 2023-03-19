@@ -12,6 +12,7 @@ class BuyerHomePage extends StatefulWidget {
 }
 
 class _BuyerHomePageState extends State<BuyerHomePage> {
+  DateTime dateTime = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +36,8 @@ class _BuyerHomePageState extends State<BuyerHomePage> {
                         'assets/images/sunset.jpg',
                       ),
                     ),
-                    title: const Text('9 Sup 2022'),
+                    title: Text(
+                        "${dateTime.day} ${'${dateTime.month}'.tr} ${dateTime.year} "),
                     subtitle: Text('user_home_page_morning'.tr),
                   ),
                 ),

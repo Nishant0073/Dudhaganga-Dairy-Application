@@ -126,3 +126,34 @@ Future<List<MilkRecord>?> getMilkRecordsOfEachFarmer(String phoneNumber) async {
     return [];
   }
 }
+
+Future<List<SellRecord>?> getMilkRecordsOfEachBuyer(String phoneNumber) async {
+  String path = "/Dairy/records/milk_buyer/m/$phoneNumber/";
+  print(path);
+  CollectionReference collectionReference =
+      FirebaseFirestore.instance.collection(path);
+  try {
+    QuerySnapshot querySnapshot = await collectionReference.get();
+
+    var allData = querySnapshot.docs.map((doc) => doc.data()).toList();
+    List<SellRecord> milkData = [];
+    for (var i in allData) {
+      print(i);
+      milkData.add(SellRecord.fromJson(i as Map<String, dynamic>));
+    }
+    path = "/Dairy/records/milk_buyer/e/$phoneNumber/";
+    collectionReference = FirebaseFirestore.instance.collection(path);
+    querySnapshot = await collectionReference.get();
+
+    allData = querySnapshot.docs.map((doc) => doc.data()).toList();
+    for (var i in allData) {
+      print(i);
+      milkData.add(SellRecord.fromJson(i as Map<String, dynamic>));
+    }
+
+    return milkData;
+  } catch (e) {
+    print("getMilkRecordsOfEachBuyer() :$e");
+    return [];
+  }
+}

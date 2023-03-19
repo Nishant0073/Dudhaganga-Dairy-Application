@@ -15,14 +15,76 @@ Widget viewAllRecordsScreen(BuildContext context, ViewHistoryModel model) {
             1: FlexColumnWidth(1),
             2: FlexColumnWidth(1),
           },
-          children: getRows(model),
+          children:
+              model.farmer != null ? getRowsFarmer(model) : getRowsBuyer(model),
         ),
       ],
     ),
   );
 }
 
-getRows(ViewHistoryModel model) {
+getRowsBuyer(ViewHistoryModel model) {
+  print(model.records?.length);
+  print("HERE");
+  List<TableRow> rows = [
+    TableRow(
+        decoration: BoxDecoration(color: Color.fromARGB(255, 185, 181, 181)),
+        children: const [
+          TableCell(
+            child: Center(
+              child: Text(
+                "Date",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+          TableCell(
+            child: Center(
+              child: Text(
+                "Time",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+          TableCell(
+              child: Center(
+                  child: Text("Litre",
+                      style: TextStyle(fontWeight: FontWeight.bold)))),
+          TableCell(
+              child: Center(
+                  child: Text("Rate",
+                      style: TextStyle(fontWeight: FontWeight.bold)))),
+          TableCell(
+              child: Center(
+                  child: Text("Amount",
+                      style: TextStyle(fontWeight: FontWeight.bold))))
+        ]),
+  ];
+  rows.addAll(model.srecords?.map((e) {
+        return TableRow(
+          decoration: BoxDecoration(color: Color.fromARGB(255, 245, 244, 244)),
+          children: [
+            TableCell(child: Center(child: Text(e.date.toString()))),
+            TableCell(child: Center(child: Text(e.time.toString()))),
+            TableCell(
+                child: Center(
+                    child: Text(getfiveDigitString(e.weight.toString())))),
+            TableCell(
+                child: Center(
+                    child:
+                        Text("${getfiveDigitString(e.rate.toString())} Rs"))),
+            TableCell(
+                child: Center(
+                    child:
+                        Text("${getfiveDigitString(e.value.toString())} Rs"))),
+          ],
+        );
+      }) ??
+      []);
+  return rows;
+}
+
+getRowsFarmer(ViewHistoryModel model) {
   List<TableRow> rows = [
     TableRow(
         decoration: BoxDecoration(color: Color.fromARGB(255, 185, 181, 181)),

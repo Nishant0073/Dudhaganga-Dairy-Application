@@ -6,8 +6,10 @@ import 'package:get/get.dart';
 import 'package:stacked/stacked.dart';
 
 class SelectFarmer extends StatefulWidget {
-  final Function? onFarmerSelection;
-  const SelectFarmer({Key? key, this.onFarmerSelection}) : super(key: key);
+  final Function? onUserSelection;
+  final bool? isMilkBuyer;
+  const SelectFarmer({Key? key, this.onUserSelection, this.isMilkBuyer})
+      : super(key: key);
 
   @override
   State<SelectFarmer> createState() => _SelectFarmerState();
@@ -19,7 +21,7 @@ class _SelectFarmerState extends State<SelectFarmer> {
   Widget build(BuildContext context) {
     return ViewModelBuilder<SelectFarmerModel>.reactive(
         viewModelBuilder: () => SelectFarmerModel(),
-        onViewModelReady: (model) => model.init(),
+        onViewModelReady: (model) => model.init(widget.isMilkBuyer ?? false),
         builder: (context, model, child) => _body(context, model));
   }
 
@@ -27,33 +29,55 @@ class _SelectFarmerState extends State<SelectFarmer> {
   Widget _body(BuildContext context, SelectFarmerModel model) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('select_farmer'.tr),
+        title: model.isMilkBuyer
+            ? Text('select_milk_buyer'.tr)
+            : Text('select_farmer'.tr),
       ),
       body: Stack(
         children: [
           ListView.builder(
-            itemCount: model.farmers.length,
+            itemCount: model.isMilkBuyer
+                ? model.milkBuyers.length
+                : model.farmers.length,
             itemBuilder: (_, index) {
               return Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: HomeCard(
-                  child: ListTile(
-                    title: Text(model.farmers[index].name ?? "Farmer Name"),
-                    subtitle: Text(model.farmers[index].phoneNumber.toString()),
-                    leading: const Icon(Icons.person),
-                    trailing: IconButton(
-                      icon: const Icon(Icons.arrow_forward),
-                      onPressed: () {
-                        widget.onFarmerSelection?.call(model.farmers[index]);
-                      },
-                    ),
-                  ),
+                  child: model.isMilkBuyer
+                      ? ListTile(
+                          title: Text(model.milkBuyers[index].name ??
+                              "milk buyer Name"),
+                          subtitle: Text(
+                              model.milkBuyers[index].phoneNumber.toString()),
+                          leading: const Icon(Icons.person),
+                          trailing: IconButton(
+                            icon: const Icon(Icons.arrow_forward),
+                            onPressed: () {
+                              widget.onUserSelection
+                                  ?.call(model.milkBuyers[index]);
+                            },
+                          ),
+                        )
+                      : ListTile(
+                          title:
+                              Text(model.farmers[index].name ?? "Farmer Name"),
+                          subtitle:
+                              Text(model.farmers[index].phoneNumber.toString()),
+                          leading: const Icon(Icons.person),
+                          trailing: IconButton(
+                            icon: const Icon(Icons.arrow_forward),
+                            onPressed: () {
+                              widget.onUserSelection
+                                  ?.call(model.farmers[index]);
+                            },
+                          ),
+                        ),
                 ),
               );
             },
           ),
           DDLoader(
-            loading: model.isBlank,
+            loading: model.isBusy,
           ),
         ],
       ),

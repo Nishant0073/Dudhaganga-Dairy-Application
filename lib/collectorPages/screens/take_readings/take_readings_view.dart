@@ -39,32 +39,24 @@ class _MilkReadingScreenState extends State<MilkReadingScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Row(
-                        children: [
-                          Text(
-                            "${'milk_reading_name'.tr} :",
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.secondary,
-                              fontFamily: "Poppins",
-                              fontSize: 17,
-                            ),
-                          ),
-                        ],
+                      Text(
+                        "${'milk_reading_name'.tr} :",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.secondary,
+                          fontFamily: "Poppins",
+                          fontSize: 17,
+                        ),
                       ),
                       const SizedBox(
                         width: 20,
                       ),
-                      Row(
-                        children: [
-                          Text(
-                            model.farmer?.name ?? "Farmer Name",
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.secondary,
-                              fontFamily: "Poppins",
-                              fontSize: 17,
-                            ),
-                          ),
-                        ],
+                      Text(
+                        model.farmer?.name ?? "Farmer Name",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.secondary,
+                          fontFamily: "Poppins",
+                          fontSize: 17,
+                        ),
                       ),
                     ],
                   ),
@@ -74,74 +66,58 @@ class _MilkReadingScreenState extends State<MilkReadingScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Row(
-                        children: [
-                          Text(
-                            "${'milk_reading_time'.tr} :",
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.secondary,
-                              fontFamily: "Poppins",
-                              fontSize: 17,
-                            ),
-                          ),
-                        ],
+                      Text(
+                        "${'milk_reading_time'.tr} :",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.secondary,
+                          fontFamily: "Poppins",
+                          fontSize: 17,
+                        ),
                       ),
                       const SizedBox(
                         width: 20,
                       ),
-                      Row(
-                        children: [
-                          Text(
-                            DateTime.now().hour < 15
-                                ? "milk_reading_morning".tr
-                                : 'add_milk_buyer_evening'.tr,
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.secondary,
-                              fontFamily: "Poppins",
-                              fontSize: 17,
-                            ),
-                          ),
-                        ],
+                      Text(
+                        DateTime.now().hour < 15
+                            ? "milk_reading_morning".tr
+                            : 'add_milk_buyer_evening'.tr,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.secondary,
+                          fontFamily: "Poppins",
+                          fontSize: 17,
+                        ),
                       ),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Row(
-                        children: [
-                          Text(
-                            "${'select_milk_type'.tr} :",
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.secondary,
-                              fontFamily: "Poppins",
-                              fontSize: 17,
-                            ),
-                          ),
-                        ],
+                      Text(
+                        "${'select_milk_type'.tr} :",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.secondary,
+                          fontFamily: "Poppins",
+                          fontSize: 17,
+                        ),
                       ),
                       const SizedBox(
                         width: 20,
                       ),
-                      Row(
-                        children: [
-                          DropdownButton(
-                            value: model.selectedAnimal,
-                            items: model.animals.map((String items) {
-                              return DropdownMenuItem(
-                                value: items,
-                                child: Text(items),
-                              );
-                            }).toList(),
-                            onChanged: (String? value) {
-                              setState(() {
-                                model.selectedAnimal = value;
-                              });
+                      DropdownButton(
+                        value: model.selectedAnimal,
+                        items: model.animals.map((String items) {
+                          return DropdownMenuItem(
+                            value: items,
+                            child: Text(items),
+                          );
+                        }).toList(),
+                        onChanged: (String? value) {
+                          setState(() {
+                            model.selectedAnimal = value;
+                          });
 
-                              print(model.selectedAnimal);
-                            },
-                          ),
-                        ],
+                          print(model.selectedAnimal);
+                        },
                       ),
                     ],
                   ),
@@ -152,6 +128,7 @@ class _MilkReadingScreenState extends State<MilkReadingScreen> {
                     label: "milk_reading_quantity".tr,
                     validatorText: "milk_reading_quantity_liter".tr,
                     hintText: "milk_reading_quantity_liter".tr,
+                    textInputType: TextInputType.number,
                     textEditingController: model.textEditingControllerWeight,
                     validator: (value) {
                       print(value);
@@ -169,6 +146,7 @@ class _MilkReadingScreenState extends State<MilkReadingScreen> {
                     validatorText: "milk_reading_enter_fat".tr,
                     hintText: "milk_reading_enter_fat".tr,
                     textEditingController: model.textEditingControllerFat,
+                    textInputType: TextInputType.number,
                     validator: (value) {
                       print(value);
                       if (value == null || value.isEmpty) {

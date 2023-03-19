@@ -48,3 +48,34 @@ class MilkRecord {
         'value': value
       };
 }
+
+class SellRecord {
+  final String? date;
+  final String? rate;
+  final String? weight;
+  final String? time;
+  final String? value;
+
+  SellRecord({
+    this.date,
+    this.rate,
+    this.weight,
+    this.time,
+    this.value,
+  });
+
+  SellRecord.fromJson(Map<String, dynamic> json)
+      : date = json['date'] as String?,
+        rate = json['rate'] as String?,
+        weight = json['weight'] as String?,
+        time = json['time'] as String?,
+        value = json['amount'] as String?;
+
+  Map<String, dynamic> toJson() => {
+        'date': date,
+        'rate': rate,
+        'weight': weight,
+        'time': time,
+        'amount': value
+      };
+}
