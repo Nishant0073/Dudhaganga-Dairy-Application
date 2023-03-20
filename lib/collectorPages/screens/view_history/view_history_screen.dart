@@ -7,6 +7,7 @@ import 'package:dudhaganga_app/collectorPages/screens/view_history/view_history_
 import 'package:dudhaganga_app/customWidgets/c_card.dart';
 import 'package:dudhaganga_app/customWidgets/ddd_loading.dart';
 import 'package:dudhaganga_app/models/farmer.dart';
+import 'package:dudhaganga_app/models/milk_buyer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +15,8 @@ import 'package:stacked/stacked.dart';
 
 class ViewHistoryScreen extends StatefulWidget {
   final Farmer? farmer;
-  const ViewHistoryScreen({this.farmer, super.key});
+  final MilkBuyer? milkBuyer;
+  const ViewHistoryScreen({this.farmer, super.key, this.milkBuyer});
 
   @override
   State<ViewHistoryScreen> createState() => _ViewHistoryScreenState();
@@ -25,7 +27,7 @@ class _ViewHistoryScreenState extends State<ViewHistoryScreen> {
   Widget build(BuildContext context) {
     return ViewModelBuilder<ViewHistoryModel>.reactive(
         viewModelBuilder: () => ViewHistoryModel(),
-        onViewModelReady: (model) => model.init(widget.farmer),
+        onViewModelReady: (model) => model.init(widget.farmer,widget.milkBuyer),
         builder: (context, model, child) => _body(context, model));
   }
 

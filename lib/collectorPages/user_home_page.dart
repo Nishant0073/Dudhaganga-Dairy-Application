@@ -4,10 +4,12 @@ import 'package:dudhaganga_app/collectorPages/screens/view_history/view_history_
 import 'package:dudhaganga_app/collectorPages/side_bar.dart';
 import 'package:dudhaganga_app/customWidgets/c_card.dart';
 import 'package:dudhaganga_app/models/farmer.dart';
+import 'package:dudhaganga_app/models/milk_buyer.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'screens/sell_milk/sell_milk_view.dart';
 import 'screens/view_payments/view_payments_screen.dart';
 
 class UserHomePage extends StatefulWidget {
@@ -18,6 +20,7 @@ class UserHomePage extends StatefulWidget {
 }
 
 class _UserHomePageState extends State<UserHomePage> {
+  DateTime dateTime = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +44,8 @@ class _UserHomePageState extends State<UserHomePage> {
                         'assets/images/sunset.jpg',
                       ),
                     ),
-                    title: const Text('9 Sup 2022'),
+                    title: Text(
+                        "${dateTime.day} ${'${dateTime.month}'.tr} ${dateTime.year} "),
                     subtitle: Text('user_home_page_morning'.tr),
                   ),
                 ),
@@ -143,7 +147,7 @@ class _UserHomePageState extends State<UserHomePage> {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => SelectFarmer(
-                            onFarmerSelection: (Farmer farmer) {
+                            onUserSelection: (Farmer farmer) {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) =>
@@ -175,20 +179,10 @@ class _UserHomePageState extends State<UserHomePage> {
                           )),
                     ),
                     onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => SelectFarmer(
-                            onFarmerSelection: (Farmer farmer) {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => ViewHistoryScreen(
-                                    farmer: farmer,
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) =>
+                            _buildPopupDialog(context),
                       );
                     },
                   ),
@@ -214,11 +208,48 @@ class _UserHomePageState extends State<UserHomePage> {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => SelectFarmer(
-                            onFarmerSelection: (Farmer farmer) {
+                            onUserSelection: (Farmer farmer) {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) => ViewPaymentsScreen(
                                     farmer: farmer,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  height: 24.0,
+                ),
+                HomeCard(
+                  child: GestureDetector(
+                    child: ListTile(
+                      leading: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: const Icon(
+                            Icons.storefront,
+                            size: 45.0,
+                          )),
+                      title: Text('sell_milk'.tr,
+                          style: const TextStyle(
+                            fontSize: 20.0,
+                          )),
+                    ),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => SelectFarmer(
+                            isMilkBuyer: true,
+                            onUserSelection: (MilkBuyer milkBuyer) {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => SellMilk(
+                                    milkBuyer: milkBuyer,
                                   ),
                                 ),
                               );
@@ -234,6 +265,57 @@ class _UserHomePageState extends State<UserHomePage> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildPopupDialog(BuildContext context) {
+    return AlertDialog(
+      title: Text('select_user'.tr),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () {
+            Navigator.pop(context);
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => SelectFarmer(
+                  onUserSelection: (Farmer farmer) {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => ViewHistoryScreen(
+                          farmer: farmer,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            );
+          },
+          child: Text('farmer'.tr),
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.pop(context);
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => SelectFarmer(
+                  isMilkBuyer: true,
+                  onUserSelection: (MilkBuyer milkBuyer) {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => ViewHistoryScreen(
+                          milkBuyer: milkBuyer,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            );
+          },
+          child: Text('milk_buyer'.tr),
+        ),
+      ],
     );
   }
 }

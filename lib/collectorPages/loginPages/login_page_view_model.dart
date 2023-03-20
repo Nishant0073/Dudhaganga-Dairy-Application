@@ -88,13 +88,14 @@ class LoginPageViewModel extends BaseViewModel {
 
       try {
         await firebaseAuth.verifyPhoneNumber(
-            phoneNumber: phoneNumber!,
-            timeout: const Duration(seconds: 5),
-            forceResendingToken: forceResendingToken,
-            verificationCompleted: verificationCompleted,
-            verificationFailed: verificationFailed,
-            codeSent: codeSent,
-            codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
+          phoneNumber: phoneNumber!,
+          timeout: const Duration(seconds: 0),
+          forceResendingToken: forceResendingToken,
+          verificationCompleted: verificationCompleted,
+          verificationFailed: verificationFailed,
+          codeSent: codeSent,
+          codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
+        );
         showOtpScreen = true;
       } catch (e) {
         Fluttertoast.showToast(msg: "Failed to Verify Phone Number: $e");
@@ -106,6 +107,7 @@ class LoginPageViewModel extends BaseViewModel {
   }
 
   void signInWithPhoneNumber(BuildContext context) async {
+    print("FUNCTION CALLED!");
     bool error = false;
     User? user;
     AuthCredential credential;
@@ -134,6 +136,8 @@ class LoginPageViewModel extends BaseViewModel {
       // ["Farmer", "Milk Collector", "Milk Buyer"];
       print("Stored  user id: ${phoneNumber.toString().substring(3)}");
       if (context.mounted) {
+        print("HERE & OTP IS: ${otpEditingController.text}");
+        print("$userType");
         if (userType == "Milk Collector") {
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => HomePage(userId: id)));

@@ -2,6 +2,7 @@ import 'package:dudhaganga_app/splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -44,6 +45,16 @@ double H(context) {
 
 double W(context) {
   return MediaQuery.of(context).size.width;
+}
+
+String getFormatedDate(DateTime selectedDate) {
+  return DateFormat("dd-MM-yy").format(selectedDate);
+}
+
+double getDoubleReDecimaled(double d) {
+  String inString = d.toStringAsFixed(2); // '2.35'
+  double inDouble = double.parse(inString);
+  return inDouble;
 }
 
 PreferredSizeWidget createAppBar() {
