@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../../services/records.dart';
 import '../../../services/sell_milk.dart';
 
 class SellMilkModel extends BaseViewModel {
@@ -59,6 +60,10 @@ class SellMilkModel extends BaseViewModel {
         rate: rate.toString(),
         weight: textEditingControllerWeight.text);
     if (result) {
+      updateSellMilkAmount(
+          getDoubleReDecimaled(
+              double.parse(textEditingControllerWeight.text) * rate),
+          milkBuyer?.phoneNumber ?? "8329060009");
       Fluttertoast.showToast(msg: "Record Saved!");
     } else {
       Fluttertoast.showToast(msg: "Unable to Save Record!");
@@ -70,5 +75,3 @@ class SellMilkModel extends BaseViewModel {
     }
   }
 }
-
-

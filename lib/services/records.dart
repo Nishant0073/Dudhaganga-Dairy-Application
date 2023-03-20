@@ -157,3 +157,22 @@ Future<List<SellRecord>?> getMilkRecordsOfEachBuyer(String phoneNumber) async {
     return [];
   }
 }
+
+void updateSellMilkAmount(double value, String phoneNumber) async {
+  String path = " /Dairy/Dudhaganga/Milk_Buyer/$phoneNumber/finance/";
+  CollectionReference collectionReference =
+      FirebaseFirestore.instance.collection(path);
+final snapShot =
+      await FirebaseFirestore.instance.collection(path).doc("amount").get();
+  if (snapShot.exists) {
+    print(snapShot.data());
+    double prevValue = snapShot["balance"].toDouble();
+    await collectionReference.doc("amount").set(
+      {
+        "balance": value + prevValue,
+      },
+      SetOptions(merge: false),
+    );
+    print("Amount updated from $prevValue to ${value + prevValue}");
+  }
+}

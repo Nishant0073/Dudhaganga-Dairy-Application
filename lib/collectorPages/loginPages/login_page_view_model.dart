@@ -137,6 +137,7 @@ class LoginPageViewModel extends BaseViewModel {
       print("Stored  user id: ${phoneNumber.toString().substring(3)}");
       if (context.mounted) {
         print("HERE & OTP IS: ${otpEditingController.text}");
+        print("$userType");
         if (userType == "Milk Collector") {
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => HomePage(userId: id)));

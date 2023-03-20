@@ -1,8 +1,9 @@
-import 'package:dudhaganga_app/milk_buyerpages/get_bill.dart';
 import 'package:dudhaganga_app/collectorPages/side_bar.dart';
 import 'package:dudhaganga_app/customWidgets/c_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'history_pages/history_view.dart';
 
 class BuyerHomePage extends StatefulWidget {
   const BuyerHomePage({super.key});
@@ -123,23 +124,66 @@ class _BuyerHomePageState extends State<BuyerHomePage> {
                 ),
                 HomeCard(
                   child: GestureDetector(
-                      child: ListTile(
-                        leading: ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: const Icon(
-                              Icons.edit_note,
-                              size: 45.0,
-                            )),
-                        title: Text('Get Total Bill'.tr,
-                            style: const TextStyle(
-                              fontSize: 20.0,
-                            )),
-                      ),
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const BuyerMilkDetailPage()));
-                      }),
+                    child: ListTile(
+                      leading: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: const Icon(
+                            Icons.history,
+                            size: 45.0,
+                          )),
+                      title: Text('view_history'.tr,
+                          style: const TextStyle(
+                            fontSize: 20.0,
+                          )),
+                    ),
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ViewAllByerBillsScreen()));
+                    },
+                  ),
                 ),
+                const SizedBox(
+                  height: 24.0,
+                ),
+                HomeCard(
+                  child: GestureDetector(
+                    child: ListTile(
+                      leading: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: const Icon(
+                            Icons.payment,
+                            size: 45.0,
+                          )),
+                      title: Text('view_payments'.tr,
+                          style: const TextStyle(
+                            fontSize: 20.0,
+                          )),
+                    ),
+                    onTap: () {},
+                  ),
+                ),
+                const SizedBox(
+                  height: 24.0,
+                ),
+                // HomeCard(
+                //   child: GestureDetector(
+                //       child: ListTile(
+                //         leading: ClipRRect(
+                //             borderRadius: BorderRadius.circular(8.0),
+                //             child: const Icon(
+                //               Icons.edit_note,
+                //               size: 45.0,
+                //             )),
+                //         title: Text('Get Total Bill'.tr,
+                //             style: const TextStyle(
+                //               fontSize: 20.0,
+                //             )),
+                //       ),
+                //       onTap: () {
+                //         Navigator.of(context).push(MaterialPageRoute(
+                //             builder: (context) => const BuyerMilkDetailPage()));
+                //       }),
+                // ),
               ],
             ),
           ),
