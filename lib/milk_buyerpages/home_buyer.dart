@@ -1,5 +1,6 @@
 import 'package:dudhaganga_app/collectorPages/side_bar.dart';
 import 'package:dudhaganga_app/customWidgets/c_card.dart';
+import 'package:dudhaganga_app/milk_buyerpages/view_payments/view_payments_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -159,7 +160,11 @@ class _BuyerHomePageState extends State<BuyerHomePage> {
                             fontSize: 20.0,
                           )),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) =>
+                              const ViewPaymentsScreenBuyer()));
+                    },
                   ),
                 ),
                 const SizedBox(

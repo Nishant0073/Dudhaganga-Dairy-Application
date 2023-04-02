@@ -12,6 +12,7 @@ import 'package:firebase_auth_web/firebase_auth_web.dart';
 import 'package:firebase_core_web/firebase_core_web.dart';
 import 'package:firebase_database_web/firebase_database_web.dart';
 import 'package:firebase_messaging_web/firebase_messaging_web.dart';
+import 'package:firebase_performance_web/firebase_performance_web.dart';
 import 'package:fluttertoast/fluttertoast_web.dart';
 import 'package:libphonenumber_web/libphonenumber_web.dart';
 import 'package:package_info_plus_web/package_info_plus_web.dart';
@@ -28,6 +29,7 @@ void registerPlugins([final Registrar? pluginRegistrar]) {
   FirebaseCoreWeb.registerWith(registrar);
   FirebaseDatabaseWeb.registerWith(registrar);
   FirebaseMessagingWeb.registerWith(registrar);
+  FirebasePerformanceWeb.registerWith(registrar);
   FluttertoastWebPlugin.registerWith(registrar);
   LibPhoneNumberPlugin.registerWith(registrar);
   PackageInfoPlugin.registerWith(registrar);
