@@ -46,7 +46,7 @@ class HistoryModelBuyer extends BaseViewModel {
     print(billFile);
     final mainPrefs = await SharedPreferences.getInstance();
     phoneNumber = mainPrefs.getString(userCn);
-    print("$phoneNumber ${milkBuyer?.name}");
+    // print("$phoneNumber ${milkBuyer?.name}");
     milkBuyer = await getMilkBuyer(phoneNumber);
     srecords = await getMilkRecordsOfEachBuyer(phoneNumber ?? "0");
     for (var i in srecords ?? []) {

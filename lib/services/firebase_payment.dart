@@ -14,7 +14,7 @@ Future<double> getFarmerPendingAmount(String phoneNumber) async {
     print("getMilkRecordsOfEachFarmer() $e");
   }
 
-  return -1;
+  return 0;
 }
 
 Future<double> getMilkBuyerPendingAmount(String phoneNumber) async {
@@ -31,5 +31,5 @@ Future<double> getMilkBuyerPendingAmount(String phoneNumber) async {
   } catch (e) {
     print("getMilkBuyerPendingAmount() $e");
   }
-  return -1;
+  return 0;
 }

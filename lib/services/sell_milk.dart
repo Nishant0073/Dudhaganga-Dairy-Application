@@ -3,6 +3,7 @@ import 'package:dudhaganga_app/constants.dart';
 import 'package:dudhaganga_app/services/sms.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../models/farmer.dart';
 import '../models/milk_buyer.dart';
 
 Future<double> getMilkRate(String phoneNumber) async {
@@ -143,6 +144,39 @@ Future<MilkBuyer?> getMilkBuyer(String? phoneNumber) async {
           morning: true,
           name: snapShot["name"].toString(),
           phoneNumber: snapShot["phoneNumber"].toString());
+    }
+  } catch (e) {
+    print("ERROR: getMilkRate: $e");
+  }
+  return null;
+}
+
+Future<Farmer?> getFarmer(String? phoneNumber) async {
+  //8329060000
+  String path = "/Dairy/Dudhaganga/Farmers/";
+  print(path);
+  print("PHONE NUMBER: $phoneNumber");
+  try {
+    final snapShot = await FirebaseFirestore.instance
+        .collection(path)
+        .doc("$phoneNumber")
+        .get();
+    if (snapShot.exists) {
+      // return MilkBuyer(
+      //     evening: true,
+      //     morning: true,
+      //     name: snapShot["name"].toString(),
+      //     phoneNumber: snapShot["phoneNumber"].toString());
+      return Farmer(
+        buffalo: snapShot.get("buffalo") ?? "",
+        name: snapShot["name"],
+        phoneNumber: snapShot.data().toString().contains('phoneNumber')
+            ? snapShot.get("phoneNumber")
+            : "0000000000",
+        cow: snapShot["cow"],
+        evening: snapShot["evening"],
+        morning: snapShot["morning"],
+      );
     }
   } catch (e) {
     print("ERROR: getMilkRate: $e");
