@@ -1,9 +1,10 @@
 import 'package:dudhaganga_app/collectorPages/side_bar.dart';
+import 'package:dudhaganga_app/farmerPages/view_history/view_history_screen.dart';
+import 'package:dudhaganga_app/farmerPages/view_payments/view_payments_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../customWidgets/c_card.dart';
-import './farmer_milk_details.dart';
 
 class FarmerHomePage extends StatefulWidget {
   const FarmerHomePage({super.key});
@@ -23,24 +24,9 @@ class _FarmerHomePageState extends State<FarmerHomePage> {
         text: DateFormat('EEE,MMM,d, ' 'yy').format(selectedDate));
   }
 
-  _selectDate(BuildContext context) async {
-    final DateTime? selected = await showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: DateTime(2005),
-      lastDate: DateTime(2030),
-    );
-    if (selected != null && selected != selectedDate) {
-      setState(() {
-        selectedDate = selected;
-        dateFormController!.text =
-            DateFormat('EEE,MMM,d, ' 'yy').format(selected);
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    DateTime dateTime = DateTime.now();
     return Scaffold(
       appBar: AppBar(
         title: Text('side_bar_home'.tr),
@@ -54,147 +40,150 @@ class _FarmerHomePageState extends State<FarmerHomePage> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               HomeCard(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 8, 8, 8),
-                  child: Row(
-                    children: <Widget>[
-                      const Expanded(
-                          child: Text(
-                        "Date",
-                        style: TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.bold),
-                      )),
-                      SizedBox(width: 10),
-                      Expanded(
-                        flex: 3,
-                        child: TextFormField(
-                          controller: dateFormController,
-                          cursorColor: Colors.black,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 15,
-                          ),
-                          readOnly: true,
-                          decoration: InputDecoration(
-                            labelText: "Date",
-                            suffixIcon: GestureDetector(
-                              onTap: () {
-                                _selectDate(context);
-                              },
-                              child: const Icon(
-                                Icons.calendar_month_outlined,
-                                color: Colors.black,
-                              ),
+                child: ListTile(
+                  leading: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: Image.asset(
+                      'assets/images/sunset.jpg',
+                    ),
+                  ),
+                  title: Text(
+                      "${dateTime.day} ${'${dateTime.month}'.tr} ${dateTime.year} "),
+                  subtitle: Text('user_home_page_morning'.tr),
+                ),
+              ),
+              const SizedBox(
+                height: 24.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                      flex: 1,
+                      child: HomeCard(
+                        child: Column(
+                          children: [
+                            Text('user_home_page_collected_milk'.tr),
+                            const Text(
+                              '34 L',
+                              style: TextStyle(fontSize: 32.0),
                             ),
-                            enabledBorder: const UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
-                            ),
-                            focusedBorder: const UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
-                            ),
-                            fillColor: Colors.black,
-                            labelStyle: TextStyle(
-                              color: Colors.white,
-                              fontSize: 2,
-                            ),
-                          ),
+                          ],
                         ),
-                      )
-                    ],
+                      )),
+                  const SizedBox(
+                    width: 16.0,
                   ),
-                ),
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              HomeCard(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: const [
-                          Text(
-                            "Todays Milk",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 17),
+                  Expanded(
+                    flex: 1,
+                    child: HomeCard(
+                      child: Column(
+                        children: [
+                          Text('user_home_page_remaining_farmer'.tr),
+                          const Text(
+                            '21',
+                            style: TextStyle(fontSize: 32.0),
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 7,
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                              child: GestureDetector(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  // border: Border.all(color: Colors.black)),
-                                  color: Color.fromARGB(255, 235, 235, 235)),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Center(child: Text("Morning")),
-                              ),
-                            ),
-                          )),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 5.0,
-                      ),
-                      tableData(),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                              child: GestureDetector(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  // border: Border.all(color: Colors.black)),
-                                  color: Color.fromARGB(255, 235, 235, 235)),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Center(child: Text("Evening")),
-                              ),
-                            ),
-                          )),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 5.0,
-                      ),
-                      tableData(),
-                    ],
-                  ),
-                ),
+                    ),
+                  )
+                ],
               ),
               const SizedBox(
-                height: 10.0,
+                height: 24.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: HomeCard(
+                      child: Column(
+                        children: [
+                          Text('user_home_page_sold_milk'.tr),
+                          const Text(
+                            '8 L',
+                            style: TextStyle(fontSize: 32.0),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 16.0,
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: HomeCard(
+                      child: Column(
+                        children: [
+                          Center(child: Text('user_home_page_customer'.tr)),
+                          const Text(
+                            '14',
+                            style: TextStyle(fontSize: 32.0),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 24.0,
+              ),
+              const SizedBox(
+                height: 24.0,
               ),
               HomeCard(
                 child: GestureDetector(
-                    child: ListTile(
-                      leading: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: const Icon(
-                            Icons.edit_note,
-                            size: 45.0,
-                          )),
-                      title: Text('Milk Total'.tr,
-                          style: const TextStyle(
-                            fontSize: 20.0,
-                          )),
-                    ),
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => FarmerMilkDetailPage()));
-                    }),
+                  child: ListTile(
+                    leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: const Icon(
+                          Icons.history,
+                          size: 45.0,
+                        )),
+                    title: Text('view_history'.tr,
+                        style: const TextStyle(
+                          fontSize: 20.0,
+                        )),
+                  ),
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => ViewHistoryFarmerScreen()));
+                  },
+                ),
+              ),
+              const SizedBox(
+                height: 24.0,
+              ),
+              HomeCard(
+                child: GestureDetector(
+                  child: ListTile(
+                    leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: const Icon(
+                          Icons.payment,
+                          size: 45.0,
+                        )),
+                    title: Text('view_payments'.tr,
+                        style: const TextStyle(
+                          fontSize: 20.0,
+                        )),
+                  ),
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>
+                            const ViewPaymentsScreenFarmer()));
+                  },
+                ),
+              ),
+              const SizedBox(
+                height: 24.0,
+              ),
+              const SizedBox(
+                height: 24.0,
               ),
             ],
           ),

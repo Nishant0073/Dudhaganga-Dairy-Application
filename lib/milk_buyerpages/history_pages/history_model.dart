@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'dart:math';
 import 'package:dudhaganga_app/models/milk_buyer.dart';
 import 'package:external_path/external_path.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +46,7 @@ class HistoryModelBuyer extends BaseViewModel {
     print(billFile);
     final mainPrefs = await SharedPreferences.getInstance();
     phoneNumber = mainPrefs.getString(userCn);
-    print("$phoneNumber ${milkBuyer?.name}");
+    // print("$phoneNumber ${milkBuyer?.name}");
     milkBuyer = await getMilkBuyer(phoneNumber);
     srecords = await getMilkRecordsOfEachBuyer(phoneNumber ?? "0");
     for (var i in srecords ?? []) {
@@ -175,7 +175,7 @@ class HistoryModelBuyer extends BaseViewModel {
         ExternalPath.DIRECTORY_DOWNLOADS));
 
     final String path =
-        '$dir/bill${milkBuyer?.name?.replaceAll(" ", '')}-$cyear-$cmonth.pdf';
+        '$dir/bill${milkBuyer?.name?.replaceAll(" ", '')}-$cyear-$cmonth-${Random().nextInt(100000)}.pdf';
     final File file = File(path);
     await file.writeAsBytes(await pdf.save());
     billFile = file;

@@ -152,6 +152,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "firebase",
+      "rootUri": "file:///home/nishant/.pub-cache/hosted/pub.dev/firebase-9.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "firebase_auth",
       "rootUri": "file:///home/nishant/.pub-cache/hosted/pub.dev/firebase_auth-3.11.2",
       "packageUri": "lib/",
@@ -220,6 +226,24 @@
     {
       "name": "firebase_messaging_web",
       "rootUri": "file:///home/nishant/.pub-cache/hosted/pub.dev/firebase_messaging_web-3.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
+      "name": "firebase_performance",
+      "rootUri": "file:///home/nishant/.pub-cache/hosted/pub.dev/firebase_performance-0.8.3+3",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
+      "name": "firebase_performance_platform_interface",
+      "rootUri": "file:///home/nishant/.pub-cache/hosted/pub.dev/firebase_performance_platform_interface-0.1.1+19",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
+      "name": "firebase_performance_web",
+      "rootUri": "file:///home/nishant/.pub-cache/hosted/pub.dev/firebase_performance_web-0.1.1+8",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
@@ -806,7 +830,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2023-03-11T07:01:44.614163Z",
+  "generated": "2023-03-22T02:00:55.679829Z",
   "generator": "pub",
   "generatorVersion": "2.19.1"
 }
